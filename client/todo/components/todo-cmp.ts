@@ -15,7 +15,7 @@ import {
   TodoService
 } from '../services/todo-service';
 
-import Todo from '../../../common-types/todo';
+import {ITodo, Todo} from '../../../common-types/todo';
 
 @Component({
   selector: 'todo-cmp',
@@ -24,13 +24,11 @@ import Todo from '../../../common-types/todo';
 })
 export class TodoCmp implements OnInit {
   title: string = "ng2do";
-  todos: Todo[] = [];
+  todos: ITodo[] = [];
   todoForm: Todo;
 
   constructor(private _todoService: TodoService) {
-    this.todoForm = {
-      "todoMessage": ""
-    };
+    this.todoForm = new Todo();
   }
 
   ngOnInit() {
@@ -45,12 +43,12 @@ export class TodoCmp implements OnInit {
         });
   }
 
-  add(message: string): void {
+  add(todo: ITodo): void {
     this._todoService
-        .add(message)
+        .add(todo)
         .subscribe((m) => {
           this.todos.push(m);
-          this.todoForm.todoMessage = "";
+          this.todoForm = new Todo();
         });
   }
 

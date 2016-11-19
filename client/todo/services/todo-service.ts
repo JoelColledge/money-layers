@@ -14,7 +14,7 @@ import {
 
 import 'rxjs/add/operator/map';
 
-import Todo from '../../../common-types/todo';
+import {ITodo} from '../../../common-types/todo';
 
 @Injectable()
 export class TodoService {
@@ -23,14 +23,14 @@ export class TodoService {
     constructor(@Inject(Http) private _http: Http) {
     }
 
-    getAll(): Observable<Todo[]> {
+    getAll(): Observable<ITodo[]> {
         return this._http
                    .get(TodoService.ENDPOINT.replace(':id', ''))
                    .map((r) => r.json());
     }
 
-    add(message: string): Observable<Todo> {
-        let _messageStringified = JSON.stringify({todoMessage: message});
+    add(todo: ITodo): Observable<ITodo> {
+        let _messageStringified = JSON.stringify(todo);
 
         let headers = new Headers();
 

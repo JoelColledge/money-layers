@@ -9,7 +9,7 @@ export class StaticDispatcher {
 
       res.type('.html');
 
-      fs.createReadStream(_root + '/build/client/dev/index.html')
+      fs.createReadStream(_root + '/build/client/dev/client/index.html')
         .pipe(res);
     }
 }

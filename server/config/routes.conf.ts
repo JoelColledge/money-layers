@@ -11,7 +11,7 @@ export class RoutesConfig {
     static init(application: express.Application):void {
         let _root = process.cwd();
         let _nodeModules = '/node_modules/';
-        let _clientFiles = (process.env.NODE_ENV === 'production') ? '/build/client/dist/' : '/build/client/dev/client/';
+        let _clientFiles = (process.env.NODE_ENV === 'production') ? '/build/client/dist/' : '/build/client/dev/';
         let _sourceFiles = '/client/';
 
         application.use(compression({

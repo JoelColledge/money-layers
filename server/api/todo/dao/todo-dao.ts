@@ -2,15 +2,15 @@ import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
 import todoSchema from '../model/todo-model';
-import Todo from '../../../../common-types/todo';
+import {ITodo} from '../../../../common-types/todo';
 
-interface TodoDocument extends mongoose.Document, Todo {
+interface TodoDocument extends mongoose.Document, ITodo {
 }
 
 namespace TodoDao {
 
-    export function getAll(): Promise<Todo[]> {
-        return new Promise<Todo[]>((resolve, reject) => {
+    export function getAll(): Promise<ITodo[]> {
+        return new Promise<ITodo[]>((resolve, reject) => {
             let _query = {};
 
             TodoModel
@@ -22,8 +22,8 @@ namespace TodoDao {
         });
     };
 
-    export function createTodo(todo:Todo): Promise<Todo> {
-        return new Promise<Todo>((resolve, reject) => {
+    export function createTodo(todo:ITodo): Promise<ITodo> {
+        return new Promise<ITodo>((resolve, reject) => {
           if (!_.isObject(todo)) {
             return reject(new TypeError('Todo is not a valid object.'));
           }
