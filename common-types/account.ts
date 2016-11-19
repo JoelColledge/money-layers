@@ -8,7 +8,7 @@ export interface IAccount {
 export class Account {
     constructor(
         public _id: any = undefined,
-        public name: string = undefined,
+        public name: string = "",
         public active: boolean = true
     ) { }
 }
