@@ -5,6 +5,4 @@ unit_coverage
 bower_components
 typings
 
-*.js
-*.js.map
-
+build

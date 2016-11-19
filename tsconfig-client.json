@@ -6,14 +6,15 @@
         "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "noImplicitAny": false
+        "noImplicitAny": false,
+        "outDir": "build/client/",
+        "rootDir": "client"
     },
     "exclude": [
-	    "node_modules",
-      "typings"
+	    "node_modules"
     ],
-    "filesGlob": [
-      "**/*.ts",
+    "include": [
+      "client/**/*.ts",
       "typings/main",
       "typings/index.d.ts"
     ]
