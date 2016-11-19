@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 
 import {
+    Router,
     ActivatedRoute,
     Params
 } from '@angular/router';
@@ -33,6 +34,7 @@ export class AccountCmp implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private _accountService: AccountService
     ) {
         this.account = new Account();
@@ -57,7 +59,7 @@ export class AccountCmp implements OnInit {
             .update(this.account)
             .subscribe((account) => {
                 console.log('got', account);
-                this.account = account;
+                this.router.navigate(['/accounts']);
             });
     }
 }

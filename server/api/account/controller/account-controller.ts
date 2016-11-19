@@ -34,7 +34,7 @@ export class AccountController {
         }
 
         AccountDao.updateAccount(_account)
-            .then(() => res.status(200).end())
+            .then(account => res.status(200).json(account))
             .catch(error => res.status(400).json(error));
     }
 }
