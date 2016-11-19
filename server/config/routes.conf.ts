@@ -12,6 +12,7 @@ export class RoutesConfig {
         let _root = process.cwd();
         let _nodeModules = '/node_modules/';
         let _clientFiles = (process.env.NODE_ENV === 'production') ? '/build/client/dist/' : '/build/client/dev/';
+        let _sourceFiles = '/client/dev/';
 
         application.use(compression({
             level: zlib.Z_BEST_COMPRESSION,
@@ -20,6 +21,7 @@ export class RoutesConfig {
 
         application.use(express.static(_root + _nodeModules));
         application.use(express.static(_root + _clientFiles));
+        application.use(express.static(_root + _sourceFiles));
         application.use(bodyParser.json());
         application.use(morgan('dev'));
         application.use(helmet());
