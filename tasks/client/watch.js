@@ -12,7 +12,7 @@ gulp.task(tasks.CLIENT_RELOAD, () => {
 
 gulp.task(tasks.CLIENT_WATCH, [tasks.CLIENT_BUILD_ALL], () => {
 
-  browserSync({proxy: "http://localhost:3333", reloadDelay: 1000, logLevel: "debug"});
+  browserSync({proxy: "http://localhost:3333", reloadDelay: 1000});
 
 
   let _watchable = [];
