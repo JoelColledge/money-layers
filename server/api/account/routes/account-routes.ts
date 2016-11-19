@@ -12,6 +12,7 @@ export class AccountRoutes {
 
       router
         .route('/api/accounts/:id')
+        .get(AccountController.get)
         .post(AccountController.updateAccount);
     }
 }

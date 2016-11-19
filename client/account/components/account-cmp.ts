@@ -12,6 +12,11 @@ import {
 } from '@angular/forms';
 
 import {
+    ActivatedRoute,
+    Params
+} from '@angular/router';
+
+import {
     AccountService
 } from '../services/account-service';
 
@@ -24,43 +29,35 @@ import {IAccount, Account} from '../../../common-types/account';
 })
 export class AccountCmp implements OnInit {
     title: string = "Accounts";
-    accounts: IAccount[] = [];
-    accountForm: Account;
+    account: Account;
 
-    constructor(private _accountService: AccountService) {
-        this.accountForm = new Account();
+    constructor(
+        private route: ActivatedRoute,
+        private _accountService: AccountService
+    ) {
+        this.account = new Account();
     }
 
     ngOnInit() {
-        this._getAll();
+        this.route.params
+            .forEach((params: Params) => this._get(params['id']))
     }
 
-    private _getAll(): void {
+    private _get(id: string): void {
         this._accountService
-            .getAll()
-            .subscribe((accounts) => {
-                console.log('got all', accounts);
-                this.accounts = accounts;
+            .get(id)
+            .subscribe((account) => {
+                console.log('got', account);
+                this.account = account;
             });
     }
 
-    add(account: IAccount): void {
+    update(): void {
         this._accountService
-            .add(account)
-            .subscribe((m) => {
-                this.accounts.push(m);
-                this.accountForm = new Account();
+            .update(this.account)
+            .subscribe((account) => {
+                console.log('got', account);
+                this.account = account;
             });
-    }
-
-    remove(id: string): void {
-        this._accountService
-            .remove(id)
-            .subscribe(() => {
-                this.accounts.forEach((t, i) => {
-                    if (t._id === id)
-                        return this.accounts.splice(i, 1);
-                });
-            })
     }
 }

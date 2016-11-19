@@ -22,6 +22,19 @@ namespace AccountDao {
         });
     };
 
+    export function get(id: string): Promise<IAccount> {
+        return new Promise<IAccount>((resolve, reject) => {
+            let _query = {};
+
+            AccountModel
+                .findById(id)
+                .exec((err, account) => {
+                    err ? reject(err)
+                        : resolve(account);
+                });
+        });
+    };
+
     export function createAccount(account: IAccount): Promise<IAccount> {
         return new Promise<IAccount>((resolve, reject) => {
             if (!_.isObject(account)) {

@@ -2,6 +2,7 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TodoCmp }   from './todo/components/todo-cmp';
+import { AccountListCmp }   from './account/components/account-list-cmp';
 import { AccountCmp }   from './account/components/account-cmp';
 
 const appRoutes: Routes = [
@@ -11,6 +12,10 @@ const appRoutes: Routes = [
     },
     {
         path: 'accounts',
+        component: AccountListCmp
+    },
+    {
+        path: 'account/:id',
         component: AccountCmp
     },
     {

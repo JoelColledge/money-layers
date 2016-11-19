@@ -1,0 +1,26 @@
+<div class="account-container">
+  <form class="account-form"
+        (submit)="add(accountForm)">
+
+    <h1 class="account-title">{{title}}</h1>
+
+    <input type="text"
+           name="accountMessage"
+           [(ngModel)]="accountForm.name"
+           [class.account-error]="!accountForm.name.length"
+           placeholder="What do you have account?"
+           autofocus />
+
+    <button type="submit"
+            [disabled]="!accountForm.name.length">+</button>
+  </form>
+
+  <div class="account-list">
+    <div *ngFor="let account of accounts;"
+         class="account-item"
+         (click)="onSelect(account);">
+      <p>{{account.name}}</p>
+      <p>{{account.active}}</p>
+    </div>
+  </div>
+</div>

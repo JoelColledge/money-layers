@@ -9,6 +9,7 @@ import { AppRoutingModule }     from './app-routing.module';
 import { TodoCmp }   from './todo/components/todo-cmp';
 import { TodoService }   from './todo/services/todo-service';
 
+import { AccountListCmp }   from './account/components/account-list-cmp';
 import { AccountCmp }   from './account/components/account-cmp';
 import { AccountService }   from './account/services/account-service';
 
@@ -22,6 +23,7 @@ import { AccountService }   from './account/services/account-service';
     declarations: [
         AppCmp,
         TodoCmp,
+        AccountListCmp,
         AccountCmp,
     ],
     providers: [

@@ -29,15 +29,31 @@ export class AccountService {
             .map((r) => r.json());
     }
 
+    get(id: string): Observable<IAccount> {
+        return this._http
+            .get(AccountService.ENDPOINT.replace(':id', id))
+            .map((r) => r.json());
+    }
+
     add(account: IAccount): Observable<IAccount> {
         let _messageStringified = JSON.stringify(account);
 
         let headers = new Headers();
-
         headers.append('Content-Type', 'application/json');
 
         return this._http
             .post(AccountService.ENDPOINT.replace(':id', ''), _messageStringified, {headers})
+            .map((r) => r.json());
+    }
+
+    update(account: IAccount): Observable<IAccount> {
+        let _messageStringified = JSON.stringify(account);
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this._http
+            .post(AccountService.ENDPOINT.replace(':id', account._id), _messageStringified, {headers})
             .map((r) => r.json());
     }
 

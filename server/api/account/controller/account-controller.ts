@@ -8,6 +8,14 @@ export class AccountController {
             .catch(error => res.status(400).json(error));
     }
 
+    static get(req: express.Request, res: express.Response): void {
+        let _id = req.params.id;
+
+        AccountDao.get(_id)
+            .then(account => res.status(200).json(account))
+            .catch(error => res.status(400).json(error));
+    }
+
     static createAccount(req: express.Request, res: express.Response): void {
         let _account = req.body;
 
