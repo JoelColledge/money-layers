@@ -32,6 +32,10 @@
   box-sizing: border-box;
 }
 
+.account-container input[type="checkbox"] {
+  width: 10%;
+}
+
 .account-container input:focus {
   outline: 0;
 }

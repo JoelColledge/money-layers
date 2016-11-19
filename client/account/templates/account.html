@@ -1,4 +1,25 @@
 <div class="account-container">
-  <p>{{account.name}}</p>
-  <p>{{account.active}}</p>
+  <form class="account-form"
+        (submit)="update()">
+
+    <h1 class="account-title">{{account._id}}</h1>
+
+    <label for="accountName">Name: </label>
+
+    <input type="text"
+           name="accountName"
+           [(ngModel)]="account.name"
+           [class.account-error]="!account.name.length"
+           placeholder="Account name"
+           autofocus />
+
+    <label for="accountActive">Active: </label>
+
+    <input type="checkbox"
+           name="accountActive"
+           [(ngModel)]="account.active" />
+
+    <button type="submit"
+            [disabled]="!account.name.length">Update</button>
+  </form>
 </div>
