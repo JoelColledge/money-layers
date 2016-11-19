@@ -4,7 +4,7 @@ export interface ITodo {
   _id: any;
 }
 
-export class Todo {
+export class Todo implements ITodo {
   constructor(
     public todoMessage: string = "",
     public _id: any = undefined
