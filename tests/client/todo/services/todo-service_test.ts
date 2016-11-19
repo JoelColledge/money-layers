@@ -2,7 +2,7 @@
 
 import {
   TodoService
-} from '../../../../client/dev/todo/services/todo-service';
+} from '../../../../client/todo/services/todo-service';
 
 describe('todo_service', () => {
   describe('creation', () => {

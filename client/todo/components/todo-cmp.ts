@@ -15,10 +15,7 @@ import {
   TodoService
 } from '../services/todo-service';
 
-type Todo = {
-  todoMessage: string;
-  _id?: string;
-}
+import Todo from '../../../common-types/todo';
 
 @Component({
   selector: 'todo-cmp',
@@ -40,7 +37,7 @@ export class TodoCmp implements OnInit {
     this._getAll();
   }
 
-  private _getAll():void {
+  private _getAll(): void {
     this._todoService
         .getAll()
         .subscribe((todos) => {
@@ -48,7 +45,7 @@ export class TodoCmp implements OnInit {
         });
   }
 
-  add(message:string):void {
+  add(message: string): void {
     this._todoService
         .add(message)
         .subscribe((m) => {
@@ -57,7 +54,7 @@ export class TodoCmp implements OnInit {
         });
   }
 
-  remove(id:string):void {
+  remove(id: string): void {
     this._todoService
       .remove(id)
       .subscribe(() => {

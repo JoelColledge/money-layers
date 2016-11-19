@@ -7,5 +7,5 @@ const CSS = path.CLIENT_APP + '**/*.css';
 gulp.task(tasks.CLIENT_BUILD_CSS, () => {
   return gulp.src(CSS, {base: path.CLIENT_APP})
              .pipe(cssmin())
-             .pipe(gulp.dest(path.CLIENT_BUILD));
+             .pipe(gulp.dest(path.CLIENT_BUILD_CLIENT));
 });

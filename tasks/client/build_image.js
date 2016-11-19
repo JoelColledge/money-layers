@@ -7,5 +7,5 @@ const IMAGES = path.CLIENT_APP + '**/*.{png,jpg,jpeg,svg,gif}';
 gulp.task(tasks.CLIENT_BUILD_IMAGE, () => {
   return gulp.src(IMAGES, {base: path.CLIENT_APP})
 			       .pipe(imageMin())
-             .pipe(gulp.dest(path.CLIENT_BUILD));
+             .pipe(gulp.dest(path.CLIENT_BUILD_CLIENT));
 });

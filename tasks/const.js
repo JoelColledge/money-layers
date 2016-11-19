@@ -1,7 +1,8 @@
 export const path = {
   ROOT: './',
-  CLIENT_APP: './client/dev/',
+  CLIENT_APP: './client/',
   CLIENT_BUILD: './build/client/dev/',
+  CLIENT_BUILD_CLIENT: './build/client/dev/client/',
   CLIENT_DIST: './build/client/dist/',
   SERVER_APP: './server/',
   SERVER_BUILD: './build/server/',

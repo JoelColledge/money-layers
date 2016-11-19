@@ -12,5 +12,5 @@ gulp.task(tasks.CLIENT_BUILD_VIEWS, () => {
                collapseWhitespace: true,
                caseSensitive: true
              }))
-             .pipe(gulp.dest(path.CLIENT_BUILD));
+             .pipe(gulp.dest(path.CLIENT_BUILD_CLIENT));
 });

@@ -9,8 +9,8 @@ import {
   Observable
 } from 'rxjs/Observable';
 
-import {TodoCmp} from '../../../../client/dev/todo/components/todo-cmp';
-import {TodoService} from '../../../../client/dev/todo/services/todo-service';
+import {TodoCmp} from '../../../../client/todo/components/todo-cmp';
+import {TodoService} from '../../../../client/todo/services/todo-service';
 
 class MockTodoService extends TodoService {
   getAll():Observable<any> {

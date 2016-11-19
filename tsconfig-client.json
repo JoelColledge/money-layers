@@ -7,14 +7,14 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noImplicitAny": false,
-        "outDir": "build/client/",
-        "rootDir": "client/dev"
+        "outDir": "build/client/"
     },
     "exclude": [
 	    "node_modules"
     ],
     "include": [
-      "client/dev/**/*.ts",
+      "client/**/*.ts",
+      "common-types/**/*.ts",
       "typings/main",
       "typings/index.d.ts"
     ]

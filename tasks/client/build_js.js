@@ -7,5 +7,5 @@ const JS = path.CLIENT_APP + '**/*.js';
 gulp.task(tasks.CLIENT_BUILD_JS, () => {
   return gulp.src(JS, {base: path.CLIENT_APP})
              .pipe(uglify())
-             .pipe(gulp.dest(path.CLIENT_BUILD));
+             .pipe(gulp.dest(path.CLIENT_BUILD_CLIENT));
 });

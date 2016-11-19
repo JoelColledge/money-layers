@@ -30,16 +30,16 @@ module.exports = function(config) {
       {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: true},
 
       // paths loaded via module imports
-      {pattern: 'client/dev/**/*.js', included: false, watched: true},
+      {pattern: 'client/**/*.js', included: false, watched: true},
 
       // paths loaded via Angular's component compiler
       // (these paths need to be rewritten, see proxies section)
-      {pattern: 'client/dev/**/*.html', included: false, watched: true},
-      {pattern: 'client/dev/**/*.css', included: false, watched: true},
+      {pattern: 'client/**/*.html', included: false, watched: true},
+      {pattern: 'client/**/*.css', included: false, watched: true},
 
       // paths to support debugging with source maps in dev tools
-      {pattern: 'client/dev/**/*.ts', included: false, watched: false},
-      {pattern: 'client/dev/**/*.js.map', included: false, watched: false},
+      {pattern: 'client/**/*.ts', included: false, watched: false},
+      {pattern: 'client/**/*.js.map', included: false, watched: false},
 
       {pattern: 'tests/client/**/*_test.js', included: false, watched: false}
     ],
@@ -47,7 +47,7 @@ module.exports = function(config) {
     // proxied base paths
     proxies: {
       // required for component assests fetched by Angular's compiler
-      "/app/": "/base/client/dev/"
+      "/app/": "/base/client/"
     },
 
     reporters: ['progress'],

@@ -32,7 +32,7 @@ System.config({
   map: {
     '@angular': 'node_modules/@angular',
     'rxjs': 'node_modules/rxjs',
-    'app': 'client/dev'
+    'app': 'client'
   },
   packages: {
     'app': {
