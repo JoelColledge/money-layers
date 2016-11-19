@@ -7,8 +7,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noImplicitAny": false,
-        "outDir": "build/server/",
-        "rootDir": "server"
+        "outDir": "build/server/"
     },
     "exclude": [
 	    "node_modules",
@@ -16,6 +15,7 @@
     ],
     "include": [
       "server/**/*.ts",
+      "common-types/**/*.ts",
       "typings/main",
       "typings/index.d.ts"
     ]

@@ -1,1 +1,1 @@
-require('./build/server/server');
+require('./build/server/server/server');
