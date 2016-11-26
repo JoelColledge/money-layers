@@ -1,5 +1,5 @@
-<div class="account-container">
-  <form class="account-form"
+<div>
+  <form class="form-inline"
         (submit)="add(accountForm)">
 
     <h1 class="account-title">{{title}}</h1>
@@ -7,11 +7,13 @@
     <input type="text"
            name="accountMessage"
            [(ngModel)]="accountForm.name"
+           class="form-control"
            [class.account-error]="!accountForm.name.length"
            placeholder="What do you have account?"
            autofocus />
 
     <button type="submit"
+            class="btn btn-default"
             [disabled]="!accountForm.name.length">+</button>
   </form>
 
@@ -19,6 +21,7 @@
     <div *ngFor="let account of accounts;"
          class="account-item"
          (click)="onSelect(account);">
+      <hr/>
       <p>{{account.name}}</p>
       <p>{{account.active}}</p>
     </div>
