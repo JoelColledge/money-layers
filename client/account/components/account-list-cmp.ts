@@ -27,9 +27,9 @@ import {IAccount, Account} from '../../../common-types/account';
     styleUrls: ['account/styles/account.css']
 })
 export class AccountListCmp implements OnInit {
-    title: string = "Accounts";
     accounts: IAccount[] = [];
     accountForm: Account;
+    accountFormIsActual: boolean;
 
     constructor(
         private _accountService: AccountService,
@@ -51,9 +51,10 @@ export class AccountListCmp implements OnInit {
             });
     }
 
-    add(account: IAccount): void {
+    add(): void {
+        this.accountForm.layer = this.accountFormIsActual ? "actual" : "logical";
         this._accountService
-            .add(account)
+            .add(this.accountForm)
             .subscribe((m) => {
                 this.accounts.push(m);
                 this.accountForm = new Account();

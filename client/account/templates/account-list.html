@@ -1,20 +1,30 @@
 <div>
   <form class="form-inline"
-        (submit)="add(accountForm)">
+        (submit)="add()">
 
-    <h1 class="account-title">{{title}}</h1>
+    <h2>Accounts</h2>
 
-    <input type="text"
-           name="accountMessage"
-           [(ngModel)]="accountForm.name"
-           class="form-control"
-           [class.account-error]="!accountForm.name.length"
-           placeholder="What do you have account?"
-           autofocus />
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text"
+          name="accountName"
+          [(ngModel)]="accountForm.name"
+          class="form-control"
+          [class.account-error]="!accountForm.name.length"
+          placeholder="Account name"
+          autofocus />
+    </div>
+
+    <div class="form-group">
+      <label>Actual</label>
+      <input type="checkbox"
+             name="accountLayer"
+             [(ngModel)]="accountFormIsActual" />
+    </div>
 
     <button type="submit"
-            class="btn btn-default"
-            [disabled]="!accountForm.name.length">+</button>
+        class="btn btn-default"
+        [disabled]="!accountForm.name.length">+</button>
   </form>
 
   <div class="account-list">
@@ -22,7 +32,8 @@
          class="account-item"
          (click)="onSelect(account);">
       <hr/>
-      <p>{{account.name}}</p>
+      <h3>{{account.name}}</h3>
+      <p>{{account.layer}}</p>
       <p>{{account.active}}</p>
     </div>
   </div>
