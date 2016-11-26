@@ -1,0 +1,9 @@
+<div>
+  <h2>Transactions</h2>
+
+  <transaction [transaction]="newTransaction" (onAdd)="add($event)"></transaction>
+  <div *ngFor="let transaction of transactions;"
+       (click)="onSelect(transaction);">
+    <transaction [transaction]="transaction"></transaction>
+  </div>
+</div>

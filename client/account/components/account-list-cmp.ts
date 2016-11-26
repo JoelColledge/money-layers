@@ -46,7 +46,6 @@ export class AccountListCmp implements OnInit {
         this._accountService
             .getAll()
             .subscribe((accounts) => {
-                console.log('got all', accounts);
                 this.accounts = accounts;
             });
     }

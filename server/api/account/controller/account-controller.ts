@@ -19,8 +19,6 @@ export class AccountController {
     static createAccount(req: express.Request, res: express.Response): void {
         let _account = req.body;
 
-        console.log(_account);
-
         AccountDao.createAccount(_account)
             .then(account => res.status(201).json(account))
             .catch(error => res.status(400).json(error));

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TodoCmp }   from './todo/components/todo-cmp';
 import { AccountListCmp }   from './account/components/account-list-cmp';
 import { AccountCmp }   from './account/components/account-cmp';
+import { TransactionListCmp }   from './account/components/transaction-list-cmp';
 
 const appRoutes: Routes = [
     {
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
     {
         path: 'account/:id',
         component: AccountCmp
+    },
+    {
+        path: 'transactions',
+        component: TransactionListCmp
     },
     {
         path: '',

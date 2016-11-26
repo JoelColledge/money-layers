@@ -49,7 +49,6 @@ export class AccountCmp implements OnInit {
         this._accountService
             .get(id)
             .subscribe((account) => {
-                console.log('got', account);
                 this.account = account;
             });
     }

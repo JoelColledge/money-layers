@@ -13,6 +13,10 @@ import { AccountListCmp }   from './account/components/account-list-cmp';
 import { AccountCmp }   from './account/components/account-cmp';
 import { AccountService }   from './account/services/account-service';
 
+import { TransactionListCmp }   from './account/components/transaction-list-cmp';
+import { TransactionCmp }   from './account/components/transaction-cmp';
+import { TransactionService }   from './account/services/transaction-service';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -25,10 +29,13 @@ import { AccountService }   from './account/services/account-service';
         TodoCmp,
         AccountListCmp,
         AccountCmp,
+        TransactionListCmp,
+        TransactionCmp,
     ],
     providers: [
         TodoService,
         AccountService,
+        TransactionService,
     ],
     bootstrap: [
         AppCmp,
