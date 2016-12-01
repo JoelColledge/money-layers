@@ -57,6 +57,14 @@ export class TransactionService {
             .map((r) => r.json());
     }
 
+    addOrUpdate(transaction: ITransaction): Observable<ITransaction> {
+        if (transaction._id) {
+            return this.update(transaction);
+        } else {
+            return this.add(transaction);
+        }
+    }
+
     remove(id: string): Observable<{}> {
         return this._http
             .delete(TransactionService.ENDPOINT.replace(':id', id));

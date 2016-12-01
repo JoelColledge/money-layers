@@ -20,6 +20,7 @@ import {ITransaction, Transaction} from '../../../common-types/transaction';
 })
 export class TransactionListCmp implements OnInit {
     transactions: ITransaction[] = [];
+    selectedIndex: number;
 
     constructor(
         private transactionService: TransactionService,
@@ -34,7 +35,6 @@ export class TransactionListCmp implements OnInit {
         this.transactionService
             .getAll()
             .subscribe((transactions) => {
-                console.log('got all transactions', transactions);
                 this.transactions = transactions;
             });
     }
@@ -43,15 +43,18 @@ export class TransactionListCmp implements OnInit {
         this.transactions.unshift(new Transaction());
     }
 
-    update(event: {index: number, transaction: ITransaction}): void {
+    update(event: {index: number, transaction: ITransaction, deselect: boolean}): void {
         this.transactionService
-            .update(event.transaction)
+            .addOrUpdate(event.transaction)
             .subscribe((m) => {
                 this.transactions[event.index] = m;
+                if (event.deselect) {
+                    this.selectedIndex = -1;
+                }
             });
     }
 
-    transactionSelected(transaction: ITransaction) {
-
+    transactionSelected(index: number) {
+        this.selectedIndex = index;
     }
 }

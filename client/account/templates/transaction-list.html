@@ -3,11 +3,12 @@
 
   <span class="glyphicon glyphicon-plus-sign" (click)="add()"></span>
 
-  <div *ngFor="let transaction of transactions;">
+  <div *ngFor="let transaction of transactions; let i = index;">
     <transaction [transaction]="transaction"
-        [index]=index
+        [index]="i"
+        [selectedIndex]="selectedIndex"
         (onUpdate)="update($event)"
-        (onSelect)="transactionSelected(transaction)">
+        (onSelect)="transactionSelected($event)">
     </transaction>
   </div>
 </div>

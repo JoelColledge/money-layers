@@ -24,9 +24,20 @@ import {ITransaction, Transaction} from '../../../common-types/transaction';
 export class TransactionCmp implements OnInit {
     @Input() index: number;
     @Input() transaction: ITransaction = new Transaction();
-    @Input() editMode: boolean = false;
-    @Output() onSelect = new EventEmitter<void>();
-    @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction}>();
+    @Output() onSelect = new EventEmitter<number>();
+    @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction, deselect: boolean}>();
+
+    @Input()
+    set selectedIndex(index: number) {
+        let wasEditMode = this.editMode;
+        this.editMode = index === this.index;
+
+        if (wasEditMode && !this.editMode) {
+            this.update(false);
+        }
+    }
+
+    editMode: boolean = false;
 
     constructor(
         private transactionService: TransactionService,
@@ -36,9 +47,8 @@ export class TransactionCmp implements OnInit {
     ngOnInit() {
     }
 
-    update(): void {
-        this.onUpdate.emit({index: this.index, transaction: this.transaction});
-        this.editMode = false;
+    update(deselect: boolean): void {
+        this.onUpdate.emit({index: this.index, transaction: this.transaction, deselect: deselect});
     }
 
     remove(id: string): void {
@@ -53,7 +63,6 @@ export class TransactionCmp implements OnInit {
     }
 
     clicked(): void {
-        this.editMode = true;
-        this.onSelect.emit();
+        this.onSelect.emit(this.index);
     }
 }

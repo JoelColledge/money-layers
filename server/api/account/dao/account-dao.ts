@@ -63,7 +63,7 @@ namespace AccountDao {
             }
 
             AccountModel
-                .findByIdAndUpdate(account._id, account)
+                .findByIdAndUpdate(account._id, account, {new: true})
                 .exec((err, updated) => {
                     err ? reject(err)
                         : resolve(updated);

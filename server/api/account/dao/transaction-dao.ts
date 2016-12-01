@@ -63,7 +63,7 @@ namespace TransactionDao {
             }
 
             TransactionModel
-                .findByIdAndUpdate(transaction._id, transaction)
+                .findByIdAndUpdate(transaction._id, transaction, {new: true})
                 .exec((err, updated) => {
                     err ? reject(err)
                         : resolve(updated);
