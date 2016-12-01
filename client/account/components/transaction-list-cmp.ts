@@ -20,10 +20,9 @@ import {ITransaction, Transaction} from '../../../common-types/transaction';
 })
 export class TransactionListCmp implements OnInit {
     transactions: ITransaction[] = [];
-    newTransaction: Transaction = new Transaction();
 
     constructor(
-        private _transactionService: TransactionService,
+        private transactionService: TransactionService,
         private router: Router
     ) { }
 
@@ -32,7 +31,7 @@ export class TransactionListCmp implements OnInit {
     }
 
     private _getAll(): void {
-        this._transactionService
+        this.transactionService
             .getAll()
             .subscribe((transactions) => {
                 console.log('got all transactions', transactions);
@@ -40,22 +39,19 @@ export class TransactionListCmp implements OnInit {
             });
     }
 
-    add(transaction: ITransaction): void {
-        this.newTransaction = new Transaction();
+    add(): void {
+        this.transactions.unshift(new Transaction());
     }
 
-    remove(id: string): void {
-        // this._transactionService
-        //     .remove(id)
-        //     .subscribe(() => {
-        //         this.transactions.forEach((t, i) => {
-        //             if (t._id === id)
-        //                 return this.transactions.splice(i, 1);
-        //         });
-        //     })
+    update(event: {index: number, transaction: ITransaction}): void {
+        this.transactionService
+            .update(event.transaction)
+            .subscribe((m) => {
+                this.transactions[event.index] = m;
+            });
     }
 
-    onSelect(transaction: ITransaction) {
-        // this.router.navigate(['/transaction', transaction._id]);
+    transactionSelected(transaction: ITransaction) {
+
     }
 }

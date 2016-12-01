@@ -29,7 +29,6 @@ import {IAccount, Account} from '../../../common-types/account';
     styleUrls: ['account/styles/account.css']
 })
 export class AccountCmp implements OnInit {
-    title: string = "Accounts";
     account: Account;
 
     constructor(

@@ -1,20 +1,37 @@
-<div>
+<hr />
+<div class="transaction"
+    (click)=clicked()>
   <form class="form-inline"
-        (submit)="add()">
+        (submit)="update()">
 
-    <div class="form-group">
-      <label>Description</label>
-      <input type="text"
-          name="transactionDescription"
-          [(ngModel)]="transaction.description"
-          class="form-control"
-          [class.transaction-error]="!transaction.description.length"
-          placeholder="Description"
-          autofocus />
+    <div class="row">
+      <div class="col-md-2">
+        {{transaction.date | date}}
+      </div>
+
+      <div class="col-md-8">
+        <div *ngIf="!editMode">
+          {{transaction.description}}
+        </div>
+        <div *ngIf="editMode" class="form-group">
+          <label>Description</label>
+          <input type="text"
+              name="transactionDescription"
+              [(ngModel)]="transaction.description"
+              class="form-control"
+              [class.transaction-error]="!transaction.description.length"
+              placeholder="Description"
+              autofocus />
+        </div>
+      </div>
     </div>
 
-    <button type="submit"
-        class="btn btn-default"
-        [disabled]="!transaction.description.length">+</button>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit"
+            class="btn btn-default"
+            [disabled]="!transaction.description.length">Update</button>
+      </div>
+    </div>
   </form>
 </div>

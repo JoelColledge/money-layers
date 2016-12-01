@@ -19,26 +19,26 @@ import {ITransaction, Transaction} from '../../../common-types/transaction';
 @Component({
     selector: 'transaction',
     templateUrl: 'account/templates/transaction.html',
-    styleUrls: []
+    styleUrls: ['account/styles/account.css']
 })
 export class TransactionCmp implements OnInit {
+    @Input() index: number;
     @Input() transaction: ITransaction = new Transaction();
-    @Output() onAdd = new EventEmitter<ITransaction>();
+    @Input() editMode: boolean = false;
+    @Output() onSelect = new EventEmitter<void>();
+    @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction}>();
 
     constructor(
-        private _transactionService: TransactionService,
+        private transactionService: TransactionService,
         private router: Router
     ) { }
 
     ngOnInit() {
     }
 
-    add(): void {
-        this._transactionService
-            .add(this.transaction)
-            .subscribe((m) => {
-                this.onAdd.emit(m);
-            });
+    update(): void {
+        this.onUpdate.emit({index: this.index, transaction: this.transaction});
+        this.editMode = false;
     }
 
     remove(id: string): void {
@@ -50,5 +50,10 @@ export class TransactionCmp implements OnInit {
         //                 return this.transactions.splice(i, 1);
         //         });
         //     })
+    }
+
+    clicked(): void {
+        this.editMode = true;
+        this.onSelect.emit();
     }
 }

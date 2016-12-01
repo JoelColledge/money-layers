@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "target": "es5",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noImplicitAny": false,
-        "outDir": "build/server/"
-    },
-    "exclude": [
-	    "node_modules",
-      "typings"
-    ],
-    "include": [
-      "server/**/*.ts",
-      "common-types/**/*.ts",
-      "typings/main",
-      "typings/index.d.ts"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "outDir": "build/server/"
+  },
+  "exclude": [
+    "node_modules",
+    "typings"
+  ],
+  "include": [
+    "server/**/*.ts",
+    "common-types/**/*.ts",
+    "typings/main",
+    "typings/index.d.ts"
+  ]
 }
