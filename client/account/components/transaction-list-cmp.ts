@@ -40,6 +40,7 @@ export class TransactionListCmp implements OnInit {
     }
 
     add(): void {
+        this.selectedIndex = 0;
         this.transactions.unshift(new Transaction());
     }
 
