@@ -13,6 +13,7 @@ export class TransactionRoutes {
       router
         .route('/api/transactions/:id')
         .get(TransactionController.get)
-        .post(TransactionController.updateTransaction);
+        .post(TransactionController.updateTransaction)
+        .delete(TransactionController.deleteTransaction);
     }
 }

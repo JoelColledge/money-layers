@@ -16,7 +16,7 @@ import {ITransaction, Transaction} from '../../../common-types/transaction';
 @Component({
     selector: 'transaction-cmp',
     templateUrl: 'account/templates/transaction-list.html',
-    styleUrls: []
+    styleUrls: ['account/styles/account.css']
 })
 export class TransactionListCmp implements OnInit {
     transactions: ITransaction[] = [];
@@ -56,5 +56,14 @@ export class TransactionListCmp implements OnInit {
 
     transactionSelected(index: number) {
         this.selectedIndex = index;
+    }
+
+    delete(index: number): void {
+        this.transactionService
+            .delete(this.transactions[index]._id)
+            .subscribe(() => {
+                this.selectedIndex = -1;
+                this.transactions.splice(index, 1);
+            });
     }
 }

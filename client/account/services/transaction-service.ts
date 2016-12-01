@@ -65,7 +65,7 @@ export class TransactionService {
         }
     }
 
-    remove(id: string): Observable<{}> {
+    delete(id: string): Observable<{}> {
         return this._http
             .delete(TransactionService.ENDPOINT.replace(':id', id));
     }

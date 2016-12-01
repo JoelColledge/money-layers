@@ -37,4 +37,12 @@ export class TransactionController {
             .then(transaction => res.status(200).json(transaction))
             .catch(error => res.status(400).json(error));
     }
+
+    static deleteTransaction(req: express.Request, res: express.Response): void {
+        let _id = req.params.id;
+
+        TransactionDao.deleteTransaction(_id)
+            .then(() => res.status(200).end())
+            .catch(error => res.status(400).json(error));
+    }
 }

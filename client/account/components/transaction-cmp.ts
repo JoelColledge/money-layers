@@ -26,6 +26,7 @@ export class TransactionCmp implements OnInit {
     @Input() transaction: ITransaction = new Transaction();
     @Output() onSelect = new EventEmitter<number>();
     @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction, deselect: boolean}>();
+    @Output() onDelete = new EventEmitter<number>();
 
     @Input()
     set selectedIndex(index: number) {
@@ -51,15 +52,8 @@ export class TransactionCmp implements OnInit {
         this.onUpdate.emit({index: this.index, transaction: this.transaction, deselect: deselect});
     }
 
-    remove(id: string): void {
-        // this._transactionService
-        //     .remove(id)
-        //     .subscribe(() => {
-        //         this.transactions.forEach((t, i) => {
-        //             if (t._id === id)
-        //                 return this.transactions.splice(i, 1);
-        //         });
-        //     })
+    delete(): void {
+        this.onDelete.emit(this.index);
     }
 
     clicked(): void {

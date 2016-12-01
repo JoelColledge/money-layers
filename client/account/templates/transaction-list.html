@@ -1,14 +1,15 @@
 <div>
   <h2>Transactions</h2>
 
-  <span class="glyphicon glyphicon-plus-sign" (click)="add()"></span>
+  <span class="glyphicon glyphicon-plus-sign add-transaction" (click)="add()"></span>
 
   <div *ngFor="let transaction of transactions; let i = index;">
     <transaction [transaction]="transaction"
         [index]="i"
         [selectedIndex]="selectedIndex"
         (onUpdate)="update($event)"
-        (onSelect)="transactionSelected($event)">
+        (onSelect)="transactionSelected($event)"
+        (onDelete)="delete($event)">
     </transaction>
   </div>
 </div>

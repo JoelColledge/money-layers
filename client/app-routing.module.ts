@@ -25,7 +25,7 @@ const appRoutes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/accounts',
+        redirectTo: '/transactions',
         pathMatch: 'full'
     },
 ];

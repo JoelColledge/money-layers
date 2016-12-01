@@ -70,6 +70,23 @@ namespace TransactionDao {
                 });
         });
     };
+
+    export function deleteTransaction(id: string): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            if (!_.isString(id)) {
+                return reject(new TypeError('Id is not a valid string.'));
+            }
+
+            TransactionModel
+                .remove({_id: id},
+                    (err) => {
+                        console.log('Transaction remove returned ', err);
+                        err ? reject(err)
+                            : resolve();
+                    }
+                );
+        });
+    };
 }
 
 let TransactionModel = mongoose.model<TransactionDocument>('Transaction', transactionSchema);
