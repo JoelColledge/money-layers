@@ -3,6 +3,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, FormBuilder } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 
+import { TypeaheadModule } from 'ng2-bootstrap/components/typeahead';
+
 import { AppCmp }         from './app-cmp';
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -11,6 +13,7 @@ import { TodoService }   from './todo/services/todo-service';
 
 import { AccountListCmp }   from './account/components/account-list-cmp';
 import { AccountCmp }   from './account/components/account-cmp';
+import { AccountChooserCmp }   from './account/components/account-chooser';
 import { AccountService }   from './account/services/account-service';
 
 import { TransactionListCmp }   from './account/components/transaction-list-cmp';
@@ -23,12 +26,14 @@ import { TransactionService }   from './account/services/transaction-service';
         FormsModule,
         HttpModule,
         AppRoutingModule,
+        TypeaheadModule,
     ],
     declarations: [
         AppCmp,
         TodoCmp,
         AccountListCmp,
         AccountCmp,
+        AccountChooserCmp,
         TransactionListCmp,
         TransactionCmp,
     ],
