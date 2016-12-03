@@ -10,10 +10,6 @@ import {
     Router
 } from '@angular/router';
 
-import {
-    TransactionService
-} from '../services/transaction-service';
-
 import {ITransaction, Transaction} from '../../../common-types/transaction';
 
 @Component({
@@ -44,7 +40,6 @@ export class TransactionCmp implements OnInit {
     editMode: boolean = false;
 
     constructor(
-        private transactionService: TransactionService,
         private router: Router
     ) { }
 

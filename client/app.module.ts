@@ -13,11 +13,12 @@ import { TodoService }   from './todo/services/todo-service';
 
 import { AccountListCmp }   from './account/components/account-list-cmp';
 import { AccountCmp }   from './account/components/account-cmp';
-import { AccountChooserCmp }   from './account/components/account-chooser';
+import { AccountChooserCmp }   from './account/components/account-chooser-cmp';
 import { AccountService }   from './account/services/account-service';
 
 import { TransactionListCmp }   from './account/components/transaction-list-cmp';
 import { TransactionCmp }   from './account/components/transaction-cmp';
+import { EntryCmp }   from './account/components/entry-cmp';
 import { TransactionService }   from './account/services/transaction-service';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { TransactionService }   from './account/services/transaction-service';
         AccountChooserCmp,
         TransactionListCmp,
         TransactionCmp,
+        EntryCmp,
     ],
     providers: [
         TodoService,

@@ -26,6 +26,12 @@
       </div>
     </div>
 
+    <div *ngFor="let entry of transaction.entries" class="row">
+      <div class="col-md-2">
+        <entry [entry]="entry"></entry>
+      </div>
+    </div>
+
     <div *ngIf="editMode" class="row">
       <div class="col-md-10">
         <button type="submit"
