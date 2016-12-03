@@ -26,6 +26,7 @@ export class EntryCmp implements OnInit {
     @Input()
     set entry(entry: IEntry) {
         this._entry = entry;
+        this._entryChangeDecimal = entry.change / 100;
         this.accountService.get(entry.account)
             .subscribe((account) => this.account = account);
     }
@@ -34,11 +35,20 @@ export class EntryCmp implements OnInit {
         return this._entry;
     }
 
-    @Output() onUpdate = new EventEmitter<{index: number, entry: IEntry}>();
     @Output() onDelete = new EventEmitter<number>();
 
     @Input() index: number;
 
+    set entryChangeDecimal(entryChangeDecimal: number) {
+        this._entryChangeDecimal = entryChangeDecimal;
+        this._entry.change = Math.round(entryChangeDecimal * 100);
+    }
+
+    get entryChangeDecimal() {
+        return this._entryChangeDecimal;
+    }
+
+    _entryChangeDecimal: number = 0;
     _entry: IEntry = new Entry(undefined, 0);
     account: IAccount = new Account();
 
@@ -51,5 +61,9 @@ export class EntryCmp implements OnInit {
 
     delete(): void {
         this.onDelete.emit(this.index);
+    }
+
+    accountChanged(account: IAccount): void {
+        this._entry.account = account;
     }
 }

@@ -1,1 +1,8 @@
-{{account.name}} :: {{entry.change}}
+<div class="row">
+  <div class="col-md-4">
+    <account-chooser [account]="account" (onAccountChanged)="accountChanged($event)"></account-chooser>
+  </div>
+  <div class="col-md-4">
+    <input type="number" step="0.01" class="form-control" [(ngModel)]="entryChangeDecimal" placeholder="Amount" />
+  </div>
+</div>
