@@ -8,9 +8,6 @@ import { TypeaheadModule } from 'ng2-bootstrap/components/typeahead';
 import { AppCmp }         from './app-cmp';
 import { AppRoutingModule }     from './app-routing.module';
 
-import { TodoCmp }   from './todo/components/todo-cmp';
-import { TodoService }   from './todo/services/todo-service';
-
 import { AccountListCmp }   from './account/components/account-list-cmp';
 import { AccountCmp }   from './account/components/account-cmp';
 import { AccountChooserCmp }   from './account/components/account-chooser-cmp';
@@ -31,7 +28,6 @@ import { TransactionService }   from './account/services/transaction-service';
     ],
     declarations: [
         AppCmp,
-        TodoCmp,
         AccountListCmp,
         AccountCmp,
         AccountChooserCmp,
@@ -40,7 +36,6 @@ import { TransactionService }   from './account/services/transaction-service';
         EntryCmp,
     ],
     providers: [
-        TodoService,
         AccountService,
         TransactionService,
     ],

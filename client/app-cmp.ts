@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
       <h1 class="title">Money Layers Accounting</h1>
       <nav class="navbar navbar-default">
         <ul class="nav navbar-nav">
-          <li><a routerLink="/todos" routerLinkActive="active">Todos</a></li>
           <li><a routerLink="/accounts" routerLinkActive="active">Accounts</a></li>
           <li><a routerLink="/transactions" routerLinkActive="active">Transactions</a></li>
         </ul>
