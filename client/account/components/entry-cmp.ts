@@ -27,8 +27,11 @@ export class EntryCmp implements OnInit {
     set entry(entry: IEntry) {
         this._entry = entry;
         this._entryChangeDecimal = entry.change / 100;
-        this.accountService.get(entry.account)
-            .subscribe((account) => this.account = account);
+
+        if (entry.account) {
+            this.accountService.get(entry.account)
+                .subscribe((account) => this.account = account);
+        }
     }
 
     get entry() {

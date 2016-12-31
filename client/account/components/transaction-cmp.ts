@@ -10,7 +10,7 @@ import {
     Router
 } from '@angular/router';
 
-import {ITransaction, Transaction} from '../../../common-types/transaction';
+import {ITransaction, Transaction, IEntry, Entry} from '../../../common-types/transaction';
 
 @Component({
     selector: 'transaction',
@@ -56,6 +56,14 @@ export class TransactionCmp implements OnInit {
 
     clicked(): void {
         this.onSelect.emit(this._index);
+    }
+
+    addEntry(): void {
+        this.transaction.entries.push({account: undefined, change: 0});
+    }
+
+    deleteEntry(index: number): void {
+        this.transaction.entries.splice(index, 1);
     }
 
     private updateEditMode(): void {
