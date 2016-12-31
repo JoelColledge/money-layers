@@ -10,12 +10,12 @@ import {
     Router
 } from '@angular/router';
 
-import {ITransaction, Transaction, IEntry, Entry} from '../../../common-types/transaction';
+import {ITransaction, Transaction, IEntry, Entry} from '../../common-types/transaction';
 
 @Component({
     selector: 'transaction',
-    templateUrl: 'account/templates/transaction.html',
-    styleUrls: ['account/styles/account.css']
+    templateUrl: 'transactions/transaction.html',
+    styleUrls: ['styles/account.css']
 })
 export class TransactionCmp implements OnInit {
     @Input() transaction: ITransaction = new Transaction();

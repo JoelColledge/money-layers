@@ -19,12 +19,12 @@ import {
     AccountService
 } from '../services/account-service';
 
-import {IAccount, Account} from '../../../common-types/account';
+import {IAccount, Account} from '../../common-types/account';
 
 @Component({
     selector: 'account-cmp',
-    templateUrl: 'account/templates/account-list.html',
-    styleUrls: ['account/styles/account.css']
+    templateUrl: 'accounts/account-list.html',
+    styleUrls: ['styles/account.css']
 })
 export class AccountListCmp implements OnInit {
     accounts: IAccount[] = [];

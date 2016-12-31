@@ -8,15 +8,16 @@ import { TypeaheadModule } from 'ng2-bootstrap/components/typeahead';
 import { AppCmp }         from './app-cmp';
 import { AppRoutingModule }     from './app-routing.module';
 
-import { AccountListCmp }   from './account/components/account-list-cmp';
-import { AccountCmp }   from './account/components/account-cmp';
-import { AccountChooserCmp }   from './account/components/account-chooser-cmp';
-import { AccountService }   from './account/services/account-service';
+import { AccountListCmp }   from './accounts/account-list-cmp';
+import { AccountCmp }   from './accounts/account-cmp';
+import { AccountChooserCmp }   from './transactions/account-chooser-cmp';
 
-import { TransactionListCmp }   from './account/components/transaction-list-cmp';
-import { TransactionCmp }   from './account/components/transaction-cmp';
-import { EntryCmp }   from './account/components/entry-cmp';
-import { TransactionService }   from './account/services/transaction-service';
+import { TransactionListCmp }   from './transactions/transaction-list-cmp';
+import { TransactionCmp }   from './transactions/transaction-cmp';
+import { EntryCmp }   from './transactions/entry-cmp';
+
+import { AccountService }   from './services/account-service';
+import { TransactionService }   from './services/transaction-service';
 
 @NgModule({
     imports: [

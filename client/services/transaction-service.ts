@@ -14,7 +14,7 @@ import {
 
 import 'rxjs/add/operator/map';
 
-import {ITransaction} from '../../../common-types/transaction';
+import {ITransaction} from '../../common-types/transaction';
 
 @Injectable()
 export class TransactionService {

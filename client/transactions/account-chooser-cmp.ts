@@ -12,11 +12,11 @@ import {
     AccountService
 } from '../services/account-service';
 
-import {IAccount, Account} from '../../../common-types/account';
+import {IAccount, Account} from '../../common-types/account';
 
 @Component({
     selector: 'account-chooser',
-    templateUrl: 'account/templates/account-chooser.html',
+    templateUrl: 'transactions/account-chooser.html',
     styles: []
 })
 export class AccountChooserCmp {

@@ -11,12 +11,12 @@ import {
     TransactionService
 } from '../services/transaction-service';
 
-import {ITransaction, Transaction} from '../../../common-types/transaction';
+import {ITransaction, Transaction} from '../../common-types/transaction';
 
 @Component({
     selector: 'transaction-cmp',
-    templateUrl: 'account/templates/transaction-list.html',
-    styleUrls: ['account/styles/account.css']
+    templateUrl: 'transactions/transaction-list.html',
+    styleUrls: ['styles/account.css']
 })
 export class TransactionListCmp implements OnInit {
     transactions: ITransaction[] = [];

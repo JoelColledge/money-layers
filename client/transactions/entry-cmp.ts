@@ -14,13 +14,13 @@ import {
     AccountService
 } from '../services/account-service';
 
-import {IEntry, Entry} from '../../../common-types/transaction';
-import {IAccount, Account} from '../../../common-types/account';
+import {IEntry, Entry} from '../../common-types/transaction';
+import {IAccount, Account} from '../../common-types/account';
 
 @Component({
     selector: 'entry',
-    templateUrl: 'account/templates/entry.html',
-    styleUrls: ['account/styles/account.css']
+    templateUrl: 'transactions/entry.html',
+    styleUrls: ['styles/account.css']
 })
 export class EntryCmp implements OnInit {
     @Input()

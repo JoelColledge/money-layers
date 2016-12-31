@@ -14,7 +14,7 @@ import {
 
 import 'rxjs/add/operator/map';
 
-import {IAccount} from '../../../common-types/account';
+import {IAccount} from '../../common-types/account';
 
 @Injectable()
 export class AccountService {

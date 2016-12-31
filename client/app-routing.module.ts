@@ -1,9 +1,9 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AccountListCmp }   from './account/components/account-list-cmp';
-import { AccountCmp }   from './account/components/account-cmp';
-import { TransactionListCmp }   from './account/components/transaction-list-cmp';
+import { AccountListCmp }   from './accounts/account-list-cmp';
+import { AccountCmp }   from './accounts/account-cmp';
+import { TransactionListCmp }   from './transactions/transaction-list-cmp';
 
 const appRoutes: Routes = [
     {
