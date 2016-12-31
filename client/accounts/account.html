@@ -2,8 +2,6 @@
   <form class="account-form"
         (submit)="update()">
 
-    <h1 class="account-title">{{account._id}}</h1>
-
     <label for="accountName">Name: </label>
 
     <input type="text"
@@ -11,6 +9,15 @@
            [(ngModel)]="account.name"
            [class.account-error]="!account.name.length"
            placeholder="Account name"
+           autofocus />
+
+    <label for="accountLayer">Layer: </label>
+
+    <input type="text"
+           name="accountLayer"
+           [(ngModel)]="account.layer"
+           [class.account-error]="!account.layer.length"
+           placeholder="Account layer"
            autofocus />
 
     <label for="accountActive">Active: </label>

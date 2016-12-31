@@ -1,6 +1,7 @@
 import {
     Component,
     Inject,
+    Input,
     OnInit
 } from '@angular/core';
 
@@ -24,40 +25,21 @@ import {
 import {IAccount, Account} from '../../common-types/account';
 
 @Component({
-    selector: 'account-cmp',
+    selector: 'account',
     templateUrl: 'accounts/account.html',
     styleUrls: ['styles/account.css']
 })
-export class AccountCmp implements OnInit {
-    account: Account;
+export class AccountCmp {
+    @Input() account: Account;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
         private _accountService: AccountService
     ) {
-        this.account = new Account();
-    }
-
-    ngOnInit() {
-        this.route.params
-            .forEach((params: Params) => this._get(params['id']))
-    }
-
-    private _get(id: string): void {
-        this._accountService
-            .get(id)
-            .subscribe((account) => {
-                this.account = account;
-            });
     }
 
     update(): void {
         this._accountService
             .update(this.account)
-            .subscribe((account) => {
-                console.log('got', account);
-                this.router.navigate(['/accounts']);
-            });
+            .subscribe(account => this.account = account);
     }
 }

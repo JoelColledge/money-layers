@@ -14,7 +14,7 @@ import {
 import {ITransaction, Transaction} from '../../common-types/transaction';
 
 @Component({
-    selector: 'transaction-cmp',
+    selector: 'transaction-list',
     templateUrl: 'transactions/transaction-list.html',
     styleUrls: ['styles/account.css']
 })

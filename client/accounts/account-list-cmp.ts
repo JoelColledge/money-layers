@@ -22,7 +22,7 @@ import {
 import {IAccount, Account} from '../../common-types/account';
 
 @Component({
-    selector: 'account-cmp',
+    selector: 'account-list',
     templateUrl: 'accounts/account-list.html',
     styleUrls: ['styles/account.css']
 })
@@ -58,20 +58,5 @@ export class AccountListCmp implements OnInit {
                 this.accounts.push(m);
                 this.accountForm = new Account();
             });
-    }
-
-    remove(id: string): void {
-        this._accountService
-            .remove(id)
-            .subscribe(() => {
-                this.accounts.forEach((t, i) => {
-                    if (t._id === id)
-                        return this.accounts.splice(i, 1);
-                });
-            })
-    }
-
-    onSelect(account: IAccount) {
-        this.router.navigate(['/account', account._id]);
     }
 }

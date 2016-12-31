@@ -28,13 +28,8 @@
   </form>
 
   <div class="account-list">
-    <div *ngFor="let account of accounts;"
-         class="account-item"
-         (click)="onSelect(account);">
-      <hr/>
-      <h3>{{account.name}}</h3>
-      <p>{{account.layer}}</p>
-      <p>{{account.active}}</p>
+    <div *ngFor="let account of accounts;">
+      <account [account]=account></account>
     </div>
   </div>
 </div>
