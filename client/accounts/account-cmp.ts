@@ -32,6 +32,14 @@ import {IAccount, Account} from '../../common-types/account';
 export class AccountCmp {
     @Input() account: Account;
 
+    get accountGroups(): string {
+        return this.account.groups.join(', ');
+    }
+
+    set accountGroups(value: string) {
+        this.account.groups = value.split(',').map(group => group.trim());
+    }
+
     constructor(
         private _accountService: AccountService
     ) {

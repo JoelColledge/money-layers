@@ -4,6 +4,7 @@ export interface IAccount {
     name: string;
     layer: string;
     active: boolean;
+    groups: string[];
 }
 
 export class Account {
@@ -11,6 +12,7 @@ export class Account {
         public _id: any = undefined,
         public name: string = "",
         public layer: string = "actual",
-        public active: boolean = true
+        public active: boolean = true,
+        public groups: string[] = []
     ) { }
 }

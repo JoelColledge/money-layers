@@ -1,32 +1,53 @@
-<div class="account-container">
-  <form class="account-form"
-        (submit)="update()">
+<form class="form-inline"
+      (submit)="update()">
 
-    <label for="accountName">Name: </label>
+  <div class="form-group">
+    <label [attr.for]="account._id + '-accountName'">Name: </label>
 
     <input type="text"
+           [id]="account._id + '-accountName'"
            name="accountName"
            [(ngModel)]="account.name"
+           class="form-control"
            [class.account-error]="!account.name.length"
-           placeholder="Account name"
+           placeholder="Name"
            autofocus />
+  </div>
 
-    <label for="accountLayer">Layer: </label>
+  <div class="form-group">
+    <label [attr.for]="account._id + '-accountLayer'">Layer: </label>
 
     <input type="text"
+           [id]="account._id + '-accountLayer'"
            name="accountLayer"
            [(ngModel)]="account.layer"
+           class="form-control"
            [class.account-error]="!account.layer.length"
-           placeholder="Account layer"
+           placeholder="Layer"
            autofocus />
+  </div>
 
-    <label for="accountActive">Active: </label>
+  <div class="checkbox">
+    <label>
+      Active:
+      <input type="checkbox"
+             name="accountActive"
+             [(ngModel)]="account.active" />
+    </label>
+  </div>
 
-    <input type="checkbox"
-           name="accountActive"
-           [(ngModel)]="account.active" />
+  <div class="form-group">
+    <label [attr.for]="account._id + '-accountGroups'">Groups: </label>
 
-    <button type="submit"
-            [disabled]="!account.name.length">Update</button>
-  </form>
-</div>
+    <input type="text"
+           [id]="account._id + '-accountGroups'"
+           name="accountGroups"
+           [(ngModel)]="accountGroups"
+           class="form-control"
+           placeholder="Groups"
+           autofocus />
+  </div>
+
+  <button type="submit"
+          [disabled]="!account.name.length">Update</button>
+</form>
