@@ -52,7 +52,7 @@ export class EntryCmp implements OnInit {
     }
 
     _entryChangeDecimal: number = 0;
-    _entry: Entry = new Entry(undefined, 0);
+    _entry: Entry = new Entry();
     account: Account = new Account();
 
     constructor(

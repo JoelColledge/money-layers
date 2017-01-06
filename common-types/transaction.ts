@@ -1,8 +1,8 @@
 
 export class Entry {
     constructor(
-        public account: any,
-        public change: number
+        public account: any = undefined,
+        public change: number = 0
     ) { }
 }
 

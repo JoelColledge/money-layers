@@ -8,3 +8,11 @@ export class Account {
         public groups: string[] = []
     ) { }
 }
+
+export class Rule {
+    constructor(
+        public _id: any = undefined,
+        public groupLeft: string = undefined,
+        public groupRight: string = "zero"
+    ) { }
+}

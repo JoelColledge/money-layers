@@ -1,18 +1,14 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AccountListCmp }   from './accounts/account-list-cmp';
+import { StructureCmp }   from './accounts/structure-cmp';
 import { AccountCmp }   from './accounts/account-cmp';
 import { TransactionListCmp }   from './transactions/transaction-list-cmp';
 
 const appRoutes: Routes = [
     {
-        path: 'accounts',
-        component: AccountListCmp
-    },
-    {
-        path: 'account/:id',
-        component: AccountCmp
+        path: 'structure',
+        component: StructureCmp
     },
     {
         path: 'transactions',

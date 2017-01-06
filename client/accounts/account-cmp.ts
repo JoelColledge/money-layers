@@ -47,7 +47,7 @@ export class AccountCmp {
 
     update(): void {
         this._accountService
-            .update(this.account)
+            .addOrUpdate(this.account)
             .subscribe(account => this.account = account);
     }
 }

@@ -57,6 +57,14 @@ export class AccountService {
             .map((r) => r.json());
     }
 
+    addOrUpdate(account: Account): Observable<Account> {
+        if (account._id) {
+            return this.update(account);
+        } else {
+            return this.add(account);
+        }
+    }
+
     remove(id: string): Observable<{}> {
         return this._http
             .delete(AccountService.ENDPOINT.replace(':id', id));
