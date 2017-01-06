@@ -1,0 +1,13 @@
+Manage groups - use tagging of accounts
+Manage validation rules
+Apply validation rules
+Styling
+Show account and group levels
+Transactions paging (by month)
+Transaction creation helpers
+Transaction edit helpers
+Import? or manual import into Mongo
+
+== Questions
+Do we need to have the 'accounting equation' on the logical accounts?
+Isn't it enough that we ensure that the logical total sums to the total in the budgeted accounts? (NB: This means that we do need a buffer in any case, because we need unallocated money in the current account)
