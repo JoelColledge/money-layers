@@ -1,12 +1,4 @@
 
-export interface IAccount {
-    _id: any;
-    name: string;
-    layer: string;
-    active: boolean;
-    groups: string[];
-}
-
 export class Account {
     constructor(
         public _id: any = undefined,

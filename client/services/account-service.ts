@@ -14,7 +14,7 @@ import {
 
 import 'rxjs/add/operator/map';
 
-import {IAccount} from '../../common-types/account';
+import {Account} from '../../common-types/account';
 
 @Injectable()
 export class AccountService {
@@ -23,19 +23,19 @@ export class AccountService {
     constructor(@Inject(Http) private _http: Http) {
     }
 
-    getAll(): Observable<IAccount[]> {
+    getAll(): Observable<Account[]> {
         return this._http
             .get(AccountService.ENDPOINT.replace(':id', ''))
             .map((r) => r.json());
     }
 
-    get(id: string): Observable<IAccount> {
+    get(id: string): Observable<Account> {
         return this._http
             .get(AccountService.ENDPOINT.replace(':id', id))
             .map((r) => r.json());
     }
 
-    add(account: IAccount): Observable<IAccount> {
+    add(account: Account): Observable<Account> {
         let _messageStringified = JSON.stringify(account);
 
         let headers = new Headers();
@@ -46,7 +46,7 @@ export class AccountService {
             .map((r) => r.json());
     }
 
-    update(account: IAccount): Observable<IAccount> {
+    update(account: Account): Observable<Account> {
         let _messageStringified = JSON.stringify(account);
 
         let headers = new Headers();

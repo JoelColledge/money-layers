@@ -19,7 +19,7 @@ import {
     AccountService
 } from '../services/account-service';
 
-import {IAccount, Account} from '../../common-types/account';
+import {Account} from '../../common-types/account';
 
 @Component({
     selector: 'account-list',
@@ -27,7 +27,7 @@ import {IAccount, Account} from '../../common-types/account';
     styleUrls: ['styles/account.css']
 })
 export class AccountListCmp implements OnInit {
-    accounts: IAccount[] = [];
+    accounts: Account[] = [];
     accountForm: Account;
     accountFormIsActual: boolean;
 

@@ -14,7 +14,7 @@ import {
 
 import 'rxjs/add/operator/map';
 
-import {ITransaction} from '../../common-types/transaction';
+import {Transaction} from '../../common-types/transaction';
 
 @Injectable()
 export class TransactionService {
@@ -23,19 +23,19 @@ export class TransactionService {
     constructor(@Inject(Http) private _http: Http) {
     }
 
-    getAll(): Observable<ITransaction[]> {
+    getAll(): Observable<Transaction[]> {
         return this._http
             .get(TransactionService.ENDPOINT.replace(':id', ''))
             .map((r) => r.json());
     }
 
-    get(id: string): Observable<ITransaction> {
+    get(id: string): Observable<Transaction> {
         return this._http
             .get(TransactionService.ENDPOINT.replace(':id', id))
             .map((r) => r.json());
     }
 
-    add(transaction: ITransaction): Observable<ITransaction> {
+    add(transaction: Transaction): Observable<Transaction> {
         let _messageStringified = JSON.stringify(transaction);
 
         let headers = new Headers();
@@ -46,7 +46,7 @@ export class TransactionService {
             .map((r) => r.json());
     }
 
-    update(transaction: ITransaction): Observable<ITransaction> {
+    update(transaction: Transaction): Observable<Transaction> {
         let _messageStringified = JSON.stringify(transaction);
 
         let headers = new Headers();
@@ -57,7 +57,7 @@ export class TransactionService {
             .map((r) => r.json());
     }
 
-    addOrUpdate(transaction: ITransaction): Observable<ITransaction> {
+    addOrUpdate(transaction: Transaction): Observable<Transaction> {
         if (transaction._id) {
             return this.update(transaction);
         } else {

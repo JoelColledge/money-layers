@@ -11,7 +11,7 @@ import {
     TransactionService
 } from '../services/transaction-service';
 
-import {ITransaction, Transaction} from '../../common-types/transaction';
+import {Transaction} from '../../common-types/transaction';
 
 @Component({
     selector: 'transaction-list',
@@ -19,7 +19,7 @@ import {ITransaction, Transaction} from '../../common-types/transaction';
     styleUrls: ['styles/account.css']
 })
 export class TransactionListCmp implements OnInit {
-    transactions: ITransaction[] = [];
+    transactions: Transaction[] = [];
     selectedIndex: number;
 
     constructor(
@@ -44,7 +44,7 @@ export class TransactionListCmp implements OnInit {
         this.transactions.unshift(new Transaction());
     }
 
-    update(event: {index: number, transaction: ITransaction, deselect: boolean}): void {
+    update(event: {index: number, transaction: Transaction, deselect: boolean}): void {
         this.transactionService
             .addOrUpdate(event.transaction)
             .subscribe((m) => {

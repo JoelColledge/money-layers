@@ -2,15 +2,15 @@ import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
 import transactionSchema from '../model/transaction-model';
-import {ITransaction} from '../../../../common-types/transaction';
+import {Transaction} from '../../../../common-types/transaction';
 
-interface TransactionDocument extends mongoose.Document, ITransaction {
+interface TransactionDocument extends mongoose.Document, Transaction {
 }
 
 namespace TransactionDao {
 
-    export function getAll(): Promise<ITransaction[]> {
-        return new Promise<ITransaction[]>((resolve, reject) => {
+    export function getAll(): Promise<Transaction[]> {
+        return new Promise<Transaction[]>((resolve, reject) => {
             let _query = {};
 
             TransactionModel
@@ -22,8 +22,8 @@ namespace TransactionDao {
         });
     };
 
-    export function get(id: string): Promise<ITransaction> {
-        return new Promise<ITransaction>((resolve, reject) => {
+    export function get(id: string): Promise<Transaction> {
+        return new Promise<Transaction>((resolve, reject) => {
             let _query = {};
 
             TransactionModel
@@ -35,8 +35,8 @@ namespace TransactionDao {
         });
     };
 
-    export function createTransaction(transaction: ITransaction): Promise<ITransaction> {
-        return new Promise<ITransaction>((resolve, reject) => {
+    export function createTransaction(transaction: Transaction): Promise<Transaction> {
+        return new Promise<Transaction>((resolve, reject) => {
             if (!_.isObject(transaction)) {
                 return reject(new TypeError('Transaction is not a valid object.'));
             }
@@ -53,8 +53,8 @@ namespace TransactionDao {
         });
     };
 
-    export function updateTransaction(transaction: ITransaction): Promise<ITransaction> {
-        return new Promise<ITransaction>((resolve, reject) => {
+    export function updateTransaction(transaction: Transaction): Promise<Transaction> {
+        return new Promise<Transaction>((resolve, reject) => {
             if (!_.isObject(transaction)) {
                 return reject(new TypeError('Transaction is not a valid object.'));
             }

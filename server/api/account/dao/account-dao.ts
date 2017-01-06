@@ -2,15 +2,15 @@ import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
 import accountSchema from '../model/account-model';
-import {IAccount} from '../../../../common-types/account';
+import {Account} from '../../../../common-types/account';
 
-interface AccountDocument extends mongoose.Document, IAccount {
+interface AccountDocument extends mongoose.Document, Account {
 }
 
 namespace AccountDao {
 
-    export function getAll(): Promise<IAccount[]> {
-        return new Promise<IAccount[]>((resolve, reject) => {
+    export function getAll(): Promise<Account[]> {
+        return new Promise<Account[]>((resolve, reject) => {
             let _query = {};
 
             AccountModel
@@ -22,8 +22,8 @@ namespace AccountDao {
         });
     };
 
-    export function get(id: string): Promise<IAccount> {
-        return new Promise<IAccount>((resolve, reject) => {
+    export function get(id: string): Promise<Account> {
+        return new Promise<Account>((resolve, reject) => {
             let _query = {};
 
             AccountModel
@@ -35,8 +35,8 @@ namespace AccountDao {
         });
     };
 
-    export function createAccount(account: IAccount): Promise<IAccount> {
-        return new Promise<IAccount>((resolve, reject) => {
+    export function createAccount(account: Account): Promise<Account> {
+        return new Promise<Account>((resolve, reject) => {
             if (!_.isObject(account)) {
                 return reject(new TypeError('Account is not a valid object.'));
             }
@@ -53,8 +53,8 @@ namespace AccountDao {
         });
     };
 
-    export function updateAccount(account: IAccount): Promise<IAccount> {
-        return new Promise<IAccount>((resolve, reject) => {
+    export function updateAccount(account: Account): Promise<Account> {
+        return new Promise<Account>((resolve, reject) => {
             if (!_.isObject(account)) {
                 return reject(new TypeError('Account is not a valid object.'));
             }

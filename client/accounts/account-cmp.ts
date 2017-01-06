@@ -22,7 +22,7 @@ import {
     AccountService
 } from '../services/account-service';
 
-import {IAccount, Account} from '../../common-types/account';
+import {Account} from '../../common-types/account';
 
 @Component({
     selector: 'account',

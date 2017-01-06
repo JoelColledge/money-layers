@@ -12,7 +12,7 @@ import {
     AccountService
 } from '../services/account-service';
 
-import {IAccount, Account} from '../../common-types/account';
+import {Account} from '../../common-types/account';
 
 @Component({
     selector: 'account-chooser',
@@ -21,13 +21,13 @@ import {IAccount, Account} from '../../common-types/account';
 })
 export class AccountChooserCmp {
     @Input()
-    set account(account: IAccount) {
+    set account(account: Account) {
         this.accountName = account.name;
     }
 
-    @Output() onAccountChanged: EventEmitter<IAccount> = new EventEmitter<IAccount>();
+    @Output() onAccountChanged: EventEmitter<Account> = new EventEmitter<Account>();
 
-    accounts: IAccount[] = [];
+    accounts: Account[] = [];
     accountName: string = '';
     accountNames: string[] = [];
 
@@ -49,7 +49,7 @@ export class AccountChooserCmp {
     }
 
     public typeaheadOnSelect(e:TypeaheadMatch):void {
-        let account: IAccount = this.accounts.find((account) => account.name === e.value);
+        let account: Account = this.accounts.find((account) => account.name === e.value);
         if (account) {
             this.onAccountChanged.emit(account);
         }

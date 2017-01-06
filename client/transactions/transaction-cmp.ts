@@ -10,7 +10,7 @@ import {
     Router
 } from '@angular/router';
 
-import {ITransaction, Transaction, IEntry, Entry} from '../../common-types/transaction';
+import {Transaction, Entry} from '../../common-types/transaction';
 
 @Component({
     selector: 'transaction',
@@ -18,7 +18,7 @@ import {ITransaction, Transaction, IEntry, Entry} from '../../common-types/trans
     styleUrls: ['styles/account.css']
 })
 export class TransactionCmp implements OnInit {
-    @Input() transaction: ITransaction = new Transaction();
+    @Input() transaction: Transaction = new Transaction();
     @Output() onSelect = new EventEmitter<number>();
     @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction, deselect: boolean}>();
     @Output() onDelete = new EventEmitter<number>();

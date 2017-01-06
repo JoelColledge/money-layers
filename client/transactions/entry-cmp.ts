@@ -14,8 +14,8 @@ import {
     AccountService
 } from '../services/account-service';
 
-import {IEntry, Entry} from '../../common-types/transaction';
-import {IAccount, Account} from '../../common-types/account';
+import {Entry} from '../../common-types/transaction';
+import {Account} from '../../common-types/account';
 
 @Component({
     selector: 'entry',
@@ -24,7 +24,7 @@ import {IAccount, Account} from '../../common-types/account';
 })
 export class EntryCmp implements OnInit {
     @Input()
-    set entry(entry: IEntry) {
+    set entry(entry: Entry) {
         this._entry = entry;
         this._entryChangeDecimal = entry.change / 100;
 
@@ -52,8 +52,8 @@ export class EntryCmp implements OnInit {
     }
 
     _entryChangeDecimal: number = 0;
-    _entry: IEntry = new Entry(undefined, 0);
-    account: IAccount = new Account();
+    _entry: Entry = new Entry(undefined, 0);
+    account: Account = new Account();
 
     constructor(
         private accountService: AccountService
@@ -66,7 +66,7 @@ export class EntryCmp implements OnInit {
         this.onDelete.emit(this.index);
     }
 
-    accountChanged(account: IAccount): void {
+    accountChanged(account: Account): void {
         this._entry.account = account;
     }
 }
