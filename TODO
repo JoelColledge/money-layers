@@ -1,10 +1,10 @@
-Manage validation rules
-Apply validation rules
+Make updating to entry accounts easier
 Styling
 Show account and group levels
 Transactions paging (by month)
 Transaction creation helpers
 Transaction edit helpers
+Transaction edit cancel
 Import? or manual import into Mongo
 
 == Questions

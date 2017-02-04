@@ -10,6 +10,7 @@ import {
     Router
 } from '@angular/router';
 
+import {Account, Structure} from '../../common-types/account';
 import {Transaction, Entry} from '../../common-types/transaction';
 
 @Component({
@@ -18,6 +19,7 @@ import {Transaction, Entry} from '../../common-types/transaction';
     styleUrls: ['styles/account.css']
 })
 export class TransactionCmp implements OnInit {
+    @Input() structure: Structure = new Structure();
     @Input() transaction: Transaction = new Transaction();
     @Output() onSelect = new EventEmitter<number>();
     @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction, deselect: boolean}>();
@@ -38,12 +40,14 @@ export class TransactionCmp implements OnInit {
     _index: number;
     _selectedIndex: number;
     editMode: boolean = false;
+    valid: boolean = true;
 
     constructor(
         private router: Router
     ) { }
 
     ngOnInit() {
+        this.validate();
     }
 
     update(deselect: boolean): void {
@@ -64,6 +68,40 @@ export class TransactionCmp implements OnInit {
 
     deleteEntry(index: number): void {
         this.transaction.entries.splice(index, 1);
+        this.validate();
+    }
+
+    validate(): void {
+        // let groups = {};
+        // this.structure.accounts
+        //     .forEach((a) => {
+        //         a.groups.forEach((group) => {
+        //             let groupAccounts = groups[group] || [];
+        //             groupAccounts.push(a);
+        //             groups[group] = groupAccounts;
+        //         });
+        //     }, {});
+        // console.log(groups);
+
+        this.valid = this.structure.rules
+            .every((rule) => this.sumByGroup(rule.groupLeft) === this.sumByGroup(rule.groupRight));
+    }
+
+    private sumByGroup(group: string): number {
+        return this.entriesInGroup(group)
+            .reduce((s, entry) => s + entry.change, 0);
+    }
+
+    private entriesInGroup(group: string): Entry[] {
+        return this.transaction.entries
+            .filter((entry) => {
+                let account = this.accountById(entry.account);
+                return !!account && account.groups.indexOf(group) > -1;
+            });
+    }
+
+    private accountById(accountId: string): Account {
+        return this.structure.accounts.find((account) => account._id === accountId);
     }
 
     private updateEditMode(): void {

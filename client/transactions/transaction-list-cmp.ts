@@ -8,9 +8,22 @@ import {
 } from '@angular/router';
 
 import {
+    Observable
+} from 'rxjs/Rx';
+
+import {
+    AccountService
+} from '../services/account-service';
+
+import {
+    RuleService
+} from '../services/rule-service';
+
+import {
     TransactionService
 } from '../services/transaction-service';
 
+import {Structure} from '../../common-types/account';
 import {Transaction} from '../../common-types/transaction';
 
 @Component({
@@ -19,10 +32,13 @@ import {Transaction} from '../../common-types/transaction';
     styleUrls: ['styles/account.css']
 })
 export class TransactionListCmp implements OnInit {
+    structure: Structure = new Structure();
     transactions: Transaction[] = [];
     selectedIndex: number;
 
     constructor(
+        private accountService: AccountService,
+        private ruleService: RuleService,
         private transactionService: TransactionService,
         private router: Router
     ) { }
@@ -32,9 +48,12 @@ export class TransactionListCmp implements OnInit {
     }
 
     private _getAll(): void {
-        this.transactionService
-            .getAll()
-            .subscribe((transactions) => {
+        let accountsObservable = this.accountService.getAll();
+        let rulesObservable = this.ruleService.getAll();
+        let transactionsObservable = this.transactionService.getAll();
+        Observable.forkJoin(accountsObservable, rulesObservable, transactionsObservable)
+            .subscribe(([accounts, rules, transactions]) => {
+                this.structure = new Structure(accounts, rules);
                 this.transactions = transactions;
             });
     }

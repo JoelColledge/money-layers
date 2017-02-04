@@ -28,7 +28,7 @@
 
     <div *ngIf="editMode">
       <div *ngFor="let entry of transaction.entries; let i = index;">
-        <entry [entry]="entry" [index]="i" (onDelete)="deleteEntry($event)"></entry>
+        <entry [entry]="entry" [index]="i" (onDelete)="deleteEntry($event)" (onChange)="validate()"></entry>
       </div>
 
       <span class="glyphicon glyphicon-plus-sign" (click)="addEntry()"></span>
@@ -47,4 +47,5 @@
         </div>
     </div>
   </form>
+  <div *ngIf="!valid" class="alert alert-danger" role="alert">Invalid!</div>
 </div>

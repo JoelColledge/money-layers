@@ -16,3 +16,10 @@ export class Rule {
         public groupRight: string = "zero"
     ) { }
 }
+
+export class Structure {
+    constructor(
+        public accounts: Account[] = [],
+        public rules: Rule[] = []
+    ) { }
+}

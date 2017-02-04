@@ -40,11 +40,14 @@ export class EntryCmp implements OnInit {
 
     @Output() onDelete = new EventEmitter<number>();
 
+    @Output() onChange = new EventEmitter<void>();
+
     @Input() index: number;
 
     set entryChangeDecimal(entryChangeDecimal: number) {
         this._entryChangeDecimal = entryChangeDecimal;
         this._entry.change = Math.round(entryChangeDecimal * 100);
+        this.onChange.emit();
     }
 
     get entryChangeDecimal() {
@@ -68,5 +71,6 @@ export class EntryCmp implements OnInit {
 
     accountChanged(account: Account): void {
         this._entry.account = account;
+        this.onChange.emit();
     }
 }
