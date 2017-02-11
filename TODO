@@ -1,12 +1,17 @@
-Make updating to entry accounts easier
-Styling
+Make updating entry accounts easier - shouldn't have to explicitly select from dropdown
 Show account and group levels
 Transactions paging (by month)
 Transaction creation helpers
 Transaction edit helpers
 Transaction edit cancel
 Import? or manual import into Mongo
+Styling
+Explain validation in GUI - which rule has been broken
 
 == Questions
 Do we need to have the 'accounting equation' on the logical accounts?
 Isn't it enough that we ensure that the logical total sums to the total in the budgeted accounts? (NB: This means that we do need a buffer in any case, because we need unallocated money in the current account)
+Do we need an expenses account parallel to each budget account?
+    Allows keeping track of historical spending better.
+    Otherwise only know how much we've removed from the budgeting account, which could be transfers for other reasons.
+    Alternative solution: tag transactions.

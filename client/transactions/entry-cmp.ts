@@ -70,7 +70,7 @@ export class EntryCmp implements OnInit {
     }
 
     accountChanged(account: Account): void {
-        this._entry.account = account;
+        this._entry.account = account._id;
         this.onChange.emit();
     }
 }
