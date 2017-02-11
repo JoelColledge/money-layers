@@ -3,6 +3,7 @@ import * as Promise from 'bluebird';
 import * as _ from 'lodash';
 import transactionSchema from '../model/transaction-model';
 import {Transaction} from '../../../../common-types/transaction';
+import {AccountTotal} from '../../../../common-types/statistics';
 
 interface TransactionDocument extends mongoose.Document, Transaction {
 }
@@ -24,13 +25,33 @@ namespace TransactionDao {
 
     export function get(id: string): Promise<Transaction> {
         return new Promise<Transaction>((resolve, reject) => {
-            let _query = {};
-
             TransactionModel
                 .findById(id)
                 .exec((err, transaction) => {
                     err ? reject(err)
                         : resolve(transaction);
+                });
+        });
+    };
+
+    export function accountTotals(): Promise<AccountTotal[]> {
+        return new Promise<AccountTotal[]>((resolve, reject) => {
+            let _aggregation = [
+                {
+                    $unwind: "$entries"
+                },
+                {
+                    $group: {_id: "$entries.account", total: {$sum: "$entries.change"}}
+                }
+            ];
+
+            TransactionModel
+                .aggregate(_aggregation, (err, result) => {
+                    err ? reject(err)
+                        : resolve(result.map((agg) => {
+                            let totals = {account: agg._id, total: agg.total};
+                            return totals;
+                        }));
                 });
         });
     };

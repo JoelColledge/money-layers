@@ -16,6 +16,12 @@ export class TransactionController {
             .catch(error => res.status(400).json(error));
     }
 
+    static accountTotals(req: express.Request, res: express.Response): void {
+        TransactionDao.accountTotals()
+            .then(totals => res.status(200).json(totals))
+            .catch(error => res.status(400).json(error));
+    }
+
     static createTransaction(req: express.Request, res: express.Response): void {
         let _transaction = req.body;
 

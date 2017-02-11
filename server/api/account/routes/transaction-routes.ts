@@ -15,5 +15,9 @@ export class TransactionRoutes {
         .get(TransactionController.get)
         .post(TransactionController.updateTransaction)
         .delete(TransactionController.deleteTransaction);
+
+      router
+        .route('/api/accountTotals')
+        .get(TransactionController.accountTotals);
     }
 }

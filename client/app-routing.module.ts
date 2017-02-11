@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { StructureCmp }   from './accounts/structure-cmp';
 import { AccountCmp }   from './accounts/account-cmp';
-import { TransactionListCmp }   from './transactions/transaction-list-cmp';
+import { TransactionsPageCmp }   from './transactions/transactions-page-cmp';
 
 const appRoutes: Routes = [
     {
@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'transactions',
-        component: TransactionListCmp
+        component: TransactionsPageCmp
     },
     {
         path: '',

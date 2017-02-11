@@ -1,12 +1,14 @@
 Make updating entry accounts easier - shouldn't have to explicitly select from dropdown
-Show account and group levels
+Order transactions date desc
 Transactions paging (by month)
 Transaction creation helpers
 Transaction edit helpers
 Transaction edit cancel
 Import? or manual import into Mongo
 Styling
+--- Deploy
 Explain validation in GUI - which rule has been broken
+Dynamic update of account totals
 
 == Questions
 Do we need to have the 'accounting equation' on the logical accounts?
