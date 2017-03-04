@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
 import transactionSchema from '../model/transaction-model';
-import {Transaction, prepareTransactionForIndex} from '../../../../common-types/transaction';
+import {Transaction, dateToMonth, prepareTransactionForIndex} from '../../../../common-types/transaction';
 import {AccountTotal} from '../../../../common-types/statistics';
 
 interface TransactionDocument extends mongoose.Document, Transaction {
@@ -10,9 +10,13 @@ interface TransactionDocument extends mongoose.Document, Transaction {
 
 namespace TransactionDao {
 
-    export function getAll(): Promise<Transaction[]> {
+    export function getAll(month: number): Promise<Transaction[]> {
         return new Promise<Transaction[]>((resolve, reject) => {
-            let _query = {};
+            month = month || dateToMonth(new Date());
+
+            let _query = {
+                month: month
+            };
 
             TransactionModel
                 .find(_query)

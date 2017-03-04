@@ -9,7 +9,8 @@ import {
 
 import {
     Http,
-    Headers
+    Headers,
+    URLSearchParams
 } from '@angular/http';
 
 import 'rxjs/add/operator/map';
@@ -23,10 +24,17 @@ export class TransactionService {
     constructor(@Inject(Http) private _http: Http) {
     }
 
-    getAll(): Observable<Transaction[]> {
+    getAll(month: number): Observable<Transaction[]> {
+        let params: URLSearchParams = new URLSearchParams();
+
+        if (month) {
+            params.set('month', month.toString());
+        }
+
         return this._http
-            .get(TransactionService.ENDPOINT.replace(':id', ''))
-            .map((r) => r.json());
+            .get(TransactionService.ENDPOINT.replace('/:id', ''), {
+                search: params
+            }).map((r) => r.json());
     }
 
     get(id: string): Observable<Transaction> {
@@ -42,7 +50,7 @@ export class TransactionService {
         headers.append('Content-Type', 'application/json');
 
         return this._http
-            .post(TransactionService.ENDPOINT.replace(':id', ''), _messageStringified, {headers})
+            .post(TransactionService.ENDPOINT.replace('/:id', ''), _messageStringified, {headers})
             .map((r) => r.json());
     }
 

@@ -3,7 +3,7 @@ import TransactionDao from '../dao/transaction-dao';
 
 export class TransactionController {
     static getAll(req: express.Request, res: express.Response): void {
-        TransactionDao.getAll()
+        TransactionDao.getAll(req.query.month)
             .then(transactions => res.status(200).json(transactions))
             .catch(error => res.status(400).json(error));
     }

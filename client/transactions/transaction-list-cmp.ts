@@ -24,7 +24,7 @@ import {
 } from '../services/transaction-service';
 
 import {Structure} from '../../common-types/account';
-import {Transaction} from '../../common-types/transaction';
+import {Transaction, dateToMonth} from '../../common-types/transaction';
 
 @Component({
     selector: 'transaction-list',
@@ -33,6 +33,7 @@ import {Transaction} from '../../common-types/transaction';
 })
 export class TransactionListCmp implements OnInit {
     structure: Structure = new Structure();
+    month: Date = new Date();
     transactions: Transaction[] = [];
     selectedIndex: number;
 
@@ -50,12 +51,17 @@ export class TransactionListCmp implements OnInit {
     private _getAll(): void {
         let accountsObservable = this.accountService.getAll();
         let rulesObservable = this.ruleService.getAll();
-        let transactionsObservable = this.transactionService.getAll();
+        let transactionsObservable = this.transactionService.getAll(dateToMonth(this.month));
         Observable.forkJoin(accountsObservable, rulesObservable, transactionsObservable)
             .subscribe(([accounts, rules, transactions]) => {
                 this.structure = new Structure(accounts, rules);
                 this.transactions = transactions;
             });
+    }
+
+    monthChanged(event): void {
+        this.month = new Date(event.target.value);
+        this._getAll();
     }
 
     add(): void {

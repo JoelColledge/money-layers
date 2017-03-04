@@ -1,6 +1,12 @@
 <div>
   <h2>Transactions</h2>
 
+  <input type="month"
+      name="transactionMonth"
+      [value]="month | date:'yyyy-MM'"
+      (input)="monthChanged($event)"
+      class="form-control" />
+
   <span class="glyphicon glyphicon-plus-sign add-transaction" (click)="add()"></span>
 
   <div *ngFor="let transaction of transactions; let i = index;">
