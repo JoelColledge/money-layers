@@ -16,6 +16,7 @@ namespace TransactionDao {
 
             TransactionModel
                 .find(_query)
+                .sort('-date')
                 .exec((err, transactions) => {
                     err ? reject(err)
                         : resolve(transactions);
