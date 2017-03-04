@@ -15,8 +15,7 @@ import {Transaction, Entry} from '../../common-types/transaction';
 
 @Component({
     selector: 'transaction',
-    templateUrl: 'transactions/transaction.html',
-    styleUrls: ['styles/account.css']
+    templateUrl: 'transactions/transaction.html'
 })
 export class TransactionCmp implements OnInit {
     @Input() structure: Structure = new Structure();

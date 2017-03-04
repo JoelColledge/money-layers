@@ -4,8 +4,7 @@ import {
 
 @Component({
     selector: 'transactions-page',
-    templateUrl: 'transactions/transactions-page.html',
-    styleUrls: ['styles/account.css']
+    templateUrl: 'transactions/transactions-page.html'
 })
 export class TransactionsPageCmp {
 }

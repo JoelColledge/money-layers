@@ -28,8 +28,7 @@ import {Transaction, dateToMonth} from '../../common-types/transaction';
 
 @Component({
     selector: 'transaction-list',
-    templateUrl: 'transactions/transaction-list.html',
-    styleUrls: ['styles/account.css']
+    templateUrl: 'transactions/transaction-list.html'
 })
 export class TransactionListCmp implements OnInit {
     structure: Structure = new Structure();

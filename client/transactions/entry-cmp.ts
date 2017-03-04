@@ -19,8 +19,7 @@ import {Account} from '../../common-types/account';
 
 @Component({
     selector: 'entry',
-    templateUrl: 'transactions/entry.html',
-    styleUrls: ['styles/account.css']
+    templateUrl: 'transactions/entry.html'
 })
 export class EntryCmp implements OnInit {
     @Input()

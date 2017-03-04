@@ -11,8 +11,7 @@ import {Account} from '../../common-types/account';
 
 @Component({
     selector: 'account-list',
-    templateUrl: 'accounts/account-list.html',
-    styleUrls: ['styles/account.css']
+    templateUrl: 'accounts/account-list.html'
 })
 export class AccountListCmp implements OnInit {
     accounts: Account[] = [];

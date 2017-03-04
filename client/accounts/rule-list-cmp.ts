@@ -11,8 +11,7 @@ import {Rule} from '../../common-types/account';
 
 @Component({
     selector: 'rule-list',
-    templateUrl: 'accounts/rule-list.html',
-    styleUrls: []
+    templateUrl: 'accounts/rule-list.html'
 })
 export class RuleListCmp implements OnInit {
     rules: Rule[] = [];

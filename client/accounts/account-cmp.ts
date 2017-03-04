@@ -26,8 +26,7 @@ import {Account} from '../../common-types/account';
 
 @Component({
     selector: 'account',
-    templateUrl: 'accounts/account.html',
-    styleUrls: ['styles/account.css']
+    templateUrl: 'accounts/account.html'
 })
 export class AccountCmp {
     @Input() account: Account;

@@ -26,8 +26,7 @@ import {Rule} from '../../common-types/account';
 
 @Component({
     selector: 'rule',
-    templateUrl: 'accounts/rule.html',
-    styleUrls: []
+    templateUrl: 'accounts/rule.html'
 })
 export class RuleCmp {
     @Input() rule: Rule;

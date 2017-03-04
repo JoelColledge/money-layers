@@ -4,8 +4,7 @@ import {
 
 @Component({
     selector: 'structure',
-    templateUrl: 'accounts/structure.html',
-    styleUrls: []
+    templateUrl: 'accounts/structure.html'
 })
 export class StructureCmp {
 }
