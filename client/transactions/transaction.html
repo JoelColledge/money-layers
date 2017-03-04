@@ -5,8 +5,17 @@
         (submit)="update(true)">
 
     <div class="row">
-      <div class="col-md-2">
-        {{transaction.date | date}}
+      <div class="col-md-4">
+        <div *ngIf="!editMode">
+          {{transaction.date | date}}
+        </div>
+        <div *ngIf="editMode" class="form-group">
+          <input type="date"
+              name="transactionDate"
+              [value]="transaction.date | date:'yyyy-MM-dd'"
+              (input)="dateChanged($event)"
+              class="form-control" />
+        </div>
       </div>
 
       <div class="col-md-8">

@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
 import transactionSchema from '../model/transaction-model';
-import {Transaction} from '../../../../common-types/transaction';
+import {Transaction, prepareTransactionForIndex} from '../../../../common-types/transaction';
 import {AccountTotal} from '../../../../common-types/statistics';
 
 interface TransactionDocument extends mongoose.Document, Transaction {
@@ -62,6 +62,8 @@ namespace TransactionDao {
                 return reject(new TypeError('Transaction is not a valid object.'));
             }
 
+            prepareTransactionForIndex(transaction);
+
             TransactionModel
                 .create(transaction,
                     (err, saved) => {
@@ -80,6 +82,8 @@ namespace TransactionDao {
             if (!_.isString(transaction._id)) {
                 return reject(new TypeError('Id is not a valid string.'));
             }
+
+            prepareTransactionForIndex(transaction);
 
             TransactionModel
                 .findByIdAndUpdate(transaction._id, transaction, {new: true})

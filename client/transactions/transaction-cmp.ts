@@ -62,6 +62,10 @@ export class TransactionCmp implements OnInit {
         this.onSelect.emit(this._index);
     }
 
+    dateChanged(event: any): void {
+        this.transaction.date = event.target.value;
+    }
+
     addEntry(): void {
         this.transaction.entries.push({account: undefined, change: 0});
     }
