@@ -40,7 +40,7 @@
         <entry [entry]="entry" [index]="i" (onDelete)="deleteEntry($event)" (onChange)="validate()"></entry>
       </div>
 
-      <span class="glyphicon glyphicon-plus-sign" (click)="addEntry()"></span>
+      <span class="glyphicon glyphicon-plus-sign" tabindex="0" (click)="addEntry()" (keypress)="addEntry()"></span>
     </div>
 
     <div *ngIf="editMode" class="row">

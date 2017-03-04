@@ -7,7 +7,7 @@
       (input)="monthChanged($event)"
       class="form-control" />
 
-  <span class="glyphicon glyphicon-plus-sign add-transaction" (click)="add()"></span>
+  <span class="glyphicon glyphicon-plus-sign add-transaction" tabindex="0" (click)="add()" (keypress)="add()"></span>
 
   <div *ngFor="let transaction of transactions; let i = index;">
     <transaction
