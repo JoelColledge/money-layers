@@ -19,5 +19,9 @@ export class TransactionRoutes {
       router
         .route('/api/accountTotals')
         .get(TransactionController.accountTotals);
+
+      router
+        .route('/api/raw/goodbudget')
+        .post(TransactionController.goodbudgetImport);
     }
 }

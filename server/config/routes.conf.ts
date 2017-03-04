@@ -23,6 +23,7 @@ export class RoutesConfig {
         application.use(express.static(_root + _clientFiles));
         application.use(express.static(_root + _sourceFiles));
         application.use(bodyParser.json());
+        application.use(bodyParser.text({ type: 'text/csv' }));
         application.use(morgan('dev'));
         application.use(helmet());
     }

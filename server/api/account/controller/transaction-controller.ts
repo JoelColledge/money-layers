@@ -1,5 +1,6 @@
 import * as express from 'express';
 import TransactionDao from '../dao/transaction-dao';
+import ImportService from '../service/import-service';
 
 export class TransactionController {
     static getAll(req: express.Request, res: express.Response): void {
@@ -50,5 +51,11 @@ export class TransactionController {
         TransactionDao.deleteTransaction(_id)
             .then(() => res.status(200).end())
             .catch(error => res.status(400).json(error));
+    }
+
+    static goodbudgetImport(req: express.Request, res: express.Response): void {
+        ImportService.goodbudgetImport(req.body);
+
+        res.status(200).end();
     }
 }

@@ -4,3 +4,6 @@ npm run dev
 
 
 db.transactions.aggregate([{$unwind: "$entries"},{$group: {_id: "$entries.account", total: {$sum: "$entries.change"}}}])
+
+curl -H 'Content-Type: text/csv' -XPOST 'localhost:3333/api/raw/goodbudget' -d 'a,b,c'
+curl -H 'Content-Type: text/csv' -XPOST 'localhost:3333/api/raw/goodbudget' --data-binary '@/file'
