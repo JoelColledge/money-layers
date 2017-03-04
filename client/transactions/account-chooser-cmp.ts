@@ -25,7 +25,7 @@ export class AccountChooserCmp {
         this.accountName = account.name;
     }
 
-    @Output() onAccountChanged: EventEmitter<Account> = new EventEmitter<Account>();
+    @Output() accountChange: EventEmitter<Account> = new EventEmitter<Account>();
 
     accounts: Account[] = [];
     accountName: string = '';
@@ -48,10 +48,10 @@ export class AccountChooserCmp {
             });
     }
 
-    public typeaheadOnSelect(e:TypeaheadMatch):void {
-        let account: Account = this.accounts.find((account) => account.name === e.value);
+    public accountNameChanged(accountName: string):void {
+        let account: Account = this.accounts.find((account) => account.name === accountName);
         if (account) {
-            this.onAccountChanged.emit(account);
+            this.accountChange.emit(account);
         }
     }
 
