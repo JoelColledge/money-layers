@@ -1,11 +1,12 @@
+Make it possible to change the date
 Order transactions date desc
 Transactions paging (by month)
 Transaction creation helpers
-Transaction edit helpers
 Transaction edit cancel
 Import? or manual import into Mongo
 Styling
 --- Deploy
+Transaction edit helpers
 Explain validation in GUI - which rule has been broken
 Dynamic update of account totals
 

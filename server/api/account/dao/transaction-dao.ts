@@ -62,8 +62,6 @@ namespace TransactionDao {
                 return reject(new TypeError('Transaction is not a valid object.'));
             }
 
-            var _transaction = new TransactionModel(transaction);
-
             TransactionModel
                 .create(transaction,
                     (err, saved) => {
