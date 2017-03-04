@@ -22,6 +22,7 @@ export class Transaction {
     constructor(
         public _id: any = undefined,
         public description: string = "",
+        public notes: string = "",
         public date: string = (new Date()).toISOString(),
         public entries: Entry[] = []
     ) { }

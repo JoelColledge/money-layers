@@ -41,6 +41,17 @@
         </div>
 
         <span class="glyphicon glyphicon-plus-sign" tabindex="0" (click)="addEntry()" (keypress)="addEntry()"></span>
+
+        <br />
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea rows="3"
+              name="transactionNotes"
+              [(ngModel)]="transaction.notes"
+              class="form-control"
+              placeholder="Notes"
+              autofocus></textarea>
+        </div>
       </div>
 
       <div *ngIf="editMode" class="row">
