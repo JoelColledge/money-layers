@@ -7,3 +7,7 @@ db.transactions.aggregate([{$unwind: "$entries"},{$group: {_id: "$entries.accoun
 
 curl -H 'Content-Type: text/csv' -XPOST 'localhost:3333/api/raw/goodbudget' -d 'a,b,c'
 curl -H 'Content-Type: text/csv' -XPOST 'localhost:3333/api/raw/goodbudget' --data-binary '@/file'
+
+Replace 'Bank account' -> 'Flat'
+11/10/2015,,"Electricity Backpayment",,0.00,
+29/08/2015,,"Fill Envelopes",,0.00,

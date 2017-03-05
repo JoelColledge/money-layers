@@ -16,7 +16,19 @@ namespace ImportService {
         return account;
     }
 
+    function parseAmount(amountString: string): number {
+        return parseFloat(amountString.replace(',', '')) * 100;
+    }
+
+    function detailEntry(accounts: Account[], detailString: string): Entry {
+        let detailParts: string[] = detailString.split('|');
+        let amount: number = parseAmount(detailParts[1]);
+        return new Entry(accountByName(accounts, detailParts[0])._id, amount);
+    }
+
     function goodbudgetLineTransaction(accounts: Account[], line: {[key:string]:any}): Transaction {
+        console.log('Processing line', line);
+
         let dateString: string = line['Date'];
         let envelope: string = line['Envelope'];
         let name: string = line['Name'];
@@ -29,7 +41,7 @@ namespace ImportService {
             parseInt(dateParts[2]), parseInt(dateParts[1]) - 1, parseInt(dateParts[0])
         ));
 
-        let amount: number = parseFloat(amountString) * 100;
+        let amount: number = parseAmount(amountString);
 
         if (envelope) {
             if (!name) {
@@ -49,9 +61,20 @@ namespace ImportService {
                     new Entry(accountByName(accounts, 'a-World')._id, -amount)
                 ]
             )
-        }
+        } else {
+            let entries: Entry[] = details.split('||')
+                .map((detailString) => detailEntry(accounts, detailString));
 
-        return null;
+            entries.push(new Entry(accountByName(accounts, '[Unallocated]')._id, -amount))
+
+            return new Transaction(
+                undefined,
+                name,
+                notes,
+                date.toISOString(),
+                entries
+            )
+        }
     }
 
     function goodbudgetArrayImport(accounts: Account[], data: Array<{[key:string]:any}>): void {
