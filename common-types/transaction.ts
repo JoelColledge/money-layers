@@ -4,8 +4,6 @@ export function dateToMonth(date: Date): number {
 }
 
 export function prepareTransactionForIndex(transaction: Transaction): void {
-    console.log(transaction.date);
-    console.log(new Date(transaction.date));
     transaction.month = dateToMonth(new Date(transaction.date));
 }
 

@@ -26,8 +26,6 @@ export class TransactionController {
     static createTransaction(req: express.Request, res: express.Response): void {
         let _transaction = req.body;
 
-        console.log(_transaction);
-
         TransactionDao.createTransaction(_transaction)
             .then(transaction => res.status(201).json(transaction))
             .catch(error => res.status(400).json(error));

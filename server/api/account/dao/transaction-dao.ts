@@ -68,6 +68,7 @@ namespace TransactionDao {
             }
 
             prepareTransactionForIndex(transaction);
+            delete transaction._id;
 
             TransactionModel
                 .create(transaction,
