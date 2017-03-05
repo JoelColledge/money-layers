@@ -43,8 +43,16 @@ namespace ImportService {
 
         if (envelope) {
             if (!name) {
-                console.log('Unnamed line', line);
-                return null;
+                return new Transaction(
+                    undefined,
+                    notes,
+                    '',
+                    date.toISOString(),
+                    [
+                        new Entry(accountByName(accounts, envelope)._id, amount),
+                        new Entry(accountByName(accounts, '[Unallocated]')._id, -amount)
+                    ]
+                )
             }
 
             return new Transaction(
