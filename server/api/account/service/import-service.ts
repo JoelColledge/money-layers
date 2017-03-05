@@ -27,8 +27,6 @@ namespace ImportService {
     }
 
     function goodbudgetLineTransaction(accounts: Account[], line: {[key:string]:any}): Transaction {
-        console.log('Processing line', line);
-
         let dateString: string = line['Date'];
         let envelope: string = line['Envelope'];
         let name: string = line['Name'];
@@ -57,7 +55,7 @@ namespace ImportService {
                 [
                     new Entry(accountByName(accounts, envelope)._id, amount),
                     new Entry(accountByName(accounts, envelope + ' expenses')._id, -amount),
-                    new Entry(accountByName(accounts, 'a-Current')._id, amount), // TODO Cash
+                    new Entry(accountByName(accounts, notes.startsWith('c') ? 'a-Cash' : 'a-Current')._id, amount),
                     new Entry(accountByName(accounts, 'a-World')._id, -amount)
                 ]
             )
