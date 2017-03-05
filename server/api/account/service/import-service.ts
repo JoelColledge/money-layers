@@ -17,7 +17,7 @@ namespace ImportService {
     }
 
     function parseAmount(amountString: string): number {
-        return parseFloat(amountString.replace(',', '')) * 100;
+        return Math.round(parseFloat(amountString.replace(',', '')) * 100);
     }
 
     function detailEntry(accounts: Account[], detailString: string): Entry {
