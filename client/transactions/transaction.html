@@ -37,7 +37,7 @@
 
       <div *ngIf="editMode">
         <div *ngFor="let entry of transaction.entries; let i = index;">
-          <entry [entry]="entry" [index]="i" (onDelete)="deleteEntry($event)" (onChange)="validate()"></entry>
+          <entry [entry]="entry" [pattern]="getEntryPattern(i)" [index]="i" (onDelete)="deleteEntry($event)" (onChange)="entryChanged(i)"></entry>
         </div>
 
         <span class="glyphicon glyphicon-plus-sign" tabindex="0" (click)="addEntry()" (keypress)="addEntry()"></span>
@@ -60,11 +60,12 @@
               class="btn btn-primary"
               [disabled]="!transaction.description.length">Update</button>
         </div>
-          <div class="col-md-2">
-            <button type=button
-                (click)="delete()"
-                class="btn btn-warning">Delete</button>
-          </div>
+        <div class="col-md-2">
+          <button
+              type=button
+              (click)="delete()"
+              class="btn btn-warning">Delete</button>
+        </div>
       </div>
     </form>
     <div *ngIf="!valid" class="alert alert-danger" role="alert">Invalid!</div>

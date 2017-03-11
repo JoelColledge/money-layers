@@ -7,12 +7,19 @@
       (input)="monthChanged($event)"
       class="form-control" />
 
-  <span class="glyphicon glyphicon-plus-sign add-transaction" tabindex="0" (click)="add()" (keypress)="add()"></span>
+  <button class="btn btn-success" (click)="addExpense()">
+    Expense <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
+  </button>
+
+  <button class="btn btn-success" (click)="addGeneric()">
+    Generic <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
+  </button>
 
   <div *ngFor="let transaction of transactions; let i = index;">
     <transaction
         [structure]="structure"
         [transaction]="transaction"
+        [pattern]="getPattern(i)"
         [index]="i"
         [selectedIndex]="selectedIndex"
         (onUpdate)="update($event)"

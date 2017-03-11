@@ -16,6 +16,7 @@ import {
 
 import {Entry} from '../../common-types/transaction';
 import {Account} from '../../common-types/account';
+import {EntryPattern} from '../patterns/transaction-pattern';
 
 @Component({
     selector: 'entry',
@@ -25,7 +26,6 @@ export class EntryCmp implements OnInit {
     @Input()
     set entry(entry: Entry) {
         this._entry = entry;
-        this._entryChangeDecimal = entry.change / 100;
 
         if (entry.account) {
             this.accountService.get(entry.account)
@@ -43,17 +43,8 @@ export class EntryCmp implements OnInit {
 
     @Input() index: number;
 
-    set entryChangeDecimal(entryChangeDecimal: number) {
-        this._entryChangeDecimal = entryChangeDecimal;
-        this._entry.change = Math.round(entryChangeDecimal * 100);
-        this.onChange.emit();
-    }
+    @Input() pattern: EntryPattern;
 
-    get entryChangeDecimal() {
-        return this._entryChangeDecimal;
-    }
-
-    _entryChangeDecimal: number = 0;
     _entry: Entry = new Entry();
     account: Account = new Account();
 
@@ -62,6 +53,15 @@ export class EntryCmp implements OnInit {
     ) { }
 
     ngOnInit() {
+    }
+
+    amount(): number {
+        return this._entry.change / 100;
+    }
+
+    amountChanged(newAmount: number) {
+        this._entry.change = Math.round(newAmount * 100);
+        this.onChange.emit();
     }
 
     delete(): void {

@@ -12,6 +12,7 @@ import {
 
 import {Account, Structure} from '../../common-types/account';
 import {Transaction, Entry} from '../../common-types/transaction';
+import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
 
 @Component({
     selector: 'transaction',
@@ -20,6 +21,7 @@ import {Transaction, Entry} from '../../common-types/transaction';
 export class TransactionCmp implements OnInit {
     @Input() structure: Structure = new Structure();
     @Input() transaction: Transaction = new Transaction();
+    @Input() pattern: TransactionPattern;
     @Output() onSelect = new EventEmitter<number>();
     @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction, deselect: boolean}>();
     @Output() onDelete = new EventEmitter<number>();
@@ -88,6 +90,15 @@ export class TransactionCmp implements OnInit {
 
         this.valid = this.structure.rules
             .every((rule) => this.sumByGroup(rule.groupLeft) === this.sumByGroup(rule.groupRight));
+    }
+
+    entryChanged(index: number): void {
+        this.transaction = this.pattern.update(this.structure, this.transaction);
+        this.validate();
+    }
+
+    getEntryPattern(index: number): EntryPattern {
+        return this.pattern.entryPatterns[index] || new EntryPattern();
     }
 
     private sumByGroup(group: string): number {

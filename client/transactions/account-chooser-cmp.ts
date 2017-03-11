@@ -27,6 +27,8 @@ export class AccountChooserCmp {
 
     @Output() accountChange: EventEmitter<Account> = new EventEmitter<Account>();
 
+    @Input() disabled: boolean = false;
+
     accounts: Account[] = [];
     accountName: string = '';
     accountNames: string[] = [];

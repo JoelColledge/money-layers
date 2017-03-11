@@ -25,6 +25,9 @@ import {
 
 import {Structure} from '../../common-types/account';
 import {Transaction, dateToMonth} from '../../common-types/transaction';
+import {TransactionPattern} from '../patterns/transaction-pattern';
+import {ExpensePattern} from '../patterns/expense-pattern';
+import {GenericPattern} from '../patterns/generic-pattern';
 
 @Component({
     selector: 'transaction-list',
@@ -34,6 +37,7 @@ export class TransactionListCmp implements OnInit {
     structure: Structure = new Structure();
     month: Date = new Date();
     transactions: Transaction[] = [];
+    patterns: TransactionPattern[] = [];
     selectedIndex: number;
 
     constructor(
@@ -54,7 +58,9 @@ export class TransactionListCmp implements OnInit {
         Observable.forkJoin(accountsObservable, rulesObservable, transactionsObservable)
             .subscribe(([accounts, rules, transactions]) => {
                 this.structure = new Structure(accounts, rules);
+                this.patterns = [];
                 this.transactions = transactions;
+                this.selectedIndex = -1;
             });
     }
 
@@ -63,9 +69,12 @@ export class TransactionListCmp implements OnInit {
         this._getAll();
     }
 
-    add(): void {
-        this.selectedIndex = 0;
-        this.transactions.unshift(new Transaction());
+    addExpense(): void {
+        this.add(new ExpensePattern());
+    }
+
+    addGeneric(): void {
+        this.add(new GenericPattern());
     }
 
     update(event: {index: number, transaction: Transaction, deselect: boolean}): void {
@@ -84,11 +93,29 @@ export class TransactionListCmp implements OnInit {
     }
 
     delete(index: number): void {
-        this.transactionService
-            .delete(this.transactions[index]._id)
-            .subscribe(() => {
-                this.selectedIndex = -1;
-                this.transactions.splice(index, 1);
-            });
+        let transaction = this.transactions[index];
+        if (transaction._id) {
+            this.transactionService
+                .delete(this.transactions[index]._id)
+                .subscribe(() => this.removeTransaction(index));
+        } else {
+            this.removeTransaction(index);
+        }
+    }
+
+    private removeTransaction(index: number) {
+        this.selectedIndex = -1;
+        this.patterns.splice(index, 1);
+        this.transactions.splice(index, 1);
+    }
+
+    getPattern(index: number): TransactionPattern {
+        return this.patterns[index] || new GenericPattern();
+    }
+
+    private add(pattern: TransactionPattern) {
+        this.selectedIndex = 0;
+        this.patterns.unshift(pattern);
+        this.transactions.unshift(pattern.create(this.structure));
     }
 }
