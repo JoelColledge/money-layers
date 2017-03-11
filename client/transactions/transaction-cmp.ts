@@ -132,9 +132,5 @@ export class TransactionCmp implements OnInit {
     private updateEditMode(): void {
         let wasEditMode = this.editMode;
         this.editMode = this._selectedIndex === this._index;
-
-        if (wasEditMode && !this.editMode) {
-            this.update(false);
-        }
     }
 }
