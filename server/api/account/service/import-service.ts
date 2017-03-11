@@ -48,10 +48,19 @@ namespace ImportService {
 
         let amount: number = parseAmount(amountString);
 
+        // Special line
+        if (notes.startsWith('s')) {
+            console.log(line);
+            return null;
+        }
+
         if (envelope) {
             let accountName = envelopeToAccountName(envelope);
 
             if (!name) {
+                // Envelope transfer
+                // These appear as 2 lines in the CSV, so just create separate
+                // transactions into and out of Buffer for them
                 return new Transaction(
                     undefined,
                     notes,
@@ -64,6 +73,7 @@ namespace ImportService {
                 )
             }
 
+            // Normal expense
             return new Transaction(
                 undefined,
                 name,
@@ -77,6 +87,7 @@ namespace ImportService {
                 ]
             )
         } else {
+            // Envelope fill
             let entries: Entry[] = details.split('||')
                 .map((detailString) => detailEntry(accounts, detailString));
 
