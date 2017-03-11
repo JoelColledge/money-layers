@@ -1,5 +1,5 @@
 <div class="panel panel-default"
-    (click)=clicked()>
+    (click)=clicked($event)>
   <div class="panel-body">
     <form class="form-inline"
           (submit)="update(true)">
@@ -55,12 +55,24 @@
       </div>
 
       <div *ngIf="editMode" class="row">
-        <div class="col-md-10">
+        <div class="col-md-3">
           <button type="submit"
               class="btn btn-primary"
               [disabled]="!transaction.description.length">Update</button>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
+          <button
+              type=button
+              (click)="duplicate()"
+              class="btn btn-success">Duplicate</button>
+        </div>
+        <div class="col-md-3">
+          <button
+              type=button
+              (click)="cancel()"
+              class="btn btn-default btn-cancel">Cancel</button>
+        </div>
+        <div class="col-md-3">
           <button
               type=button
               (click)="delete()"

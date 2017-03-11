@@ -24,7 +24,7 @@ import {
 } from '../services/transaction-service';
 
 import {Structure} from '../../common-types/account';
-import {Transaction, dateToMonth} from '../../common-types/transaction';
+import {Entry, Transaction, dateToMonth} from '../../common-types/transaction';
 
 import {TransactionPattern} from '../patterns/transaction-pattern';
 import {ExpensePattern} from '../patterns/expense-pattern';
@@ -104,6 +104,16 @@ export class TransactionListCmp implements OnInit {
             });
     }
 
+    duplicate(transaction: Transaction): void {
+        this.addTransaction(null, new Transaction(
+            undefined,
+            transaction.description,
+            transaction.notes,
+            transaction.date,
+            transaction.entries.map((entry) => new Entry(entry.account, entry.change))
+        ));
+    }
+
     transactionSelected(index: number) {
         this.selectedIndex = index;
     }
@@ -130,8 +140,12 @@ export class TransactionListCmp implements OnInit {
     }
 
     private add(pattern: TransactionPattern) {
+        this.addTransaction(pattern, pattern.create(this.structure));
+    }
+
+    private addTransaction(pattern: TransactionPattern, transaction: Transaction) {
         this.selectedIndex = 0;
         this.patterns.unshift(pattern);
-        this.transactions.unshift(pattern.create(this.structure));
+        this.transactions.unshift(transaction);
     }
 }

@@ -25,6 +25,7 @@ export class TransactionCmp implements OnInit {
     @Output() onSelect = new EventEmitter<number>();
     @Output() onUpdate = new EventEmitter<{index: number, transaction: Transaction, deselect: boolean}>();
     @Output() onDelete = new EventEmitter<number>();
+    @Output() onDuplicate = new EventEmitter<Transaction>();
 
     @Input()
     set index(index: number) {
@@ -59,8 +60,18 @@ export class TransactionCmp implements OnInit {
         this.onDelete.emit(this._index);
     }
 
-    clicked(): void {
-        this.onSelect.emit(this._index);
+    clicked(event: any): void {
+        if (!event.target.classList.contains('btn-cancel')) {
+            this.onSelect.emit(this._index);
+        }
+    }
+
+    duplicate(): void {
+        this.onDuplicate.emit(this.transaction);
+    }
+
+    cancel(): void {
+        this.onSelect.emit(-1);
     }
 
     dateChanged(event: any): void {
