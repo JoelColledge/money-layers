@@ -1,10 +1,13 @@
-Transaction creation helpers
+Don't auto-import specials
 Styling
+Show quantities on overview
+Transaction duplication
 --- Deploy
 Transaction edit cancel
 Transaction edit helpers
 Explain validation in GUI - which rule has been broken
 Dynamic update of account totals
+Only show selected account totals
 
 == Questions
 Do we need to have the 'accounting equation' on the logical accounts?

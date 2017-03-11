@@ -25,8 +25,12 @@ import {
 
 import {Structure} from '../../common-types/account';
 import {Transaction, dateToMonth} from '../../common-types/transaction';
+
 import {TransactionPattern} from '../patterns/transaction-pattern';
 import {ExpensePattern} from '../patterns/expense-pattern';
+import {IncomePattern} from '../patterns/income-pattern';
+import {WithdrawalPattern} from '../patterns/withdrawal-pattern';
+import {ExpenseGbpPattern} from '../patterns/expense-gbp-pattern';
 import {GenericPattern} from '../patterns/generic-pattern';
 
 @Component({
@@ -71,6 +75,18 @@ export class TransactionListCmp implements OnInit {
 
     addExpense(): void {
         this.add(new ExpensePattern());
+    }
+
+    addIncome(): void {
+        this.add(new IncomePattern());
+    }
+
+    addWithdrawal(): void {
+        this.add(new WithdrawalPattern());
+    }
+
+    addExpenseGbp(): void {
+        this.add(new ExpenseGbpPattern());
     }
 
     addGeneric(): void {

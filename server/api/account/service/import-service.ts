@@ -8,6 +8,13 @@ import TransactionDao from '../dao/transaction-dao';
 
 namespace ImportService {
 
+    function envelopeToAccountName(envelope: string): string {
+        if (envelope === '[Unallocated]') {
+            return 'Buffer';
+        }
+        return envelope;
+    }
+
     function accountByName(accounts: Account[], name: string): Account {
         let account: Account = accounts.find((account) => account.name === name);
         if (!account) {
@@ -23,7 +30,7 @@ namespace ImportService {
     function detailEntry(accounts: Account[], detailString: string): Entry {
         let detailParts: string[] = detailString.split('|');
         let amount: number = parseAmount(detailParts[1]);
-        return new Entry(accountByName(accounts, detailParts[0])._id, amount);
+        return new Entry(accountByName(accounts, envelopeToAccountName(detailParts[0]))._id, amount);
     }
 
     function goodbudgetLineTransaction(accounts: Account[], line: {[key:string]:any}): Transaction {
@@ -42,6 +49,8 @@ namespace ImportService {
         let amount: number = parseAmount(amountString);
 
         if (envelope) {
+            let accountName = envelopeToAccountName(envelope);
+
             if (!name) {
                 return new Transaction(
                     undefined,
@@ -49,8 +58,8 @@ namespace ImportService {
                     '',
                     date.toISOString(),
                     [
-                        new Entry(accountByName(accounts, envelope)._id, amount),
-                        new Entry(accountByName(accounts, '[Unallocated]')._id, -amount)
+                        new Entry(accountByName(accounts, accountName)._id, amount),
+                        new Entry(accountByName(accounts, 'Buffer')._id, -amount)
                     ]
                 )
             }
@@ -61,8 +70,8 @@ namespace ImportService {
                 notes,
                 date.toISOString(),
                 [
-                    new Entry(accountByName(accounts, envelope)._id, amount),
-                    new Entry(accountByName(accounts, envelope + ' expenses')._id, -amount),
+                    new Entry(accountByName(accounts, accountName)._id, amount),
+                    new Entry(accountByName(accounts, accountName + ' expenses')._id, -amount),
                     new Entry(accountByName(accounts, notes.startsWith('c') ? 'a-Cash' : 'a-Current')._id, amount),
                     new Entry(accountByName(accounts, 'a-World')._id, -amount)
                 ]
@@ -71,7 +80,7 @@ namespace ImportService {
             let entries: Entry[] = details.split('||')
                 .map((detailString) => detailEntry(accounts, detailString));
 
-            entries.push(new Entry(accountByName(accounts, '[Unallocated]')._id, -amount))
+            entries.push(new Entry(accountByName(accounts, 'Buffer')._id, -amount))
 
             return new Transaction(
                 undefined,

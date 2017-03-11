@@ -1,4 +1,14 @@
 
+export function findAccountIdByName(structure: Structure, name: string): any {
+    let account =  structure.accounts.find((account) => account.name === name);
+    return account ? account._id : null;
+}
+
+export function findAccountNameById(structure: Structure, id: any): string {
+    let account = structure.accounts.find((account) => account._id === id);
+    return account ? account.name : null;
+}
+
 export class Account {
     constructor(
         public _id: any = undefined,
