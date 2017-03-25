@@ -1,17 +1,16 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// import { StructureCmp }   from './accounts/structure-cmp';
-// import { AccountCmp }   from './accounts/account-cmp';
-// import { TransactionsPageCmp }   from './transactions/transactions-page-cmp';
+import { StructureComponent }   from './structure/structure/structure.component';
+import { StructureModule } from './structure/structure.module';
 import { TransactionsPageComponent }   from './transactions/transactions-page/transactions-page.component';
 import { TransactionsModule } from './transactions/transactions.module';
 
 const appRoutes: Routes = [
-    // {
-    //     path: 'structure',
-    //     component: StructureCmp
-    // },
+    {
+        path: 'structure',
+        component: StructureComponent
+    },
     {
         path: 'transactions',
         component: TransactionsPageComponent
@@ -28,6 +27,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(
             appRoutes
         ),
+        StructureModule,
         TransactionsModule,
     ],
     exports: [
