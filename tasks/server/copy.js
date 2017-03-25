@@ -1,6 +1,5 @@
 import gulp from 'gulp';
-import cssmin from 'gulp-clean-css';
-import {path, tasks} from '../const';
+import {path} from '../const';
 
 const FILES = path.SERVER_APP + '**/*.json';
 

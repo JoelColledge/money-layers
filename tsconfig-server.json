@@ -3,7 +3,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es6",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -11,13 +11,10 @@
     "outDir": "build/server/"
   },
   "exclude": [
-    "node_modules",
-    "typings"
+    "node_modules"
   ],
   "include": [
     "server/**/*.ts",
-    "common-types/**/*.ts",
-    "typings/main",
-    "typings/index.d.ts"
+    "common-types/**/*.ts"
   ]
 }
