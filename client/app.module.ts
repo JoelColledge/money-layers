@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, FormBuilder } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 
-import { TypeaheadModule } from 'ng2-bootstrap/components/typeahead';
+import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
 
 import { AppCmp }         from './app-cmp';
 import { AppRoutingModule }     from './app-routing.module';

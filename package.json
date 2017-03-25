@@ -4,13 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start-client": "ng serve",
+    "start-client": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start-server": "node index",
-    "dev": "npm run build-server && concurrently \"npm start-server\" \"npm start-client\"",
+    "dev": "npm run build-server && concurrently \"npm run start-server\" \"npm run start-client\"",
     "build-server": "gulp server.build_all"
   },
   "private": true,
