@@ -1,0 +1,85 @@
+<div class="panel panel-default"
+    (click)=clicked($event)>
+  <div class="panel-body">
+    <form class="form-inline"
+          (submit)="update(true)">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div *ngIf="!editMode">
+            {{transaction.date | date}}
+          </div>
+          <div *ngIf="editMode" class="form-group">
+            <input type="date"
+                name="transactionDate"
+                [value]="transaction.date | date:'yyyy-MM-dd'"
+                (input)="dateChanged($event)"
+                class="form-control" />
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div *ngIf="!editMode">
+            {{transaction.description}}
+          </div>
+          <div *ngIf="editMode" class="form-group">
+            <label>Description</label>
+            <input type="text"
+                name="transactionDescription"
+                [(ngModel)]="transaction.description"
+                class="form-control"
+                [class.transaction-error]="!transaction.description.length"
+                placeholder="Description"
+                autofocus />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="editMode">
+        <div *ngFor="let entry of transaction.entries; let i = index;">
+          <entry [entry]="entry" [pattern]="getEntryPattern(i)" [index]="i" (onDelete)="deleteEntry($event)" (onChange)="entryChanged(i)"></entry>
+        </div>
+
+        <span class="glyphicon glyphicon-plus-sign" tabindex="0" (click)="addEntry()" (keypress)="addEntry()"></span>
+
+        <br />
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea rows="3"
+              name="transactionNotes"
+              [(ngModel)]="transaction.notes"
+              class="form-control"
+              placeholder="Notes"
+              autofocus></textarea>
+        </div>
+      </div>
+
+      <div *ngIf="editMode" class="row">
+        <div class="col-md-3">
+          <button type="submit"
+              class="btn btn-primary"
+              [disabled]="!transaction.description.length">Update</button>
+        </div>
+        <div class="col-md-3">
+          <button
+              type=button
+              (click)="duplicate()"
+              class="btn btn-success">Duplicate</button>
+        </div>
+        <div class="col-md-3">
+          <button
+              type=button
+              (click)="cancel()"
+              class="btn btn-default btn-cancel">Cancel</button>
+        </div>
+        <div class="col-md-3">
+          <button
+              type=button
+              (click)="delete()"
+              class="btn btn-warning">Delete</button>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="!valid" class="alert alert-danger" role="alert">Invalid!</div>
+  </div>
+</div>
