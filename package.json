@@ -3,15 +3,14 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
     "start-client": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build-server": "gulp server.build_all",
     "start-server": "node index",
     "dev": "npm run build-server && concurrently \"npm run start-server\" \"npm run start-client\"",
-    "build-server": "gulp server.build_all"
+    "build-production": "rm -rf build/ dist/ && npm run build-server && ng build --target=production && npm pack"
   },
   "private": true,
   "dependencies": {
@@ -77,5 +76,10 @@
   "homepage": "https://github.com/JoelColledge/money-layers",
   "engines": {
     "node": "stable"
-  }
+  },
+  "files": [
+    "build/",
+    "dist/",
+    "index.js"
+  ]
 }
