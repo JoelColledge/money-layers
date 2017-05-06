@@ -8,9 +8,9 @@
     sudo systemctl start docker
     docker-compose up
     npm run dev
+    http://localhost:4200
 
 ## Production
 
     # git clone
     npm install --production
-    

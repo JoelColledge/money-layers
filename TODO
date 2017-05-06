@@ -1,6 +1,5 @@
+Get http basic auth working
 Styling
-Show quantities on overview
-Fix prod build
 --- Deploy
 Transaction edit cancel
 Transaction edit helpers
