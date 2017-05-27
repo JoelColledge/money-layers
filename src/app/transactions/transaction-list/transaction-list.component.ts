@@ -141,7 +141,12 @@ export class TransactionListComponent implements OnInit {
     }
 
     private add(pattern: TransactionPattern) {
-        this.addTransaction(pattern, pattern.create(this.structure));
+        let transaction = pattern.create(this.structure);
+        let now = new Date();
+        if (this.month.getMonth() !== now.getMonth() || this.month.getFullYear() !== now.getFullYear()) {
+            transaction.date = this.month.toISOString();
+        }
+        this.addTransaction(pattern, transaction);
     }
 
     private addTransaction(pattern: TransactionPattern, transaction: Transaction) {
