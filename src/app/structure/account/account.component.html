@@ -30,7 +30,7 @@
            [id]="account._id + '-accountGroups'"
            name="accountGroups"
            [(ngModel)]="accountGroups"
-           class="form-control"
+           class="form-control small-input"
            placeholder="Groups" />
   </div>
 
@@ -41,7 +41,7 @@
            [id]="account._id + '-accountOrder'"
            name="accountOrder"
            [(ngModel)]="account.order"
-           class="form-control"
+           class="form-control small-input"
            placeholder="Order" />
   </div>
 
@@ -53,6 +53,17 @@
              [(ngModel)]="account.showInList" />
     </label>
   </div>
+
+    <div class="form-group">
+      <label [attr.for]="account._id + '-accountIcon'">Icon: </label>
+
+      <input type="text"
+             [id]="account._id + '-accountIcon'"
+             name="accountIcon"
+             [(ngModel)]="account.icon"
+             class="form-control small-input"
+             placeholder="Icon" />
+    </div>
 
   <button type="submit"
           [disabled]="!account.name.length">Update</button>

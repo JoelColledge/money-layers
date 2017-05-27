@@ -5,8 +5,12 @@ export function findAccountIdByName(structure: Structure, name: string): any {
 }
 
 export function findAccountNameById(structure: Structure, id: any): string {
-    let account = structure.accounts.find((account) => account._id === id);
+    let account = findAccountById(structure, id);
     return account ? account.name : null;
+}
+
+export function findAccountById(structure: Structure, id: any): Account {
+    return structure.accounts.find((account) => account._id === id);
 }
 
 export class Account {
@@ -16,7 +20,8 @@ export class Account {
         public active: boolean = true,
         public groups: string[] = [],
         public order: number = 0,
-        public showInList: boolean = true
+        public showInList: boolean = true,
+        public icon: string = ""
     ) { }
 }
 

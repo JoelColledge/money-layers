@@ -6,7 +6,8 @@ var schema = new mongoose.Schema({
     createdAt: {type: Date, default: Date.now},
     groups: {type: [String], default: []},
     order: {type: Number, default: 0},
-    showInList: {type: Boolean, default: true}
+    showInList: {type: Boolean, default: true},
+    icon: {type: String, default: "", trim: true}
 });
 
 export default schema;

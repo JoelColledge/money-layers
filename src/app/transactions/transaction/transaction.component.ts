@@ -10,7 +10,7 @@ import {
     Router
 } from '@angular/router';
 
-import {Account, Structure} from '../../../../common-types/account';
+import {Account, Structure, findAccountIdByName, findAccountById} from '../../../../common-types/account';
 import {Transaction, Entry} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
 
@@ -106,18 +106,26 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionType(): string {
-        let worldAccount = this.structure.accounts.find((account) => account.name === 'a-World');
-        if (!worldAccount) {
+        let worldAccountId = findAccountIdByName(this.structure, 'a-World');
+        if (!worldAccountId) {
             return 'none';
         }
 
-        let worldEntry = this.transaction.entries.find((entry) => entry.account === worldAccount._id);
+        let worldEntry = this.transaction.entries.find((entry) => entry.account === worldAccountId);
         if (!worldEntry) {
             return 'none';
         }
 
         return worldEntry.change > 0 ? 'expense' :
             (worldEntry.change < 0 ? 'income' : 'none');
+    }
+
+    icons(): string[] {
+        return this.transaction.entries
+            .map((entry) => findAccountById(this.structure, entry.account))
+            .filter((account) => !!account)
+            .map((account) => account.icon)
+            .filter((icon) => !!icon);
     }
 
     private sumByGroup(group: string): number {
