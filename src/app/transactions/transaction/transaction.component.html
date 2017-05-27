@@ -10,6 +10,7 @@
             {{transaction.date | date}}
           </div>
           <div *ngIf="editMode" class="form-group">
+            <label class="small">Date</label>
             <input type="date"
                 name="transactionDate"
                 [value]="transaction.date | date:'yyyy-MM-dd'"
@@ -18,12 +19,12 @@
           </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-5">
           <div *ngIf="!editMode">
             {{transaction.description}}
           </div>
           <div *ngIf="editMode" class="form-group">
-            <label>Description</label>
+            <label class="small">Description</label>
             <input type="text"
                 name="transactionDescription"
                 [(ngModel)]="transaction.description"
@@ -31,6 +32,14 @@
                 [class.transaction-error]="!transaction.description.length"
                 placeholder="Description"
                 autofocus />
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="pull-right">
+            <span *ngFor="let quantity of transactionQuantities(); let last = last;">
+              {{quantity | number : '1.2-2'}}<span *ngIf="!last">, </span>
+            </span>
           </div>
         </div>
       </div>

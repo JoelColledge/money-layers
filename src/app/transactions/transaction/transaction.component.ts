@@ -50,7 +50,7 @@ export class TransactionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.validate();
+        this.transactionChanged();
     }
 
     update(deselect: boolean): void {
@@ -85,32 +85,28 @@ export class TransactionComponent implements OnInit {
 
     deleteEntry(index: number): void {
         this.transaction.entries.splice(index, 1);
-        this.validate();
+        this.transactionChanged();
     }
 
-    validate(): void {
-        // let groups = {};
-        // this.structure.accounts
-        //     .forEach((a) => {
-        //         a.groups.forEach((group) => {
-        //             let groupAccounts = groups[group] || [];
-        //             groupAccounts.push(a);
-        //             groups[group] = groupAccounts;
-        //         });
-        //     }, {});
-        // console.log(groups);
-
+    transactionChanged(): void {
         this.valid = this.structure.rules
             .every((rule) => this.sumByGroup(rule.groupLeft) === this.sumByGroup(rule.groupRight));
     }
 
     entryChanged(index: number): void {
         this.transaction = this.pattern.update(this.structure, this.transaction);
-        this.validate();
+        this.transactionChanged();
     }
 
     getEntryPattern(index: number): EntryPattern {
         return this.pattern.entryPatterns[index] || new EntryPattern();
+    }
+
+    transactionQuantities(): number[] {
+        return Array.from(new Set(
+                this.transaction.entries
+                    .map((entry) => Math.abs(entry.change))
+            )).map((change) => change / 100);
     }
 
     private sumByGroup(group: string): number {
