@@ -5,33 +5,28 @@
           (submit)="update(true)">
 
       <div class="row">
-        <div class="col-md-4">
-          <div *ngIf="!editMode">
+        <div *ngIf="!editMode">
+          <div class="col-md-4">
             {{transaction.date | date}}
           </div>
-          <div *ngIf="editMode" class="form-group">
-            <label class="small">Date</label>
-            <input type="date"
-                name="transactionDate"
-                [value]="transaction.date | date:'yyyy-MM-dd'"
-                (input)="dateChanged($event)"
-                class="form-control" />
+
+          <div class="col-md-5">
+            {{transaction.description}}
           </div>
         </div>
 
-        <div class="col-md-5">
-          <div *ngIf="!editMode">
-            {{transaction.description}}
-          </div>
-          <div *ngIf="editMode" class="form-group">
-            <label class="small">Description</label>
-            <input type="text"
-                name="transactionDescription"
-                [(ngModel)]="transaction.description"
-                class="form-control"
-                [class.transaction-error]="!transaction.description.length"
-                placeholder="Description"
-                autofocus />
+        <div *ngIf="editMode">
+          <div class="col-md-9">
+            <div *ngIf="editMode" class="form-group">
+              <label class="small">Description</label>
+              <input type="text"
+                  name="transactionDescription"
+                  [(ngModel)]="transaction.description"
+                  class="form-control"
+                  [class.transaction-error]="!transaction.description.length"
+                  placeholder="Description"
+                  autofocus />
+            </div>
           </div>
         </div>
 
@@ -42,6 +37,11 @@
             </span>
           </div>
         </div>
+      </div>
+
+      <div *ngIf="editMode" class="form-group">
+        <label class="small">Date</label>
+        <datepicker [(ngModel)]="transaction.date" name="transactionDate" showWeeks="false" startingDay="1"></datepicker>
       </div>
 
       <div *ngIf="editMode">

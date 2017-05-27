@@ -3,7 +3,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 
-import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
+import { DatepickerModule } from 'ngx-bootstrap';
+import { TypeaheadModule } from 'ngx-bootstrap';
 
 import { AccountChooserComponent } from './account-chooser/account-chooser.component';
 import { EntryComponent } from './entry/entry.component';
@@ -18,6 +19,7 @@ import { TransactionService } from './transaction.service';
         BrowserModule,
         FormsModule,
         HttpModule,
+        DatepickerModule.forRoot(),
         TypeaheadModule.forRoot(),
         StatisticsModule,
     ],
