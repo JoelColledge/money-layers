@@ -15,6 +15,7 @@ export class Account {
         public name: string = "",
         public active: boolean = true,
         public groups: string[] = [],
+        public order: number = 0,
         public showInList: boolean = true
     ) { }
 }

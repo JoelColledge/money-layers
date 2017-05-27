@@ -5,6 +5,7 @@ var schema = new mongoose.Schema({
     active: {type: Boolean, required: true},
     createdAt: {type: Date, default: Date.now},
     groups: {type: [String], default: []},
+    order: {type: Number, default: 0},
     showInList: {type: Boolean, default: true}
 });
 

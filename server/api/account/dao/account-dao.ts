@@ -15,6 +15,7 @@ namespace AccountDao {
 
             AccountModel
                 .find(_query)
+                .sort('order')
                 .exec((err, accounts) => {
                     err ? reject(err)
                         : resolve(accounts);

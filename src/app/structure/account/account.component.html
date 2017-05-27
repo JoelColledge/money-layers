@@ -31,8 +31,18 @@
            name="accountGroups"
            [(ngModel)]="accountGroups"
            class="form-control"
-           placeholder="Groups"
-           autofocus />
+           placeholder="Groups" />
+  </div>
+
+  <div class="form-group">
+    <label [attr.for]="account._id + '-accountOrder'">Order: </label>
+
+    <input type="number"
+           [id]="account._id + '-accountOrder'"
+           name="accountOrder"
+           [(ngModel)]="account.order"
+           class="form-control"
+           placeholder="Order" />
   </div>
 
   <div class="checkbox">
