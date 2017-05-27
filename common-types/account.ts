@@ -14,7 +14,8 @@ export class Account {
         public _id: any = undefined,
         public name: string = "",
         public active: boolean = true,
-        public groups: string[] = []
+        public groups: string[] = [],
+        public showInList: boolean = true
     ) { }
 }
 

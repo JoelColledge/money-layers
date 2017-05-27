@@ -36,7 +36,7 @@ export class AccountTotalsComponent implements OnInit {
         this._accountService
             .getAll()
             .subscribe((accounts) => {
-                this.accounts = accounts;
+                this.accounts = accounts.filter((account) => account.showInList);
             });
 
         this._statisticsService

@@ -35,6 +35,15 @@
            autofocus />
   </div>
 
+  <div class="checkbox">
+    <label>
+      Show in list:
+      <input type="checkbox"
+             name="showInList"
+             [(ngModel)]="account.showInList" />
+    </label>
+  </div>
+
   <button type="submit"
           [disabled]="!account.name.length">Update</button>
 </form>
