@@ -1,0 +1,11 @@
+.type-none {
+  background-color: #fff9dc;
+}
+
+.type-expense {
+  background-color: #dceaff;
+}
+
+.type-income {
+  background-color: #dfffdc;
+}

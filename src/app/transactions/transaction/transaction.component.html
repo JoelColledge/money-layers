@@ -1,4 +1,5 @@
 <div class="panel panel-default"
+    [ngClass]="'type-' + transactionType()"
     (click)=clicked($event)>
   <div class="panel-body">
     <form class="form-inline"

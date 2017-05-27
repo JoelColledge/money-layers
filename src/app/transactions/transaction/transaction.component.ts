@@ -105,6 +105,21 @@ export class TransactionComponent implements OnInit {
             )).map((change) => change / 100);
     }
 
+    transactionType(): string {
+        let worldAccount = this.structure.accounts.find((account) => account.name === 'a-World');
+        if (!worldAccount) {
+            return 'none';
+        }
+
+        let worldEntry = this.transaction.entries.find((entry) => entry.account === worldAccount._id);
+        if (!worldEntry) {
+            return 'none';
+        }
+
+        return worldEntry.change > 0 ? 'expense' :
+            (worldEntry.change < 0 ? 'income' : 'none');
+    }
+
     private sumByGroup(group: string): number {
         return this.entriesInGroup(group)
             .reduce((s, entry) => s + entry.change, 0);
