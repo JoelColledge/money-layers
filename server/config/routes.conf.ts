@@ -13,8 +13,15 @@ export class RoutesConfig {
         let _root = process.cwd();
         let _clientFiles = '/dist/';
 
+        let username = process.env.USERNAME;
+        let password = process.env.PASSWORD;
+        if (!username || !password) {
+            throw new Error('No credentials specified');
+        }
+        let users = {};
+        users[username] = password;
         application.use(basicAuth({
-            users: { 'user': 'pass' },
+            users: users,
             challenge: true
         }));
         application.use(helmet());
