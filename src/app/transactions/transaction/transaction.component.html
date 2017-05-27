@@ -13,7 +13,7 @@
 
           <div class="col-md-5">
             {{transaction.description}}
-            <span *ngFor="let icon of icons()" [ngClass]="['glyphicon', 'glyphicon-' + icon]"></span>
+            <span *ngFor="let icon of icons()" class="account-icon" [ngClass]="['glyphicon', 'glyphicon-' + icon]"></span>
           </div>
         </div>
 
