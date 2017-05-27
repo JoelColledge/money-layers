@@ -69,8 +69,8 @@ export class TransactionListComponent implements OnInit {
             });
     }
 
-    monthChanged(event): void {
-        this.month = new Date(event.target.value);
+    monthChanged(date: Date): void {
+        this.month = date;
         this._getAll();
     }
 

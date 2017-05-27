@@ -1,31 +1,37 @@
 <div>
   <h2>Transactions</h2>
 
-  <input type="month"
-      name="transactionMonth"
-      [value]="month | date:'yyyy-MM'"
-      (input)="monthChanged($event)"
-      class="form-control" />
+  <div class="date-block">
+    <datepicker
+        [ngModel]="month"
+        (ngModelChange)="monthChanged($event)"
+        name="transactionMonth"
+        datepickerMode="month"
+        minMode="month">
+    </datepicker>
+  </div>
 
-  <button class="btn btn-success" (click)="addExpense()">
-    Expense <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
-  </button>
+  <div>
+    <button class="btn btn-success" (click)="addExpense()">
+      Expense <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
+    </button>
 
-  <button class="btn btn-success" (click)="addIncome()">
-    Income <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
-  </button>
+    <button class="btn btn-success" (click)="addIncome()">
+      Income <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
+    </button>
 
-  <button class="btn btn-success" (click)="addWithdrawal()">
-    Withdrawal <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
-  </button>
+    <button class="btn btn-success" (click)="addWithdrawal()">
+      Withdrawal <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
+    </button>
 
-  <button class="btn btn-success" (click)="addExpenseGbp()">
-    GBP (£) Expense <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
-  </button>
+    <button class="btn btn-success" (click)="addExpenseGbp()">
+      GBP (£) Expense <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
+    </button>
 
-  <button class="btn btn-success" (click)="addGeneric()">
-    Generic <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
-  </button>
+    <button class="btn btn-success" (click)="addGeneric()">
+      Generic <span class="glyphicon glyphicon-plus-sign add-transaction"></span>
+    </button>
+  </div>
 
   <div *ngFor="let transaction of transactions; let i = index;">
     <transaction

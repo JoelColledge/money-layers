@@ -75,10 +75,6 @@ export class TransactionComponent implements OnInit {
         this.onSelect.emit(-1);
     }
 
-    dateChanged(event: any): void {
-        this.transaction.date = event.target.value;
-    }
-
     addEntry(): void {
         this.transaction.entries.push({account: undefined, change: 0});
     }
