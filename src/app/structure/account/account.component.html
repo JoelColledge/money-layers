@@ -14,19 +14,6 @@
            autofocus />
   </div>
 
-  <div class="form-group">
-    <label [attr.for]="account._id + '-accountLayer'">Layer: </label>
-
-    <input type="text"
-           [id]="account._id + '-accountLayer'"
-           name="accountLayer"
-           [(ngModel)]="account.layer"
-           class="form-control"
-           [class.account-error]="!account.layer.length"
-           placeholder="Layer"
-           autofocus />
-  </div>
-
   <div class="checkbox">
     <label>
       Active:
