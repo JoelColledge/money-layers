@@ -8,3 +8,6 @@ typings
 build
 /data
 dist
+
+npm-debug.log
+/*.env
