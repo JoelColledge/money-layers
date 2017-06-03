@@ -3,8 +3,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 
-import { DatepickerModule } from 'ngx-bootstrap';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { AccountChooserComponent } from './account-chooser/account-chooser.component';
 import { EntryComponent } from './entry/entry.component';

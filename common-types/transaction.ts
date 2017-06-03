@@ -7,6 +7,10 @@ export function prepareTransactionForIndex(transaction: Transaction): void {
     transaction.month = dateToMonth(new Date(transaction.date));
 }
 
+export function calendarDate(date: Date): string {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString();
+}
+
 export class Entry {
     constructor(
         public account: any = undefined,
@@ -21,7 +25,7 @@ export class Transaction {
         public _id: any = undefined,
         public description: string = "",
         public notes: string = "",
-        public date: string = (new Date()).toISOString(),
+        public date: string = calendarDate(new Date()),
         public entries: Entry[] = []
     ) { }
 }

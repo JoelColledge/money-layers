@@ -11,7 +11,7 @@ import {
 } from '@angular/router';
 
 import {Account, Structure, findAccountIdByName, findAccountById} from '../../../../common-types/account';
-import {Transaction, Entry} from '../../../../common-types/transaction';
+import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
 
 @Component({
@@ -44,6 +44,8 @@ export class TransactionComponent implements OnInit {
     _selectedIndex: number;
     editMode: boolean = false;
     valid: boolean = true;
+
+    private _transactionDate: Date;
 
     constructor(
         private router: Router
@@ -126,6 +128,15 @@ export class TransactionComponent implements OnInit {
             .filter((account) => !!account)
             .map((account) => account.icon)
             .filter((icon) => !!icon);
+    }
+
+    transactionDate(): Date {
+        return this._transactionDate;
+    }
+
+    transactionDateChanged(date: Date): void {
+        this._transactionDate = date;
+        this.transaction.date = calendarDate(date);
     }
 
     private sumByGroup(group: string): number {
