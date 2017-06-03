@@ -6,6 +6,7 @@ import {EntryPattern, TransactionPattern} from './transaction-pattern';
 export class WithdrawalPattern implements TransactionPattern {
     create(structure: Structure) {
         let transaction = new Transaction();
+        transaction.description = "ATM";
         transaction.entries = [
             new Entry(findAccountIdByName(structure, 'a-Current')),
             new Entry(findAccountIdByName(structure, 'a-Cash'))
