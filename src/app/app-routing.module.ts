@@ -1,6 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { StructureCacheService } from './shared/structure-cache.service';
 import { StructureComponent }   from './structure/structure/structure.component';
 import { StructureModule } from './structure/structure.module';
 import { TransactionsPageComponent }   from './transactions/transactions-page/transactions-page.component';
@@ -13,7 +14,10 @@ const appRoutes: Routes = [
     },
     {
         path: 'transactions',
-        component: TransactionsPageComponent
+        component: TransactionsPageComponent,
+        resolve: {
+            structure: StructureCacheService
+        }
     },
     {
         path: '',

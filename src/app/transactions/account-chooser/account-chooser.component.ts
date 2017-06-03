@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 
 import {
-    AccountService
-} from '../../shared/account.service';
+    StructureCacheService
+} from '../../shared/structure-cache.service';
 
 import {Account} from '../../../../common-types/account';
 
@@ -32,20 +32,12 @@ export class AccountChooserComponent implements OnInit {
     accountNames: string[] = [];
 
     constructor(
-        private _accountService: AccountService
+        private structureCacheService: StructureCacheService
     ) { }
 
     ngOnInit() {
-        this._getAll();
-    }
-
-    private _getAll(): void {
-        this._accountService
-            .getAll()
-            .subscribe((accounts) => {
-                this.accounts = accounts;
-                this.accountNames = accounts.map((account) => account.name);
-            });
+        this.accounts = this.structureCacheService.get().accounts;
+        this.accountNames = this.accounts.map((account) => account.name);
     }
 
     public accountNameChanged(accountName: string):void {

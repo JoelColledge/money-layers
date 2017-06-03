@@ -35,7 +35,6 @@
 
   <div *ngFor="let transaction of transactions; let i = index;">
     <transaction
-        [structure]="structure"
         [transaction]="transaction"
         [pattern]="getPattern(i)"
         [index]="i"

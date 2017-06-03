@@ -12,18 +12,13 @@ import {
 } from 'rxjs/Rx';
 
 import {
-    AccountService
-} from '../../shared/account.service';
-
-import {
-    RuleService
-} from '../../shared/rule.service';
+    StructureCacheService
+} from '../../shared/structure-cache.service';
 
 import {
     TransactionService
 } from '../transaction.service';
 
-import {Structure} from '../../../../common-types/account';
 import {Entry, Transaction, dateToMonth} from '../../../../common-types/transaction';
 
 import {TransactionPattern} from '../patterns/transaction-pattern';
@@ -39,15 +34,13 @@ import {GenericPattern} from '../patterns/generic-pattern';
   styleUrls: ['./transaction-list.component.css']
 })
 export class TransactionListComponent implements OnInit {
-    structure: Structure = new Structure();
     month: Date = new Date();
     transactions: Transaction[] = [];
     patterns: TransactionPattern[] = [];
     selectedIndex: number;
 
     constructor(
-        private accountService: AccountService,
-        private ruleService: RuleService,
+        private structureCacheService: StructureCacheService,
         private transactionService: TransactionService,
         private router: Router
     ) { }
@@ -57,12 +50,8 @@ export class TransactionListComponent implements OnInit {
     }
 
     private _getAll(): void {
-        let accountsObservable = this.accountService.getAll();
-        let rulesObservable = this.ruleService.getAll();
-        let transactionsObservable = this.transactionService.getAll(dateToMonth(this.month));
-        Observable.forkJoin(accountsObservable, rulesObservable, transactionsObservable)
-            .subscribe(([accounts, rules, transactions]) => {
-                this.structure = new Structure(accounts, rules);
+        this.transactionService.getAll(dateToMonth(this.month))
+            .subscribe(transactions => {
                 this.patterns = [];
                 this.transactions = transactions;
                 this.selectedIndex = -1;
@@ -141,7 +130,7 @@ export class TransactionListComponent implements OnInit {
     }
 
     private add(pattern: TransactionPattern) {
-        let transaction = pattern.create(this.structure);
+        let transaction = pattern.create(this.structureCacheService.get());
         let now = new Date();
         if (this.month.getMonth() !== now.getMonth() || this.month.getFullYear() !== now.getFullYear()) {
             transaction.date = this.month.toISOString();

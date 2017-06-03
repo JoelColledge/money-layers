@@ -11,8 +11,8 @@ import {
 } from '@angular/router';
 
 import {
-    AccountService
-} from '../../shared/account.service';
+    StructureCacheService
+} from '../../shared/structure-cache.service';
 
 import {Entry} from '../../../../common-types/transaction';
 import {Account} from '../../../../common-types/account';
@@ -29,8 +29,7 @@ export class EntryComponent implements OnInit {
         this._entry = entry;
 
         if (entry.account) {
-            this.accountService.get(entry.account)
-                .subscribe((account) => this.account = account);
+            this.account = this.structureCacheService.get().accounts.find(account => account._id === entry.account);
         }
     }
 
@@ -50,7 +49,7 @@ export class EntryComponent implements OnInit {
     account: Account = new Account();
 
     constructor(
-        private accountService: AccountService
+        private structureCacheService: StructureCacheService
     ) { }
 
     ngOnInit() {

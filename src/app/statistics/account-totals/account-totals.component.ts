@@ -4,8 +4,8 @@ import {
 } from '@angular/core';
 
 import {
-    AccountService
-} from '../../shared/account.service';
+    StructureCacheService
+} from '../../shared/structure-cache.service';
 
 import {
     StatisticsService
@@ -24,7 +24,7 @@ export class AccountTotalsComponent implements OnInit {
     accountTotals: AccountTotal[] = [];
 
     constructor(
-        private _accountService: AccountService,
+        private structureCacheService: StructureCacheService,
         private _statisticsService: StatisticsService
     ) { }
 
@@ -33,11 +33,7 @@ export class AccountTotalsComponent implements OnInit {
     }
 
     private _getAll(): void {
-        this._accountService
-            .getAll()
-            .subscribe((accounts) => {
-                this.accounts = accounts.filter((account) => account.showInList);
-            });
+        this.accounts = this.structureCacheService.get().accounts.filter((account) => account.showInList);
 
         this._statisticsService
             .accountTotals()

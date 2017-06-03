@@ -10,6 +10,10 @@ import {
     Router
 } from '@angular/router';
 
+import {
+    StructureCacheService
+} from '../../shared/structure-cache.service';
+
 import {Account, Structure, findAccountIdByName, findAccountById} from '../../../../common-types/account';
 import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
@@ -20,7 +24,6 @@ import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern'
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-    @Input() structure: Structure = new Structure();
     @Input() transaction: Transaction = new Transaction();
     @Input() pattern: TransactionPattern;
     @Output() onSelect = new EventEmitter<number>();
@@ -48,6 +51,7 @@ export class TransactionComponent implements OnInit {
     private _transactionDate: Date;
 
     constructor(
+        private structureCacheService: StructureCacheService,
         private router: Router
     ) { }
 
@@ -87,12 +91,12 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionChanged(): void {
-        this.valid = this.structure.rules
+        this.valid = this.structureCacheService.get().rules
             .every((rule) => this.sumByGroup(rule.groupLeft) === this.sumByGroup(rule.groupRight));
     }
 
     entryChanged(index: number): void {
-        this.transaction = this.pattern.update(this.structure, this.transaction);
+        this.transaction = this.pattern.update(this.structureCacheService.get(), this.transaction);
         this.transactionChanged();
     }
 
@@ -108,7 +112,7 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionType(): string {
-        let worldAccountId = findAccountIdByName(this.structure, 'a-World');
+        let worldAccountId = findAccountIdByName(this.structureCacheService.get(), 'a-World');
         if (!worldAccountId) {
             return 'none';
         }
@@ -124,7 +128,7 @@ export class TransactionComponent implements OnInit {
 
     icons(): string[] {
         return this.transaction.entries
-            .map((entry) => findAccountById(this.structure, entry.account))
+            .map((entry) => findAccountById(this.structureCacheService.get(), entry.account))
             .filter((account) => !!account)
             .map((account) => account.icon)
             .filter((icon) => !!icon);
@@ -153,7 +157,7 @@ export class TransactionComponent implements OnInit {
     }
 
     private accountById(accountId: string): Account {
-        return this.structure.accounts.find((account) => account._id === accountId);
+        return this.structureCacheService.get().accounts.find((account) => account._id === accountId);
     }
 
     private updateEditMode(): void {
