@@ -1,6 +1,5 @@
 import {
-    Component,
-    OnInit
+    Component
 } from '@angular/core';
 
 import {
@@ -33,7 +32,7 @@ import {GenericPattern} from '../patterns/generic-pattern';
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.css']
 })
-export class TransactionListComponent implements OnInit {
+export class TransactionListComponent {
     month: Date = new Date();
     transactions: Transaction[] = [];
     patterns: TransactionPattern[] = [];
@@ -44,10 +43,6 @@ export class TransactionListComponent implements OnInit {
         private transactionService: TransactionService,
         private router: Router
     ) { }
-
-    ngOnInit() {
-        this._getAll();
-    }
 
     private _getAll(): void {
         this.transactionService.getAll(dateToMonth(this.month))
