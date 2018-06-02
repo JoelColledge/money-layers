@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 import { AccountTotalsComponent } from './account-totals/account-totals.component';
+import { CashFlowComponent } from './cash-flow/cash-flow.component';
 import { StatisticsService } from './statistics.service';
 
 @NgModule({
@@ -12,9 +13,11 @@ import { StatisticsService } from './statistics.service';
     ],
     declarations: [
         AccountTotalsComponent,
+        CashFlowComponent,
     ],
     exports: [
         AccountTotalsComponent,
+        CashFlowComponent,
     ],
     providers: [
         StatisticsService,

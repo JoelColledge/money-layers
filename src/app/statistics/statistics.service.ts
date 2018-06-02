@@ -16,7 +16,7 @@ import {
     map
 } from 'rxjs/operators';
 
-import {AccountTotal} from '../../../common-types/statistics';
+import {AccountTotal, MonthChange} from '../../../common-types/statistics';
 
 @Injectable()
 export class StatisticsService {
@@ -26,6 +26,12 @@ export class StatisticsService {
     accountTotals(): Observable<AccountTotal[]> {
         return this._http
             .get('/api/accountTotals')
+            .pipe(map((r) => r.json()));
+    }
+
+    changeByMonth(): Observable<MonthChange[]> {
+        return this._http
+            .get('/api/changeByMonth')
             .pipe(map((r) => r.json()));
     }
 }

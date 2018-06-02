@@ -9,6 +9,7 @@ export class AccountTotal {
 export class MonthChange {
     constructor(
         public month: number = -1,
-        public change: number = 0
+        public increase: number = 0,
+        public decrease: number = 0
     ) { }
 }

@@ -3,6 +3,12 @@ export function dateToMonth(date: Date): number {
     return date.getFullYear() * 12 + date.getMonth();
 }
 
+export function monthToDate(month: number): Date {
+    let year = Math.floor(month / 12);
+    let monthInYear = month - year * 12;
+    return new Date(Date.UTC(year, monthInYear));
+}
+
 export function prepareTransactionForIndex(transaction: Transaction): void {
     transaction.month = dateToMonth(new Date(transaction.date));
 }

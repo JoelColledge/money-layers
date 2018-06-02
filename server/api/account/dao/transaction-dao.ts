@@ -67,20 +67,61 @@ namespace TransactionDao {
             .then(accounts => {
                 return new Promise<MonthChange[]>((resolve, reject) => {
                     let actualInternalAccountIds = accounts.filter(account => account.groups.includes('a/in')).map(account => account._id);
-                    console.log(actualInternalAccountIds);
 
                     let _aggregation = [
                         {
-                            $unwind: "$entries"
+                            // Process the individual transactions
+                            $project: {
+                                "month": true,
+                                // Total actual internal change for this transaction
+                                "transactionChange": {
+                                    $sum: {
+                                        // Extract the changes from the entries
+                                        $map: {
+                                            input: {
+                                                // Only include changes for the actual internal accounts
+                                                $filter: {
+                                                    input: "$entries",
+                                                    as: "entry",
+                                                    cond: {
+                                                        $in: ["$$entry.account", actualInternalAccountIds]
+                                                    }
+                                                }
+                                            },
+                                            as: "entry",
+                                            in: "$$entry.change"
+                                        }
+                                    }
+                                }
+                            }
                         },
                         {
-                            $match: { "entries.account": { $in: actualInternalAccountIds } }
+                            // Sum up the positive and negative changes separately for each month
+                            $group: {
+                                _id: {
+                                    month: "$month",
+                                    positive: { $gt: ["$transactionChange", 0] }
+                                },
+                                totalChange: { $sum: "$transactionChange" }
+                            }
                         },
                         {
-                            $group: {_id: "$month", change: {$sum: "$entries.change"}}
+                            // Group the results by month
+                            $group: {
+                                _id: "$_id.month",
+                                changes: {
+                                    $push: "$totalChange"
+                                }
+                            }
                         },
                         {
-                            $sort: {_id: 1}
+                            $sort: { "_id": -1 }
+                        },
+                        {
+                            $limit: 12
+                        },
+                        {
+                            $sort: { "_id": 1 }
                         }
                     ];
 
@@ -88,8 +129,11 @@ namespace TransactionDao {
                         .aggregate(_aggregation, (err, result) => {
                             err ? reject(err)
                                 : resolve(result.map((agg) => {
-                                    let changeByMonth = {month: agg._id, change: agg.change};
-                                    return changeByMonth;
+                                    return {
+                                        month: agg._id,
+                                        increase: agg.changes.find(v => v > 0) || 0,
+                                        decrease: Math.abs(agg.changes.find(v => v < 0) || 0)
+                                    };
                                 }));
                         });
                 });
