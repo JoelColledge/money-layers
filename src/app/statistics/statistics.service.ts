@@ -5,14 +5,16 @@ import {
 
 import {
     Observable
-} from 'rxjs/Observable';
+} from 'rxjs';
 
 import {
     Http,
     Headers
 } from '@angular/http';
 
-import 'rxjs/add/operator/map';
+import {
+    map
+} from 'rxjs/operators';
 
 import {AccountTotal} from '../../../common-types/statistics';
 
@@ -24,6 +26,6 @@ export class StatisticsService {
     accountTotals(): Observable<AccountTotal[]> {
         return this._http
             .get('/api/accountTotals')
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 }

@@ -5,14 +5,16 @@ import {
 
 import {
     Observable
-} from 'rxjs/Observable';
+} from 'rxjs';
 
 import {
     Http,
     Headers
 } from '@angular/http';
 
-import 'rxjs/add/operator/map';
+import {
+    map
+} from 'rxjs/operators';
 
 import {Rule} from '../../../common-types/account';
 
@@ -26,13 +28,13 @@ export class RuleService {
     getAll(): Observable<Rule[]> {
         return this._http
             .get(RuleService.ENDPOINT.replace(':id', ''))
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     get(id: string): Observable<Rule> {
         return this._http
             .get(RuleService.ENDPOINT.replace(':id', id))
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     add(rule: Rule): Observable<Rule> {
@@ -43,7 +45,7 @@ export class RuleService {
 
         return this._http
             .post(RuleService.ENDPOINT.replace(':id', ''), _messageStringified, {headers})
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     update(rule: Rule): Observable<Rule> {
@@ -54,7 +56,7 @@ export class RuleService {
 
         return this._http
             .post(RuleService.ENDPOINT.replace(':id', rule._id), _messageStringified, {headers})
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     addOrUpdate(rule: Rule): Observable<Rule> {

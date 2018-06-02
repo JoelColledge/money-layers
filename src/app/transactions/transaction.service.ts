@@ -5,7 +5,7 @@ import {
 
 import {
     Observable
-} from 'rxjs/Observable';
+} from 'rxjs';
 
 import {
     Http,
@@ -13,7 +13,9 @@ import {
     URLSearchParams
 } from '@angular/http';
 
-import 'rxjs/add/operator/map';
+import {
+    map
+} from 'rxjs/operators';
 
 import {Transaction} from '../../../common-types/transaction';
 
@@ -34,13 +36,13 @@ export class TransactionService {
         return this._http
             .get(TransactionService.ENDPOINT.replace('/:id', ''), {
                 search: params
-            }).map((r) => r.json());
+            }).pipe(map((r) => r.json()));
     }
 
     get(id: string): Observable<Transaction> {
         return this._http
             .get(TransactionService.ENDPOINT.replace(':id', id))
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     add(transaction: Transaction): Observable<Transaction> {
@@ -51,7 +53,7 @@ export class TransactionService {
 
         return this._http
             .post(TransactionService.ENDPOINT.replace('/:id', ''), _messageStringified, {headers})
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     update(transaction: Transaction): Observable<Transaction> {
@@ -62,7 +64,7 @@ export class TransactionService {
 
         return this._http
             .post(TransactionService.ENDPOINT.replace(':id', transaction._id), _messageStringified, {headers})
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     addOrUpdate(transaction: Transaction): Observable<Transaction> {

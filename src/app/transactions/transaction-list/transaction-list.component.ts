@@ -8,7 +8,7 @@ import {
 
 import {
     Observable
-} from 'rxjs/Rx';
+} from 'rxjs';
 
 import {
     StructureCacheService

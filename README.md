@@ -7,7 +7,7 @@
     npm install
     sudo systemctl start docker
     docker-compose up
-    npm run dev
+    USERNAME=user PASSWORD=pass npm run dev
     http://localhost:4200
 
 ## Production

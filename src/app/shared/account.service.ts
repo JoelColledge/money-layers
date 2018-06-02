@@ -5,14 +5,16 @@ import {
 
 import {
     Observable
-} from 'rxjs/Observable';
+} from 'rxjs';
 
 import {
     Http,
     Headers
 } from '@angular/http';
 
-import 'rxjs/add/operator/map';
+import {
+    map
+} from 'rxjs/operators';
 
 import {Account} from '../../../common-types/account';
 
@@ -26,13 +28,13 @@ export class AccountService {
     getAll(): Observable<Account[]> {
         return this._http
             .get(AccountService.ENDPOINT.replace(':id', ''))
-            .map((r) => r.json());
+            .pipe(map(r => r.json()));
     }
 
     get(id: string): Observable<Account> {
         return this._http
             .get(AccountService.ENDPOINT.replace(':id', id))
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     add(account: Account): Observable<Account> {
@@ -43,7 +45,7 @@ export class AccountService {
 
         return this._http
             .post(AccountService.ENDPOINT.replace(':id', ''), _messageStringified, {headers})
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     update(account: Account): Observable<Account> {
@@ -54,7 +56,7 @@ export class AccountService {
 
         return this._http
             .post(AccountService.ENDPOINT.replace(':id', account._id), _messageStringified, {headers})
-            .map((r) => r.json());
+            .pipe(map((r) => r.json()));
     }
 
     addOrUpdate(account: Account): Observable<Account> {
