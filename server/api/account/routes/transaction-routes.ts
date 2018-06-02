@@ -21,6 +21,10 @@ export class TransactionRoutes {
         .get(TransactionController.accountTotals);
 
       router
+        .route('/api/changeByMonth')
+        .get(TransactionController.changeByMonth);
+
+      router
         .route('/api/raw/goodbudget')
         .post(TransactionController.goodbudgetImport);
     }

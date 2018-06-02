@@ -23,6 +23,12 @@ export class TransactionController {
             .catch(error => res.status(400).json(error));
     }
 
+    static changeByMonth(req: express.Request, res: express.Response): void {
+        TransactionDao.changeByMonth()
+            .then(changeByMonth => res.status(200).json(changeByMonth))
+            .catch(error => res.status(400).json(error));
+    }
+
     static createTransaction(req: express.Request, res: express.Response): void {
         let _transaction = req.body;
 

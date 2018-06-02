@@ -1,11 +1,12 @@
-Get http basic auth working
-Styling
---- Deploy
+Only show selected account totals
+Improve design for account totals
+Cash-flow graphic
+Dynamic update of account totals
+Mark accounts with type instead of directly with groups - save structure as a single config object rather than in multiple collections
+Remember with what pattern a transaction was created. Save additional data for pattern? Define patterns in config?
 Transaction edit cancel
 Transaction edit helpers
 Explain validation in GUI - which rule has been broken
-Dynamic update of account totals
-Only show selected account totals
 
 == Questions
 Do we need to have the 'accounting equation' on the logical accounts?

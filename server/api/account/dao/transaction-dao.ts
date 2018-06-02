@@ -1,9 +1,10 @@
 import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
+import AccountDao from './account-dao';
 import transactionSchema from '../model/transaction-model';
 import {Transaction, dateToMonth, prepareTransactionForIndex} from '../../../../common-types/transaction';
-import {AccountTotal} from '../../../../common-types/statistics';
+import {AccountTotal, MonthChange} from '../../../../common-types/statistics';
 
 interface TransactionDocument extends mongoose.Document, Transaction {
 }
@@ -57,6 +58,40 @@ namespace TransactionDao {
                             let totals = {account: agg._id, total: agg.total};
                             return totals;
                         }));
+                });
+        });
+    };
+
+    export function changeByMonth(): Promise<MonthChange[]> {
+        return AccountDao.getAll()
+            .then(accounts => {
+                return new Promise<MonthChange[]>((resolve, reject) => {
+                    let actualInternalAccountIds = accounts.filter(account => account.groups.includes('a/in')).map(account => account._id);
+                    console.log(actualInternalAccountIds);
+
+                    let _aggregation = [
+                        {
+                            $unwind: "$entries"
+                        },
+                        {
+                            $match: { "entries.account": { $in: actualInternalAccountIds } }
+                        },
+                        {
+                            $group: {_id: "$month", change: {$sum: "$entries.change"}}
+                        },
+                        {
+                            $sort: {_id: 1}
+                        }
+                    ];
+
+                    TransactionModel
+                        .aggregate(_aggregation, (err, result) => {
+                            err ? reject(err)
+                                : resolve(result.map((agg) => {
+                                    let changeByMonth = {month: agg._id, change: agg.change};
+                                    return changeByMonth;
+                                }));
+                        });
                 });
         });
     };
