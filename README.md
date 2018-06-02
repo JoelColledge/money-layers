@@ -14,3 +14,8 @@
 
     # git clone
     npm install --production
+
+## Heroku deployment
+
+    heroku login
+    git push heroku master

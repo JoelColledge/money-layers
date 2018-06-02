@@ -13,14 +13,13 @@ export class ExpenseGbpPattern implements TransactionPattern {
             new Entry(findAccountIdByName(structure, 'Trading buffer')),
             new Entry(findAccountIdByName(structure, 'GBP-Buffer')),
             new Entry(findAccountIdByName(structure, 'GBP-Trading')),
-            new Entry(findAccountIdByName(structure, 'a-GBP-Current')),
-            new Entry(findAccountIdByName(structure, 'a-GBP-World'))
+            new Entry(findAccountIdByName(structure, 'a-GBP-Current'))
         ];
         return transaction;
     }
 
     update(structure: Structure, transaction: Transaction) {
-        if (transaction.entries.length < 8) {
+        if (transaction.entries.length < 7) {
             return transaction;
         }
 
@@ -32,7 +31,6 @@ export class ExpenseGbpPattern implements TransactionPattern {
         let gbpChange: number = transaction.entries[5].change;
         transaction.entries[4].change = -gbpChange;
         transaction.entries[6].change = -gbpChange;
-        transaction.entries[7].change = gbpChange;
 
         let internalAccountName = findAccountNameById(structure, transaction.entries[0].account);
         transaction.entries[1].account = findAccountIdByName(structure, internalAccountName + ' expenses');
@@ -47,7 +45,6 @@ export class ExpenseGbpPattern implements TransactionPattern {
         new EntryPattern(false, false, false),
         new EntryPattern(false, false, false),
         new EntryPattern(false, true, false),
-        new EntryPattern(true, false, false),
-        new EntryPattern(false, false, false)
+        new EntryPattern(true, false, false)
     ];
 }

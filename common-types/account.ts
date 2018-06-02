@@ -13,6 +13,12 @@ export function findAccountById(structure: Structure, id: any): Account {
     return structure.accounts.find((account) => account._id === id);
 }
 
+export function findAccountIdsByGroup(structure: Structure, group: string): any[] {
+    return structure.accounts
+        .filter(account => account.groups.includes(group))
+        .map(account => account._id);
+}
+
 export class Account {
     constructor(
         public _id: any = undefined,

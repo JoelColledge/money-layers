@@ -9,21 +9,19 @@ export class ExpensePattern implements TransactionPattern {
         transaction.entries = [
             new Entry(),
             new Entry(),
-            new Entry(findAccountIdByName(structure, 'a-Current')),
-            new Entry(findAccountIdByName(structure, 'a-World'))
+            new Entry(findAccountIdByName(structure, 'a-Current'))
         ];
         return transaction;
     }
 
     update(structure: Structure, transaction: Transaction) {
-        if (transaction.entries.length < 4) {
+        if (transaction.entries.length < 3) {
             return transaction;
         }
 
         let change: number = transaction.entries[1].change;
         transaction.entries[0].change = -change;
         transaction.entries[2].change = -change;
-        transaction.entries[3].change = change;
 
         let internalAccountName = findAccountNameById(structure, transaction.entries[0].account);
         transaction.entries[1].account = findAccountIdByName(structure, internalAccountName + ' expenses');
@@ -34,7 +32,6 @@ export class ExpensePattern implements TransactionPattern {
     entryPatterns = [
         new EntryPattern(true, false, false),
         new EntryPattern(false, true, false),
-        new EntryPattern(true, false, false),
-        new EntryPattern(false, false, false)
+        new EntryPattern(true, false, false)
     ];
 }

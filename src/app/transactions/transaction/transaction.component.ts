@@ -14,7 +14,7 @@ import {
     StructureCacheService
 } from '../../shared/structure-cache.service';
 
-import {Account, Structure, findAccountIdByName, findAccountById} from '../../../../common-types/account';
+import {Account, Structure, findAccountIdByName, findAccountById, findAccountIdsByGroup} from '../../../../common-types/account';
 import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
 
@@ -112,18 +112,14 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionType(): string {
-        let worldAccountId = findAccountIdByName(this.structureCacheService.get(), 'a-World');
-        if (!worldAccountId) {
-            return 'none';
-        }
+        let accountIds = findAccountIdsByGroup(this.structureCacheService.get(), 'a/in');
 
-        let worldEntry = this.transaction.entries.find((entry) => entry.account === worldAccountId);
-        if (!worldEntry) {
-            return 'none';
-        }
+        let entries = this.transaction.entries.filter(entry => accountIds.includes(entry.account));
 
-        return worldEntry.change > 0 ? 'expense' :
-            (worldEntry.change < 0 ? 'income' : 'none');
+        let totalChange = entries.map(entry => entry.change).reduce((acc, change) => acc + change, 0);
+
+        return totalChange < 0 ? 'expense' :
+            (totalChange > 0 ? 'income' : 'none');
     }
 
     icons(): string[] {
