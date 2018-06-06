@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
-import { AccountService }   from './account.service';
-import { RuleService }   from './rule.service';
+import { StructureService }   from './structure.service';
 import { StructureCacheService } from './structure-cache.service';
 
 @NgModule({
@@ -11,8 +10,7 @@ import { StructureCacheService } from './structure-cache.service';
     ],
     declarations: [],
     providers: [
-        AccountService,
-        RuleService,
+        StructureService,
         StructureCacheService,
     ],
 })

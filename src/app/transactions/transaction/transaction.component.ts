@@ -14,7 +14,7 @@ import {
     StructureCacheService
 } from '../../shared/structure-cache.service';
 
-import {Account, Structure, findAccountIdByName, findAccountById, findAccountIdsByGroup} from '../../../../common-types/account';
+import {Account, Structure, findAccountIdByName, findAccountById, findAccountIdsByGroup} from '../../../../common-types/structure';
 import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
 

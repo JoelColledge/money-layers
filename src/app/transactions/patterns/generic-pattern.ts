@@ -1,5 +1,5 @@
 
-import {Structure} from '../../../../common-types/account';
+import {Structure} from '../../../../common-types/structure';
 import {Transaction} from '../../../../common-types/transaction';
 import {TransactionPattern} from './transaction-pattern';
 

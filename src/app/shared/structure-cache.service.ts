@@ -3,32 +3,25 @@ import { Injectable } from '@angular/core';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
 import {
-    Observable,
-    forkJoin
+    Observable
 } from 'rxjs';
 
 import {
-    map,
-    share
+    tap
 } from 'rxjs/operators';
 
 import {
-    AccountService
-} from './account.service';
+    StructureService
+} from './structure.service';
 
-import {
-    RuleService
-} from './rule.service';
-
-import {Structure} from '../../../common-types/account';
+import {Structure} from '../../../common-types/structure';
 
 @Injectable()
 export class StructureCacheService implements Resolve<Structure>  {
     private structure: Structure;
 
     constructor(
-        private accountService: AccountService,
-        private ruleService: RuleService
+        private structureService: StructureService
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Structure> {
@@ -36,15 +29,7 @@ export class StructureCacheService implements Resolve<Structure>  {
     }
 
     fetch(): Observable<Structure> {
-        let accountsObservable = this.accountService.getAll();
-        let rulesObservable = this.ruleService.getAll();
-        let shared = forkJoin(accountsObservable, rulesObservable)
-            .pipe(map(([accounts, rules]) =>  new Structure(accounts, rules)))
-            .pipe(share());
-        shared.subscribe(structure => {
-                this.structure = structure;
-            });
-        return shared;
+        return this.structureService.get().pipe(tap(structure => this.structure = structure));
     }
 
     get(): Structure {

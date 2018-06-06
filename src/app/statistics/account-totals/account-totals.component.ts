@@ -12,7 +12,7 @@ import {
 } from '../statistics.service';
 
 import {AccountTotal} from '../../../../common-types/statistics';
-import {Account} from '../../../../common-types/account';
+import {Account} from '../../../../common-types/structure';
 
 @Component({
   selector: 'account-totals',

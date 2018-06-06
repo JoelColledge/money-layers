@@ -41,6 +41,7 @@ export class Rule {
 
 export class Structure {
     constructor(
+        public _id: any = undefined,
         public accounts: Account[] = [],
         public rules: Rule[] = []
     ) { }

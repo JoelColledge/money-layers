@@ -1,8 +1,8 @@
 import * as csvparse from 'csv-parse';
 
-import {Account} from '../../../../common-types/account';
+import {Account} from '../../../../common-types/structure';
 import {Transaction, Entry} from '../../../../common-types/transaction';
-import AccountDao from '../dao/account-dao';
+import StructureDao from '../dao/structure-dao';
 import TransactionDao from '../dao/transaction-dao';
 
 
@@ -112,12 +112,12 @@ namespace ImportService {
     }
 
     export function goodbudgetImport(csv: string) {
-        AccountDao.getAll().then((accounts) => {
+        StructureDao.get().then(structure => {
             csvparse(csv, { columns: true }, (err, output) => {
                 if (err) {
                     console.error(err);
                 } else {
-                    goodbudgetArrayImport(accounts, output);
+                    goodbudgetArrayImport(structure.accounts, output);
                 }
             })
         });

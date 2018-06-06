@@ -1,8 +1,20 @@
-Only show selected account totals
 Improve design for account totals
-Cash-flow graphic
+Group account totals by type
+    Mark accounts with type instead of directly with groups
+    Save structure as a single config object rather than in multiple collections
+    Remove 'a-' from account names
 Dynamic update of account totals
-Mark accounts with type instead of directly with groups - save structure as a single config object rather than in multiple collections
+Exclude initial fills (transactions from a given 'equity' account
+Make buttons for new transaction different for those for editing
+Position new transactions in correct month - switch to new view for creating transaction?
+Add 'Save and add another' button(s)
+Restrict account choice by expected account type
+    Make account choice a dropdown
+Give accounts currencies
+    Show in account totals
+    Do approximate conversions between currencies
+    Include all currencies (converted to common currency) in cash flow
+Remember current month in URL
 Remember with what pattern a transaction was created. Save additional data for pattern? Define patterns in config?
 Transaction edit cancel
 Transaction edit helpers

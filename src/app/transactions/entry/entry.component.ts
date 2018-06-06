@@ -15,7 +15,7 @@ import {
 } from '../../shared/structure-cache.service';
 
 import {Entry} from '../../../../common-types/transaction';
-import {Account} from '../../../../common-types/account';
+import {Account} from '../../../../common-types/structure';
 import {EntryPattern} from '../patterns/transaction-pattern';
 
 @Component({

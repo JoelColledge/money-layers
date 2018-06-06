@@ -1,5 +1,5 @@
 
-import {Account, Structure, findAccountIdByName, findAccountNameById} from '../../../../common-types/account';
+import {Account, Structure, findAccountIdByName, findAccountNameById} from '../../../../common-types/structure';
 import {Transaction, Entry} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from './transaction-pattern';
 

@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as _ from 'lodash';
-import AccountDao from './account-dao';
+import StructureDao from './structure-dao';
 import transactionSchema from '../model/transaction-model';
 import {Transaction, dateToMonth, prepareTransactionForIndex} from '../../../../common-types/transaction';
 import {AccountTotal, MonthChange} from '../../../../common-types/statistics';
@@ -63,10 +63,10 @@ namespace TransactionDao {
     };
 
     export function changeByMonth(): Promise<MonthChange[]> {
-        return AccountDao.getAll()
-            .then(accounts => {
+        return StructureDao.get()
+            .then(structure => {
                 return new Promise<MonthChange[]>((resolve, reject) => {
-                    let actualInternalAccountIds = accounts.filter(account => account.groups.includes('a/in')).map(account => account._id);
+                    let actualInternalAccountIds = structure.accounts.filter(account => account.groups.includes('a/in')).map(account => account._id);
 
                     let _aggregation = [
                         {

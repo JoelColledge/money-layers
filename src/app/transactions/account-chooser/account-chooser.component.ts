@@ -10,7 +10,7 @@ import {
     StructureCacheService
 } from '../../shared/structure-cache.service';
 
-import {Account} from '../../../../common-types/account';
+import {Account} from '../../../../common-types/structure';
 
 @Component({
   selector: 'account-chooser',
