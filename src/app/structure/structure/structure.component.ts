@@ -13,7 +13,7 @@ import {
   styleUrls: ['./structure.component.css']
 })
 export class StructureComponent implements OnInit {
-    structureJson: string = '';
+    structure: any = {};
 
     constructor(
         private _structureService: StructureService
@@ -27,8 +27,17 @@ export class StructureComponent implements OnInit {
         this._structureService
             .get()
             .subscribe(structure => {
-                this.structureJson = JSON.stringify(structure, null, 4);
+                this.structure = structure;
             });
     }
 
+    onChange(value): void {
+        console.log('JSON changed', value);
+    }
+
+    update(): void {
+        this._structureService
+            .update(this.structure)
+            .subscribe();
+    }
 }
