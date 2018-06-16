@@ -13,10 +13,18 @@ export function findAccountById(structure: Structure, id: any): Account {
     return structure.accounts.find((account) => account._id === id);
 }
 
-export function findAccountIdsByGroup(structure: Structure, group: string): any[] {
+export function findAccountIdsByType(structure: Structure, type: string): any[] {
     return structure.accounts
-        .filter(account => account.groups.includes(group))
+        .filter(account => account.type === type)
         .map(account => account._id);
+}
+
+export class Type {
+    constructor(
+        public _id: any = undefined,
+        public name: string = "",
+        public display: string = ""
+    ) { }
 }
 
 export class Account {
@@ -24,9 +32,8 @@ export class Account {
         public _id: any = undefined,
         public name: string = "",
         public active: boolean = true,
-        public groups: string[] = [],
+        public type: string = "",
         public order: number = 0,
-        public showInList: boolean = true,
         public icon: string = ""
     ) { }
 }
@@ -34,14 +41,16 @@ export class Account {
 export class Rule {
     constructor(
         public _id: any = undefined,
-        public groupLeft: string = undefined,
-        public groupRight: string = "zero"
+        public typesLeft: string[] = [],
+        public typesRight: string[] = []
     ) { }
 }
 
 export class Structure {
     constructor(
         public _id: any = undefined,
+        public types: Type[] = [],
+        public accountTotalTypes: string[] = [],
         public accounts: Account[] = [],
         public rules: Rule[] = []
     ) { }

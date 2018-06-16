@@ -3,5 +3,4 @@ function show_result (result) {
 }
 
 show_result(db.transactions.remove({ }));
-show_result(db.accounts.remove({ }));
-show_result(db.rules.remove({ }));
+show_result(db.structure.remove({ }));

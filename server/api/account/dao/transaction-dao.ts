@@ -66,7 +66,7 @@ namespace TransactionDao {
         return StructureDao.get()
             .then(structure => {
                 return new Promise<MonthChange[]>((resolve, reject) => {
-                    let actualInternalAccountIds = structure.accounts.filter(account => account.groups.includes('a/in')).map(account => account._id);
+                    let actualInternalAccountIds = structure.accounts.filter(account => ['envelope', 'unallocated'].includes(account.type)).map(account => account._id);
 
                     let _aggregation = [
                         {
@@ -188,7 +188,6 @@ namespace TransactionDao {
             TransactionModel
                 .remove({_id: id},
                     (err) => {
-                        console.log('Transaction remove returned ', err);
                         err ? reject(err)
                             : resolve();
                     }

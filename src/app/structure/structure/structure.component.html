@@ -1,7 +1,6 @@
 <json-editor
-    [(ngModel)]="structure"
-    [config]="{sortObjectKeys: true, modes: ['tree', 'code'], indentation: 4}"
-    (change)="onChange($event)">
+    [options]="{sortObjectKeys: true, modes: ['tree', 'code'], indentation: 4}"
+    [data]="structure">
 </json-editor>
 
 <button type="submit"

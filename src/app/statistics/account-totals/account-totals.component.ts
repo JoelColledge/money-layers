@@ -33,7 +33,8 @@ export class AccountTotalsComponent implements OnInit {
     }
 
     private _getAll(): void {
-        this.accounts = this.structureCacheService.get().accounts.filter((account) => account.showInList);
+        let structure = this.structureCacheService.get();
+        this.accounts = structure.accounts.filter(account => structure.accountTotalTypes.includes(account.type));
 
         this._statisticsService
             .accountTotals()

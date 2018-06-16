@@ -1,11 +1,16 @@
 import {
     Component,
-    OnInit
+    OnInit,
+    ViewChild
 } from '@angular/core';
+
+import { JsonEditorComponent } from 'ang-jsoneditor';
 
 import {
     StructureService
 } from '../../shared/structure.service';
+
+import {Structure} from '../../../../common-types/structure';
 
 @Component({
   selector: 'structure',
@@ -14,6 +19,8 @@ import {
 })
 export class StructureComponent implements OnInit {
     structure: any = {};
+
+    @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
 
     constructor(
         private _structureService: StructureService
@@ -31,12 +38,9 @@ export class StructureComponent implements OnInit {
             });
     }
 
-    onChange(value): void {
-    }
-
     update(): void {
         this._structureService
-            .update(this.structure)
+            .update(this.editor.get() as any)
             .subscribe();
     }
 }

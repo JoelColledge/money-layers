@@ -1,10 +1,12 @@
 Improve design for account totals
 Group account totals by type
     Mark accounts with type instead of directly with groups
-    Save structure as a single config object rather than in multiple collections
     Remove 'a-' from account names
 Dynamic update of account totals
-Exclude initial fills (transactions from a given 'equity' account
+Include sums (in particular, available balance) in account totals
+Exclude initial fills from cash flow (transactions from a given 'equity' account) / handle anomalies when scaling cash flow
+Even out 13. and 14. salary in cash flow
+Exclude Trading Buffer from cash flow, so that GBP transfer has no effect
 Make buttons for new transaction different for those for editing
 Position new transactions in correct month - switch to new view for creating transaction?
 Add 'Save and add another' button(s)

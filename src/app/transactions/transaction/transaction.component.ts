@@ -14,7 +14,7 @@ import {
     StructureCacheService
 } from '../../shared/structure-cache.service';
 
-import {Account, Structure, findAccountIdByName, findAccountById, findAccountIdsByGroup} from '../../../../common-types/structure';
+import {Account, Structure, findAccountIdByName, findAccountById, findAccountIdsByType} from '../../../../common-types/structure';
 import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
 
@@ -92,7 +92,7 @@ export class TransactionComponent implements OnInit {
 
     transactionChanged(): void {
         this.valid = this.structureCacheService.get().rules
-            .every((rule) => this.sumByGroup(rule.groupLeft) === this.sumByGroup(rule.groupRight));
+            .every((rule) => this.sumByTypes(rule.typesLeft) === this.sumByTypes(rule.typesRight));
     }
 
     entryChanged(index: number): void {
@@ -112,7 +112,7 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionType(): string {
-        let accountIds = findAccountIdsByGroup(this.structureCacheService.get(), 'a/in');
+        let accountIds = findAccountIdsByType(this.structureCacheService.get(), 'actual');
 
         let entries = this.transaction.entries.filter(entry => accountIds.includes(entry.account));
 
@@ -139,16 +139,16 @@ export class TransactionComponent implements OnInit {
         this.transaction.date = calendarDate(date);
     }
 
-    private sumByGroup(group: string): number {
-        return this.entriesInGroup(group)
+    private sumByTypes(types: string[]): number {
+        return this.entriesWithTypes(types)
             .reduce((s, entry) => s + entry.change, 0);
     }
 
-    private entriesInGroup(group: string): Entry[] {
+    private entriesWithTypes(types: string[]): Entry[] {
         return this.transaction.entries
             .filter((entry) => {
                 let account = this.accountById(entry.account);
-                return !!account && account.groups.indexOf(group) > -1;
+                return !!account && types.includes(account.type);
             });
     }
 

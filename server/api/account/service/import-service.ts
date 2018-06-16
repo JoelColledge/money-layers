@@ -10,7 +10,7 @@ namespace ImportService {
 
     function envelopeToAccountName(envelope: string): string {
         if (envelope === '[Unallocated]') {
-            return 'Buffer';
+            return 'unallocated';
         }
         return envelope;
     }
@@ -90,7 +90,7 @@ namespace ImportService {
             let entries: Entry[] = details.split('||')
                 .map((detailString) => detailEntry(accounts, detailString));
 
-            entries.push(new Entry(accountByName(accounts, 'Buffer')._id, -amount))
+            entries.push(new Entry(accountByName(accounts, 'unallocated')._id, -amount))
 
             return new Transaction(
                 undefined,
