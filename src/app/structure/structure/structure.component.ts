@@ -32,7 +32,6 @@ export class StructureComponent implements OnInit {
     }
 
     onChange(value): void {
-        console.log('JSON changed', value);
     }
 
     update(): void {
