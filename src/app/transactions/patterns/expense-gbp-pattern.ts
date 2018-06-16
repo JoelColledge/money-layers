@@ -13,7 +13,7 @@ export class ExpenseGbpPattern implements TransactionPattern {
             new Entry(findAccountIdByName(structure, 'Trading buffer')),
             new Entry(findAccountIdByName(structure, 'GBP-Buffer')),
             new Entry(findAccountIdByName(structure, 'GBP-Trading')),
-            new Entry(findAccountIdByName(structure, 'a-GBP-Current'))
+            new Entry(findAccountIdByName(structure, 'GBP-Current'))
         ];
         return transaction;
     }

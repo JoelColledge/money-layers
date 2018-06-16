@@ -8,8 +8,8 @@ export class IncomePattern implements TransactionPattern {
         let transaction = new Transaction();
         transaction.entries = [
             new Entry(findAccountIdByName(structure, 'Income')),
-            new Entry(findAccountIdByName(structure, 'Buffer')),
-            new Entry(findAccountIdByName(structure, 'a-Current'))
+            new Entry(findAccountIdByName(structure, 'Unallocated')),
+            new Entry(findAccountIdByName(structure, 'Current'))
         ];
         return transaction;
     }

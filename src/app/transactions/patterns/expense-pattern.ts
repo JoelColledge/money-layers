@@ -9,7 +9,7 @@ export class ExpensePattern implements TransactionPattern {
         transaction.entries = [
             new Entry(),
             new Entry(),
-            new Entry(findAccountIdByName(structure, 'a-Current'))
+            new Entry(findAccountIdByName(structure, 'Current'))
         ];
         return transaction;
     }

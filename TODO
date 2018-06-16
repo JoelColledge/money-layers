@@ -1,7 +1,3 @@
-Improve design for account totals
-Group account totals by type
-    Mark accounts with type instead of directly with groups
-    Remove 'a-' from account names
 Dynamic update of account totals
 Include sums (in particular, available balance) in account totals
 Exclude initial fills from cash flow (transactions from a given 'equity' account) / handle anomalies when scaling cash flow

@@ -82,7 +82,7 @@ namespace ImportService {
                 [
                     new Entry(accountByName(accounts, accountName)._id, amount),
                     new Entry(accountByName(accounts, accountName + ' expenses')._id, -amount),
-                    new Entry(accountByName(accounts, notes.startsWith('c') ? 'a-Cash' : 'a-Current')._id, amount)
+                    new Entry(accountByName(accounts, notes.startsWith('c') ? 'Cash' : 'Current')._id, amount)
                 ]
             )
         } else {
