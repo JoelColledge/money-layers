@@ -1,0 +1,17 @@
+.even {
+  background-color: #f0f0f0;
+}
+
+.account-total {
+  text-align: right;
+}
+
+.account-name, .account-total {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.account-type {
+  margin-left: -10px;
+  margin-right: -10px;
+}

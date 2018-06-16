@@ -1,3 +1,11 @@
-<div *ngFor="let account of accounts">
-  {{account.name}}: {{total(account)}}
+<div *ngFor="let accountsByType of accountsByTypes">
+  <h4 class="account-type">{{accountsByType.typeDisplayString}}</h4>
+  <div *ngFor="let account of accountsByType.accounts; let even=even;" class="row" [class.even]="even">
+    <div class="col-xs-8 account-name">
+      {{account.name}}
+    </div>
+    <div class="col-xs-4 account-total">
+      {{total(account) | number : '1.2-2'}}
+    </div>
+  </div>
 </div>
