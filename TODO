@@ -1,8 +1,5 @@
-Dynamic update of account totals
 Include sums (in particular, available balance) in account totals
 Exclude initial fills from cash flow (transactions from a given 'equity' account) / handle anomalies when scaling cash flow
-Even out 13. and 14. salary in cash flow
-Exclude Trading Buffer from cash flow, so that GBP transfer has no effect
 Make buttons for new transaction different for those for editing
 Position new transactions in correct month - switch to new view for creating transaction?
 Add 'Save and add another' button(s)
@@ -14,9 +11,11 @@ Give accounts currencies
     Include all currencies (converted to common currency) in cash flow
 Remember current month in URL
 Remember with what pattern a transaction was created. Save additional data for pattern? Define patterns in config?
+    Allow conversion to generic pattern
 Transaction edit cancel
 Transaction edit helpers
 Explain validation in GUI - which rule has been broken
+Correctly colour foreign expenses/transfers
 
 == Questions
 Do we need to have the 'accounting equation' on the logical accounts?

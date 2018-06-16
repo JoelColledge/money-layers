@@ -8,6 +8,10 @@ import {
 } from 'rxjs';
 
 import {
+    tap
+} from 'rxjs/operators';
+
+import {
     Http,
     Headers,
     URLSearchParams
@@ -17,13 +21,19 @@ import {
     map
 } from 'rxjs/operators';
 
+import {
+    StatisticsService
+} from '../statistics/statistics.service';
+
 import {Transaction} from '../../../common-types/transaction';
 
 @Injectable()
 export class TransactionService {
     static ENDPOINT: string = '/api/transactions/:id';
 
-    constructor(@Inject(Http) private _http: Http) {
+    constructor(
+        @Inject(Http) private _http: Http,
+        private _statisticsService: StatisticsService) {
     }
 
     getAll(month: number): Observable<Transaction[]> {
@@ -53,6 +63,7 @@ export class TransactionService {
 
         return this._http
             .post(TransactionService.ENDPOINT.replace('/:id', ''), _messageStringified, {headers})
+            .pipe(tap(_ => this._statisticsService.update()))
             .pipe(map((r) => r.json()));
     }
 
@@ -64,6 +75,7 @@ export class TransactionService {
 
         return this._http
             .post(TransactionService.ENDPOINT.replace(':id', transaction._id), _messageStringified, {headers})
+            .pipe(tap(_ => this._statisticsService.update()))
             .pipe(map((r) => r.json()));
     }
 
