@@ -1,5 +1,4 @@
 Include sums (in particular, available balance) in account totals
-Exclude initial fills from cash flow (transactions from a given 'equity' account) / handle anomalies when scaling cash flow
 Make buttons for new transaction different for those for editing
 Position new transactions in correct month - switch to new view for creating transaction?
 Add 'Save and add another' button(s)
