@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-    <account-chooser [account]="account" (accountChange)="accountChanged($event)" [disabled]="!pattern.accountEnabled"></account-chooser>
+    <account-chooser [account]="account()" (accountChange)="accountChanged($event)" [disabled]="!pattern.accountEnabled"></account-chooser>
   </div>
   <div class="col-md-4">
     <input type="number"

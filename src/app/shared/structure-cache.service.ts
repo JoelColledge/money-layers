@@ -25,14 +25,6 @@ export class StructureCacheService implements Resolve<Structure>  {
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Structure> {
-        return this.fetch();
-    }
-
-    fetch(): Observable<Structure> {
         return this.structureService.get().pipe(tap(structure => this.structure = structure));
-    }
-
-    get(): Structure {
-        return this.structure;
     }
 }

@@ -6,16 +6,14 @@ import {
     Output
 } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+
 import {
     Router
 } from '@angular/router';
 
-import {
-    StructureCacheService
-} from '../../shared/structure-cache.service';
-
 import {Entry} from '../../../../common-types/transaction';
-import {Account} from '../../../../common-types/structure';
+import {Structure, Account} from '../../../../common-types/structure';
 import {EntryPattern} from '../patterns/transaction-pattern';
 
 @Component({
@@ -24,18 +22,7 @@ import {EntryPattern} from '../patterns/transaction-pattern';
   styleUrls: ['./entry.component.css']
 })
 export class EntryComponent implements OnInit {
-    @Input()
-    set entry(entry: Entry) {
-        this._entry = entry;
-
-        if (entry.account) {
-            this.account = this.structureCacheService.get().accounts.find(account => account._id === entry.account);
-        }
-    }
-
-    get entry() {
-        return this._entry;
-    }
+    @Input() entry: Entry;
 
     @Output() onDelete = new EventEmitter<number>();
 
@@ -45,22 +32,29 @@ export class EntryComponent implements OnInit {
 
     @Input() pattern: EntryPattern;
 
-    _entry: Entry = new Entry();
-    account: Account = new Account();
+    private structure: Structure;
 
     constructor(
-        private structureCacheService: StructureCacheService
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
+        this.route.data
+            .subscribe((data: { structure: Structure }) => {
+                this.structure = data.structure;
+            });
+    }
+
+    account(): Account {
+        return this.structure.accounts.find(account => account._id === this.entry.account);
     }
 
     amount(): number {
-        return this._entry.change / 100;
+        return this.entry.change / 100;
     }
 
     amountChanged(newAmount: number) {
-        this._entry.change = Math.round(newAmount * 100);
+        this.entry.change = Math.round(newAmount * 100);
         this.onChange.emit();
     }
 
@@ -69,7 +63,7 @@ export class EntryComponent implements OnInit {
     }
 
     accountChanged(account: Account): void {
-        this._entry.account = account._id;
+        this.entry.account = account._id;
         this.onChange.emit();
     }
 

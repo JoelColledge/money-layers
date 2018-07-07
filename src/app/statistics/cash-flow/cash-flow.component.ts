@@ -6,6 +6,7 @@ import {
 
 import {monthToDate} from '../../../../common-types/transaction';
 import {MonthChange} from '../../../../common-types/statistics';
+import {Structure} from '../../../../common-types/structure';
 
 @Component({
   selector: 'cash-flow',
@@ -16,15 +17,15 @@ export class CashFlowComponent implements OnInit {
     changeByMonth: MonthChange[] = [];
 
     constructor(
-        private _statisticsService: StatisticsService
+        private statisticsService: StatisticsService
     ) { }
 
     ngOnInit() {
-        this._getAll();
+        this.getAll();
     }
 
-    private _getAll(): void {
-        this._statisticsService
+    private getAll(): void {
+        this.statisticsService
             .changeByMonth()
             .subscribe((changeByMonth) => {
                 this.changeByMonth = changeByMonth;

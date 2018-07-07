@@ -1,8 +1,10 @@
 import {
-    Component
+    Component,
+    OnInit
 } from '@angular/core';
 
 import {
+    ActivatedRoute,
     Router
 } from '@angular/router';
 
@@ -11,14 +13,11 @@ import {
 } from 'rxjs';
 
 import {
-    StructureCacheService
-} from '../../shared/structure-cache.service';
-
-import {
     TransactionService
 } from '../transaction.service';
 
 import {Entry, Transaction, dateToMonth} from '../../../../common-types/transaction';
+import {Structure} from '../../../../common-types/structure';
 
 import {TransactionPattern} from '../patterns/transaction-pattern';
 import {ExpensePattern} from '../patterns/expense-pattern';
@@ -32,17 +31,26 @@ import {GenericPattern} from '../patterns/generic-pattern';
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.css']
 })
-export class TransactionListComponent {
+export class TransactionListComponent implements OnInit {
     month: Date = new Date();
     transactions: Transaction[] = [];
     patterns: TransactionPattern[] = [];
     selectedIndex: number;
 
+    private structure: Structure;
+
     constructor(
-        private structureCacheService: StructureCacheService,
+        private route: ActivatedRoute,
         private transactionService: TransactionService,
         private router: Router
     ) { }
+
+    ngOnInit() {
+        this.route.data
+            .subscribe((data: { structure: Structure }) => {
+                this.structure = data.structure;
+            });
+    }
 
     private _getAll(): void {
         this.transactionService.getAll(dateToMonth(this.month))
@@ -125,7 +133,7 @@ export class TransactionListComponent {
     }
 
     private add(pattern: TransactionPattern) {
-        let transaction = pattern.create(this.structureCacheService.get());
+        let transaction = pattern.create(this.structure);
         let now = new Date();
         if (this.month.getMonth() !== now.getMonth() || this.month.getFullYear() !== now.getFullYear()) {
             transaction.date = this.month.toISOString();

@@ -18,7 +18,7 @@ import {
 import {
     map,
     concatMap,
-    share
+    shareReplay
 } from 'rxjs/operators';
 
 import {AccountTotal, MonthChange} from '../../../common-types/statistics';
@@ -35,13 +35,13 @@ export class StatisticsService {
                 .get('/api/accountTotals')
                 .pipe(map(r => r.json()))
             ))
-            .pipe(share());
+            .pipe(shareReplay(1));
         this._changeByMonth = concat(of(null), this._update)
             .pipe(concatMap(_ => this._http
                 .get('/api/changeByMonth')
                 .pipe(map(r => r.json()))
             ))
-            .pipe(share());
+            .pipe(shareReplay(1));
     }
 
     update(): void {

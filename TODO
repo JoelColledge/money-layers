@@ -14,7 +14,6 @@ Remember with what pattern a transaction was created. Save additional data for p
     Allow conversion to generic pattern
 Transaction edit cancel
 Transaction edit helpers
-Explain validation in GUI - which rule has been broken
 Correctly colour foreign expenses/transfers
 
 == Questions

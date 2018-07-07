@@ -7,12 +7,9 @@ import {
 } from '@angular/core';
 
 import {
+    ActivatedRoute,
     Router
 } from '@angular/router';
-
-import {
-    StructureCacheService
-} from '../../shared/structure-cache.service';
 
 import {Account, Structure, Rule, findAccountIdByName, findAccountById, findAccountIdsByType} from '../../../../common-types/structure';
 import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
@@ -56,12 +53,18 @@ export class TransactionComponent implements OnInit {
 
     private _transactionDate: Date;
 
+    private structure: Structure;
+
     constructor(
-        private structureCacheService: StructureCacheService,
+        private route: ActivatedRoute,
         private router: Router
     ) { }
 
     ngOnInit() {
+        this.route.data
+            .subscribe((data: { structure: Structure }) => {
+                this.structure = data.structure;
+            });
     }
 
     update(deselect: boolean): void {
@@ -95,7 +98,7 @@ export class TransactionComponent implements OnInit {
     }
 
     ruleViolations(): RuleViolation[] {
-        return this.structureCacheService.get().rules
+        return this.structure.rules
             .map(rule => {
                 let left = this.sumByTypes(rule.typesLeft) / 100;
                 let right = this.sumByTypes(rule.typesRight) / 100;
@@ -110,7 +113,7 @@ export class TransactionComponent implements OnInit {
     }
 
     entryChanged(index: number): void {
-        this.transaction = this.pattern.update(this.structureCacheService.get(), this.transaction);
+        this.transaction = this.pattern.update(this.structure, this.transaction);
     }
 
     getEntryPattern(index: number): EntryPattern {
@@ -125,7 +128,7 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionType(): string {
-        let accountIds = findAccountIdsByType(this.structureCacheService.get(), 'actual');
+        let accountIds = findAccountIdsByType(this.structure, 'actual');
 
         let entries = this.transaction.entries.filter(entry => accountIds.includes(entry.account));
 
@@ -137,7 +140,7 @@ export class TransactionComponent implements OnInit {
 
     icons(): string[] {
         return this.transaction.entries
-            .map((entry) => findAccountById(this.structureCacheService.get(), entry.account))
+            .map((entry) => findAccountById(this.structure, entry.account))
             .filter((account) => !!account)
             .map((account) => account.icon)
             .filter((icon) => !!icon);
@@ -160,13 +163,9 @@ export class TransactionComponent implements OnInit {
     private entriesWithTypes(types: string[]): Entry[] {
         return this.transaction.entries
             .filter((entry) => {
-                let account = this.accountById(entry.account);
+                let account = findAccountById(this.structure, entry.account);
                 return !!account && types.includes(account.type);
             });
-    }
-
-    private accountById(accountId: string): Account {
-        return this.structureCacheService.get().accounts.find((account) => account._id === accountId);
     }
 
     private updateEditMode(): void {

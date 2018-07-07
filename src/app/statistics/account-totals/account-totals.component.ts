@@ -3,9 +3,7 @@ import {
     OnInit
 } from '@angular/core';
 
-import {
-    StructureCacheService
-} from '../../shared/structure-cache.service';
+import { ActivatedRoute } from '@angular/router';
 
 import {
     StatisticsService
@@ -23,38 +21,42 @@ export class AccountTotalsComponent implements OnInit {
     accountsByTypes: {typeDisplayString: string, accounts: Account[]}[] = [];
     accountTotals: AccountTotal[] = [];
 
+    private structure: Structure;
+
     constructor(
-        private structureCacheService: StructureCacheService,
-        private _statisticsService: StatisticsService
+        private route: ActivatedRoute,
+        private statisticsService: StatisticsService
     ) { }
 
     ngOnInit() {
-        this._getAll();
+        this.route.data
+            .subscribe((data: { structure: Structure }) => {
+                this.structure = data.structure;
+                this.getAll();
+            });
     }
 
-    private _getAll(): void {
-        let structure = this.structureCacheService.get();
-        this.accountsByTypes = structure.accountTotalTypes
+    private getAll(): void {
+        this.accountsByTypes = this.structure.accountTotalTypes
             .map(typeName => ({
-                typeDisplayString: this._findTypeDisplayString(structure, typeName),
-                accounts: this._findAccountsByType(structure, typeName)
+                typeDisplayString: this.findTypeDisplayString(typeName),
+                accounts: this.findAccountsByType(typeName)
             }));
-                structure.accounts.filter(account => structure.accountTotalTypes.includes(account.type));
 
-        this._statisticsService
+        this.statisticsService
             .accountTotals()
             .subscribe((accountTotals) => {
                 this.accountTotals = accountTotals;
             });
     }
 
-    private _findTypeDisplayString(structure: Structure, typeName: string): string {
-        let type = structure.types.find(type => type.name === typeName);
+    private findTypeDisplayString(typeName: string): string {
+        let type = this.structure.types.find(type => type.name === typeName);
         return type ? type.display : typeName;
     }
 
-    private _findAccountsByType(structure: Structure, typeName: string): Account[] {
-        return structure.accounts.filter(account => account.type === typeName);
+    private findAccountsByType(typeName: string): Account[] {
+        return this.structure.accounts.filter(account => account.type === typeName);
     }
 
     total(account: Account): number {

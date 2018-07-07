@@ -6,11 +6,9 @@ import {
     Output
 } from '@angular/core';
 
-import {
-    StructureCacheService
-} from '../../shared/structure-cache.service';
+import { ActivatedRoute } from '@angular/router';
 
-import {Account} from '../../../../common-types/structure';
+import {Structure, Account} from '../../../../common-types/structure';
 
 @Component({
   selector: 'account-chooser',
@@ -20,7 +18,9 @@ import {Account} from '../../../../common-types/structure';
 export class AccountChooserComponent implements OnInit {
     @Input()
     set account(account: Account) {
-        this.accountName = account.name;
+        if (account) {
+            this.accountName = account.name;
+        }
     }
 
     @Output() accountChange: EventEmitter<Account> = new EventEmitter<Account>();
@@ -32,12 +32,15 @@ export class AccountChooserComponent implements OnInit {
     accountNames: string[] = [];
 
     constructor(
-        private structureCacheService: StructureCacheService
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
-        this.accounts = this.structureCacheService.get().accounts;
-        this.accountNames = this.accounts.map((account) => account.name);
+        this.route.data
+            .subscribe((data: { structure: Structure }) => {
+                this.accounts = data.structure.accounts;
+                this.accountNames = this.accounts.map((account) => account.name);
+            });
     }
 
     public accountNameChanged(accountName: string):void {
