@@ -41,7 +41,9 @@ export class Account {
 export class Rule {
     constructor(
         public _id: any = undefined,
+        public nameLeft: string = "",
         public typesLeft: string[] = [],
+        public nameRight: string = "",
         public typesRight: string[] = []
     ) { }
 }

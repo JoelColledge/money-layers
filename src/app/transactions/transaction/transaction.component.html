@@ -92,6 +92,13 @@
         </div>
       </div>
     </form>
-    <div *ngIf="!valid" class="alert alert-danger" role="alert">Invalid!</div>
+    <div *ngIf="ruleViolations().length" class="alert alert-danger" role="alert">
+      Invalid!
+      <div *ngFor="let ruleViolation of ruleViolations()">
+        [{{ruleViolation.rule.nameLeft}}] {{ruleViolation.left | number : '1.2-2'}} !=
+        {{ruleViolation.right | number : '1.2-2'}} [{{ruleViolation.rule.nameRight}}].
+        Difference: {{ruleViolation.difference | number : '1.2-2'}}
+      </div>
+    </div>
   </div>
 </div>

@@ -15,7 +15,9 @@ var accountSchema = new mongoose.Schema({
 });
 
 var ruleSchema = new mongoose.Schema({
+    nameLeft: {type: String, default: ""},
     typesLeft: {type: [String], required: true},
+    nameRight: {type: String, default: ""},
     typesRight: {type: [String], required: true}
 });
 

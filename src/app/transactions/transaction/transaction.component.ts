@@ -14,9 +14,16 @@ import {
     StructureCacheService
 } from '../../shared/structure-cache.service';
 
-import {Account, Structure, findAccountIdByName, findAccountById, findAccountIdsByType} from '../../../../common-types/structure';
+import {Account, Structure, Rule, findAccountIdByName, findAccountById, findAccountIdsByType} from '../../../../common-types/structure';
 import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
+
+interface RuleViolation {
+    rule: Rule;
+    left: number;
+    right: number;
+    difference: number;
+}
 
 @Component({
   selector: 'transaction',
@@ -46,7 +53,6 @@ export class TransactionComponent implements OnInit {
     _index: number;
     _selectedIndex: number;
     editMode: boolean = false;
-    valid: boolean = true;
 
     private _transactionDate: Date;
 
@@ -56,7 +62,6 @@ export class TransactionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.transactionChanged();
     }
 
     update(deselect: boolean): void {
@@ -87,17 +92,25 @@ export class TransactionComponent implements OnInit {
 
     deleteEntry(index: number): void {
         this.transaction.entries.splice(index, 1);
-        this.transactionChanged();
     }
 
-    transactionChanged(): void {
-        this.valid = this.structureCacheService.get().rules
-            .every((rule) => this.sumByTypes(rule.typesLeft) === this.sumByTypes(rule.typesRight));
+    ruleViolations(): RuleViolation[] {
+        return this.structureCacheService.get().rules
+            .map(rule => {
+                let left = this.sumByTypes(rule.typesLeft) / 100;
+                let right = this.sumByTypes(rule.typesRight) / 100;
+                return {
+                    rule: rule,
+                    left: left,
+                    right: right,
+                    difference: left - right
+                };
+            })
+            .filter(ruleParts => ruleParts.left !== ruleParts.right);
     }
 
     entryChanged(index: number): void {
         this.transaction = this.pattern.update(this.structureCacheService.get(), this.transaction);
-        this.transactionChanged();
     }
 
     getEntryPattern(index: number): EntryPattern {
