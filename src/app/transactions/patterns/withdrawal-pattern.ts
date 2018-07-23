@@ -8,7 +8,7 @@ export class WithdrawalPattern implements TransactionPattern {
         let transaction = new Transaction();
         transaction.description = "ATM";
         transaction.entries = [
-            new Entry(findAccountIdByName(structure, 'Current')),
+            new Entry(findAccountIdByName(structure, 'Bank account')),
             new Entry(findAccountIdByName(structure, 'Cash'))
         ];
         return transaction;

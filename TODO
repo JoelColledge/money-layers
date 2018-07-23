@@ -1,3 +1,5 @@
+Make duplicate easier to use (currently new one is not opened and can easily be lost)
+Update summaries on delete
 Include sums (in particular, available balance) in account totals
 Make buttons for new transaction different for those for editing
 Position new transactions in correct month - switch to new view for creating transaction?

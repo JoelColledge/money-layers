@@ -9,7 +9,7 @@ export class IncomePattern implements TransactionPattern {
         transaction.entries = [
             new Entry(findAccountIdByName(structure, 'Income')),
             new Entry(findAccountIdByName(structure, 'Income buffer')),
-            new Entry(findAccountIdByName(structure, 'Current'))
+            new Entry(findAccountIdByName(structure, 'Bank account'))
         ];
         return transaction;
     }
