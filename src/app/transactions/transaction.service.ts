@@ -89,6 +89,7 @@ export class TransactionService {
 
     delete(id: string): Observable<{}> {
         return this._http
-            .delete(TransactionService.ENDPOINT.replace(':id', id));
+            .delete(TransactionService.ENDPOINT.replace(':id', id))
+            .pipe(tap(_ => this._statisticsService.update()));
     }
 }
