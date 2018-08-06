@@ -128,7 +128,8 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionType(): string {
-        let accountIds = findAccountIdsByType(this.structure, 'actual');
+        let accountIds = findAccountIdsByType(this.structure, 'actual')
+            .concat(findAccountIdsByType(this.structure, 'gbp-actual'));
 
         let entries = this.transaction.entries.filter(entry => accountIds.includes(entry.account));
 
