@@ -15,3 +15,6 @@ mongodump -d money-layers -c accounts
 mongodump -d money-layers -c rules
 mongorestore ...
 POST goodbudget export
+
+mongo --quiet money-layers db/export-human.js > export-human.json
+cat export-human.json | jq '.[] | [.description, .notes, .date, .accountName, .change | tostring] | join("; ")' | sed -e 's/^"//' -e 's/"$//' | xclip -selection clipboard
