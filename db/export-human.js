@@ -4,6 +4,9 @@
 
 print(tojson(db.transactions.aggregate([
     {
+        $match: { date: { $gte: ISODate("2018-06-25T00:00:00Z") } }
+    },
+    {
         $unwind: "$entries"
     },
     {
