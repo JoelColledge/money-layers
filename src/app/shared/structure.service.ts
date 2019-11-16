@@ -8,9 +8,9 @@ import {
 } from 'rxjs';
 
 import {
-    Http,
-    Headers
-} from '@angular/http';
+    HttpClient,
+    HttpHeaders
+} from '@angular/common/http';
 
 import {
     map
@@ -22,24 +22,23 @@ import {Structure} from '../../../common-types/structure';
 export class StructureService {
     static ENDPOINT: string = '/api/structure';
 
-    constructor(@Inject(Http) private _http: Http) {
+    constructor(private _http: HttpClient) {
     }
 
     get(): Observable<Structure> {
         return this._http
-            .get(StructureService.ENDPOINT)
-            .pipe(map((r) => r.json()));
+            .get<Structure>(StructureService.ENDPOINT);
     }
 
     update(structure: Structure): Observable<Structure> {
         let _messageStringified = JSON.stringify(structure);
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+	});
 
         return this._http
-            .put(StructureService.ENDPOINT, _messageStringified, {headers})
-            .pipe(map((r) => r.json()));
+            .put<Structure>(StructureService.ENDPOINT, _messageStringified, {headers});
     }
 
 }

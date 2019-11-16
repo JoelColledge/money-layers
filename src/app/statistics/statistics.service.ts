@@ -11,9 +11,8 @@ import {
 } from 'rxjs';
 
 import {
-    Http,
-    Headers
-} from '@angular/http';
+    HttpClient
+} from '@angular/common/http';
 
 import {
     map,
@@ -29,17 +28,15 @@ export class StatisticsService {
     private _accountTotals: Observable<AccountTotal[]> = new Observable();
     private _changeByMonth: Observable<MonthChange[]> = new Observable();
 
-    constructor(@Inject(Http) private _http: Http) {
+    constructor(private _http: HttpClient) {
         this._accountTotals = concat(of(null), this._update)
             .pipe(concatMap(_ => this._http
-                .get('/api/accountTotals')
-                .pipe(map(r => r.json()))
+                .get<AccountTotal[]>('/api/accountTotals')
             ))
             .pipe(shareReplay(1));
         this._changeByMonth = concat(of(null), this._update)
             .pipe(concatMap(_ => this._http
-                .get('/api/changeByMonth')
-                .pipe(map(r => r.json()))
+                .get<MonthChange[]>('/api/changeByMonth')
             ))
             .pipe(shareReplay(1));
     }

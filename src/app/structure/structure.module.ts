@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
@@ -10,7 +10,7 @@ import { StructureComponent } from './structure/structure.component';
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         NgJsonEditorModule,
     ],
     declarations: [

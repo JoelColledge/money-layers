@@ -8,18 +8,15 @@ import {
 } from 'rxjs';
 
 import {
-    tap
-} from 'rxjs/operators';
-
-import {
-    Http,
-    Headers,
-    URLSearchParams
-} from '@angular/http';
-
-import {
+    tap, 
     map
 } from 'rxjs/operators';
+
+import {
+    HttpClient,
+    HttpHeaders,
+    HttpParams
+} from '@angular/common/http';
 
 import {
     StatisticsService
@@ -32,51 +29,45 @@ export class TransactionService {
     static ENDPOINT: string = '/api/transactions/:id';
 
     constructor(
-        @Inject(Http) private _http: Http,
+        private _http: HttpClient,
         private _statisticsService: StatisticsService) {
     }
 
     getAll(month: number): Observable<Transaction[]> {
-        let params: URLSearchParams = new URLSearchParams();
-
-        if (month) {
-            params.set('month', month.toString());
-        }
+        const options = month ?
+            { params: new HttpParams().set('month', month.toString()) } : {};
 
         return this._http
-            .get(TransactionService.ENDPOINT.replace('/:id', ''), {
-                search: params
-            }).pipe(map((r) => r.json()));
+            .get<Transaction[]>(TransactionService.ENDPOINT.replace('/:id', ''), options);
     }
 
     get(id: string): Observable<Transaction> {
         return this._http
-            .get(TransactionService.ENDPOINT.replace(':id', id))
-            .pipe(map((r) => r.json()));
+            .get<Transaction>(TransactionService.ENDPOINT.replace(':id', id));
     }
 
     add(transaction: Transaction): Observable<Transaction> {
         let _messageStringified = JSON.stringify(transaction);
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+	});
 
         return this._http
-            .post(TransactionService.ENDPOINT.replace('/:id', ''), _messageStringified, {headers})
-            .pipe(tap(_ => this._statisticsService.update()))
-            .pipe(map((r) => r.json()));
+            .post<Transaction>(TransactionService.ENDPOINT.replace('/:id', ''), _messageStringified, {headers})
+            .pipe(tap(_ => this._statisticsService.update()));
     }
 
     update(transaction: Transaction): Observable<Transaction> {
         let _messageStringified = JSON.stringify(transaction);
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+	});
 
         return this._http
-            .post(TransactionService.ENDPOINT.replace(':id', transaction._id), _messageStringified, {headers})
-            .pipe(tap(_ => this._statisticsService.update()))
-            .pipe(map((r) => r.json()));
+            .post<Transaction>(TransactionService.ENDPOINT.replace(':id', transaction._id), _messageStringified, {headers})
+            .pipe(tap(_ => this._statisticsService.update()));
     }
 
     addOrUpdate(transaction: Transaction): Observable<Transaction> {

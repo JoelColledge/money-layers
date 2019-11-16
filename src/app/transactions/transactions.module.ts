@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 
@@ -18,7 +18,7 @@ import { TransactionService } from './transaction.service';
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         DatepickerModule.forRoot(),
         TypeaheadModule.forRoot(),
         StatisticsModule,
