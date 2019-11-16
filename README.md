@@ -4,8 +4,8 @@
 
 ## Development
 
+    nvm use node v8.16.0
     npm install
-    sudo systemctl start docker
     docker-compose up
     USERNAME=user PASSWORD=pass npm run dev
     http://localhost:4200
