@@ -4,8 +4,14 @@ import {Transaction, Entry} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from './transaction-pattern';
 
 export class IncomePattern implements TransactionPattern {
+
+    entryPatterns = [
+        new EntryPattern(false, false, false),
+        new EntryPattern(false, true, false),
+        new EntryPattern(false, false, false)
+    ];
     create(structure: Structure) {
-        let transaction = new Transaction();
+        const transaction = new Transaction();
         transaction.entries = [
             new Entry(findAccountIdByName(structure, 'Income')),
             new Entry(findAccountIdByName(structure, 'Income buffer')),
@@ -19,16 +25,10 @@ export class IncomePattern implements TransactionPattern {
             return transaction;
         }
 
-        let change: number = transaction.entries[1].change;
+        const change: number = transaction.entries[1].change;
         transaction.entries[0].change = -change;
         transaction.entries[2].change = change;
 
         return transaction;
     }
-
-    entryPatterns = [
-        new EntryPattern(false, false, false),
-        new EntryPattern(false, true, false),
-        new EntryPattern(false, false, false)
-    ];
 }

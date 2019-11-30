@@ -51,7 +51,7 @@ export class AccountTotalsComponent implements OnInit {
     }
 
     private findTypeDisplayString(typeName: string): string {
-        let type = this.structure.types.find(type => type.name === typeName);
+        const type = this.structure.types.find(type => type.name === typeName);
         return type ? type.display : typeName;
     }
 
@@ -60,7 +60,7 @@ export class AccountTotalsComponent implements OnInit {
     }
 
     total(account: Account): number {
-        let accountTotal = this.accountTotals.find((accountTotal) => accountTotal.account === account._id);
+        const accountTotal = this.accountTotals.find((accountTotal) => accountTotal.account === account._id);
         return accountTotal ? accountTotal.total / 100 : 0;
     }
 }

@@ -25,10 +25,10 @@ export class AccountChooserComponent implements OnInit {
 
     @Output() accountChange: EventEmitter<Account> = new EventEmitter<Account>();
 
-    @Input() disabled: boolean = false;
+    @Input() disabled = false;
 
     accounts: Account[] = [];
-    accountName: string = '';
+    accountName = '';
     accountNames: string[] = [];
 
     constructor(
@@ -43,8 +43,8 @@ export class AccountChooserComponent implements OnInit {
             });
     }
 
-    public accountNameChanged(accountName: string):void {
-        let account: Account = this.accounts.find((account) => account.name === accountName);
+    public accountNameChanged(accountName: string): void {
+        const account: Account = this.accounts.find((account) => account.name === accountName);
         if (account) {
             this.accountChange.emit(account);
         }

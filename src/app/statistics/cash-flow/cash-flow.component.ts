@@ -14,13 +14,15 @@ import {Structure} from '../../../../common-types/structure';
   styleUrls: ['./cash-flow.component.css']
 })
 export class CashFlowComponent implements OnInit {
-    changeByMonth: MonthChange[] = [];
-
-    private comparison: number = 1;
 
     constructor(
         private statisticsService: StatisticsService
     ) { }
+    changeByMonth: MonthChange[] = [];
+
+    private comparison = 1;
+
+    monthToDate = monthToDate;
 
     ngOnInit() {
         this.getAll();
@@ -35,10 +37,8 @@ export class CashFlowComponent implements OnInit {
             });
     }
 
-    monthToDate = monthToDate;
-
     private calculateComparison(): number {
-        let sorted = this.changeByMonth
+        const sorted = this.changeByMonth
             .reduce((acc, monthChange) => acc.concat([monthChange.increase, monthChange.decrease]), [])
             .sort((a, b) => b - a);
 

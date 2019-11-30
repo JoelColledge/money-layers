@@ -1,11 +1,11 @@
 
 export function findAccountIdByName(structure: Structure, name: string): any {
-    let account =  structure.accounts.find((account) => account.name === name);
+    const account =  structure.accounts.find((account) => account.name === name);
     return account ? account._id : null;
 }
 
 export function findAccountNameById(structure: Structure, id: any): string {
-    let account = findAccountById(structure, id);
+    const account = findAccountById(structure, id);
     return account ? account.name : null;
 }
 
@@ -22,28 +22,28 @@ export function findAccountIdsByType(structure: Structure, type: string): any[] 
 export class Type {
     constructor(
         public _id: any = undefined,
-        public name: string = "",
-        public display: string = ""
+        public name: string = '',
+        public display: string = ''
     ) { }
 }
 
 export class Account {
     constructor(
         public _id: any = undefined,
-        public name: string = "",
+        public name: string = '',
         public active: boolean = true,
-        public type: string = "",
+        public type: string = '',
         public order: number = 0,
-        public icon: string = ""
+        public icon: string = ''
     ) { }
 }
 
 export class Rule {
     constructor(
         public _id: any = undefined,
-        public nameLeft: string = "",
+        public nameLeft: string = '',
         public typesLeft: string[] = [],
-        public nameRight: string = "",
+        public nameRight: string = '',
         public typesRight: string[] = []
     ) { }
 }

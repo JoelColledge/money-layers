@@ -8,7 +8,7 @@ import {
 } from 'rxjs';
 
 import {
-    tap, 
+    tap,
     map
 } from 'rxjs/operators';
 
@@ -26,7 +26,7 @@ import {Transaction} from '../../../common-types/transaction';
 
 @Injectable()
 export class TransactionService {
-    static ENDPOINT: string = '/api/transactions/:id';
+    static ENDPOINT = '/api/transactions/:id';
 
     constructor(
         private _http: HttpClient,
@@ -47,9 +47,9 @@ export class TransactionService {
     }
 
     add(transaction: Transaction): Observable<Transaction> {
-        let _messageStringified = JSON.stringify(transaction);
+        const _messageStringified = JSON.stringify(transaction);
 
-        let headers = new HttpHeaders({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json'
 	});
 
@@ -59,9 +59,9 @@ export class TransactionService {
     }
 
     update(transaction: Transaction): Observable<Transaction> {
-        let _messageStringified = JSON.stringify(transaction);
+        const _messageStringified = JSON.stringify(transaction);
 
-        let headers = new HttpHeaders({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json'
 	});
 

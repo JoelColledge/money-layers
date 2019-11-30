@@ -4,8 +4,8 @@ export function dateToMonth(date: Date): number {
 }
 
 export function monthToDate(month: number): Date {
-    let year = Math.floor(month / 12);
-    let monthInYear = month - year * 12;
+    const year = Math.floor(month / 12);
+    const monthInYear = month - year * 12;
     return new Date(Date.UTC(year, monthInYear));
 }
 
@@ -25,12 +25,12 @@ export class Entry {
 }
 
 export class Transaction {
-    public month: number = -1;
+    public month = -1;
 
     constructor(
         public _id: any = undefined,
-        public description: string = "",
-        public notes: string = "",
+        public description: string = '',
+        public notes: string = '',
         public date: string = calendarDate(new Date()),
         public entries: Entry[] = []
     ) { }

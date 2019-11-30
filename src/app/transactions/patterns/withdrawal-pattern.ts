@@ -4,9 +4,14 @@ import {Transaction, Entry} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from './transaction-pattern';
 
 export class WithdrawalPattern implements TransactionPattern {
+
+    entryPatterns = [
+        new EntryPattern(false, false, false),
+        new EntryPattern(false, true, false)
+    ];
     create(structure: Structure) {
-        let transaction = new Transaction();
-        transaction.description = "ATM";
+        const transaction = new Transaction();
+        transaction.description = 'ATM';
         transaction.entries = [
             new Entry(findAccountIdByName(structure, 'Bank account')),
             new Entry(findAccountIdByName(structure, 'Cash'))
@@ -19,14 +24,9 @@ export class WithdrawalPattern implements TransactionPattern {
             return transaction;
         }
 
-        let change: number = transaction.entries[1].change;
+        const change: number = transaction.entries[1].change;
         transaction.entries[0].change = -change;
 
         return transaction;
     }
-
-    entryPatterns = [
-        new EntryPattern(false, false, false),
-        new EntryPattern(false, true, false)
-    ];
 }

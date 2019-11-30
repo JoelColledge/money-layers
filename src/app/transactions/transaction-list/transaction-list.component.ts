@@ -112,7 +112,7 @@ export class TransactionListComponent implements OnInit {
     }
 
     delete(index: number): void {
-        let transaction = this.transactions[index];
+        const transaction = this.transactions[index];
         if (transaction._id) {
             this.transactionService
                 .delete(this.transactions[index]._id)
@@ -133,8 +133,8 @@ export class TransactionListComponent implements OnInit {
     }
 
     private add(pattern: TransactionPattern) {
-        let transaction = pattern.create(this.structure);
-        let now = new Date();
+        const transaction = pattern.create(this.structure);
+        const now = new Date();
         if (this.month.getMonth() !== now.getMonth() || this.month.getFullYear() !== now.getFullYear()) {
             transaction.date = this.month.toISOString();
         }

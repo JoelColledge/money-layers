@@ -20,7 +20,7 @@ import {Structure} from '../../../common-types/structure';
 
 @Injectable()
 export class StructureService {
-    static ENDPOINT: string = '/api/structure';
+    static ENDPOINT = '/api/structure';
 
     constructor(private _http: HttpClient) {
     }
@@ -31,9 +31,9 @@ export class StructureService {
     }
 
     update(structure: Structure): Observable<Structure> {
-        let _messageStringified = JSON.stringify(structure);
+        const _messageStringified = JSON.stringify(structure);
 
-        let headers = new HttpHeaders({
+        const headers = new HttpHeaders({
             'Content-Type': 'application/json'
 	});
 

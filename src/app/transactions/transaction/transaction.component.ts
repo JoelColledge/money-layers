@@ -49,7 +49,7 @@ export class TransactionComponent implements OnInit {
 
     _index: number;
     _selectedIndex: number;
-    editMode: boolean = false;
+    editMode = false;
 
     private _transactionDate: Date;
 
@@ -68,7 +68,7 @@ export class TransactionComponent implements OnInit {
     }
 
     update(deselect: boolean): void {
-        this.onUpdate.emit({index: this._index, transaction: this.transaction, deselect: deselect});
+        this.onUpdate.emit({index: this._index, transaction: this.transaction, deselect});
     }
 
     delete(): void {
@@ -100,12 +100,12 @@ export class TransactionComponent implements OnInit {
     ruleViolations(): RuleViolation[] {
         return this.structure.rules
             .map(rule => {
-                let left = this.sumByTypes(rule.typesLeft) / 100;
-                let right = this.sumByTypes(rule.typesRight) / 100;
+                const left = this.sumByTypes(rule.typesLeft) / 100;
+                const right = this.sumByTypes(rule.typesRight) / 100;
                 return {
-                    rule: rule,
-                    left: left,
-                    right: right,
+                    rule,
+                    left,
+                    right,
                     difference: left - right
                 };
             })
@@ -128,12 +128,12 @@ export class TransactionComponent implements OnInit {
     }
 
     transactionType(): string {
-        let accountIds = findAccountIdsByType(this.structure, 'actual')
+        const accountIds = findAccountIdsByType(this.structure, 'actual')
             .concat(findAccountIdsByType(this.structure, 'gbp-actual'));
 
-        let entries = this.transaction.entries.filter(entry => accountIds.includes(entry.account));
+        const entries = this.transaction.entries.filter(entry => accountIds.includes(entry.account));
 
-        let totalChange = entries.map(entry => entry.change).reduce((acc, change) => acc + change, 0);
+        const totalChange = entries.map(entry => entry.change).reduce((acc, change) => acc + change, 0);
 
         return totalChange < 0 ? 'expense' :
             (totalChange > 0 ? 'income' : 'none');
@@ -164,13 +164,13 @@ export class TransactionComponent implements OnInit {
     private entriesWithTypes(types: string[]): Entry[] {
         return this.transaction.entries
             .filter((entry) => {
-                let account = findAccountById(this.structure, entry.account);
+                const account = findAccountById(this.structure, entry.account);
                 return !!account && types.includes(account.type);
             });
     }
 
     private updateEditMode(): void {
-        let wasEditMode = this.editMode;
+        const wasEditMode = this.editMode;
         this.editMode = this._selectedIndex === this._index;
     }
 

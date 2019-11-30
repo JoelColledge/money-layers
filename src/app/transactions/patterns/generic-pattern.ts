@@ -4,6 +4,8 @@ import {Transaction} from '../../../../common-types/transaction';
 import {TransactionPattern} from './transaction-pattern';
 
 export class GenericPattern implements TransactionPattern {
+
+    entryPatterns = [];
     create(structure: Structure) {
         return new Transaction();
     }
@@ -11,6 +13,4 @@ export class GenericPattern implements TransactionPattern {
     update(structure: Structure, transaction: Transaction) {
         return transaction;
     }
-
-    entryPatterns = [];
 }
