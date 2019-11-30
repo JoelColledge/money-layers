@@ -4,7 +4,7 @@
 
 ## Development
 
-    nvm use node v8.16.0
+    nvm use node v12.8.0
     npm install
     docker-compose up
     USERNAME=user PASSWORD=pass npm run dev

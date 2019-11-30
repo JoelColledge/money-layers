@@ -20,7 +20,7 @@ import {Structure} from '../../../../common-types/structure';
 export class StructureComponent implements OnInit {
     structure: any = {};
 
-    @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
+    @ViewChild(JsonEditorComponent, {static: false}) editor: JsonEditorComponent;
 
     constructor(
         private _structureService: StructureService
