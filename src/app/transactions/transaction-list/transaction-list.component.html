@@ -2,13 +2,11 @@
   <h2>Transactions</h2>
 
   <div class="date-block">
-    <datepicker
-        [ngModel]="month"
-        (ngModelChange)="monthChanged($event)"
-        name="transactionMonth"
-        datepickerMode="month"
-        minMode="month">
-    </datepicker>
+    <bs-datepicker-inline
+        [bsValue]="month"
+        (bsValueChange)="monthChanged($event)"
+        [bsConfig]="datepickerConfig">
+    </bs-datepicker-inline>
   </div>
 
   <div>

@@ -12,11 +12,13 @@ import {
     Observable
 } from 'rxjs';
 
+import { BsDatepickerConfig, BsDatepickerViewMode } from 'ngx-bootstrap/datepicker';
+
 import {
     TransactionService
 } from '../transaction.service';
 
-import {Entry, Transaction, dateToMonth} from '../../../../common-types/transaction';
+import {Entry, Transaction, calendarDate, dateToMonth} from '../../../../common-types/transaction';
 import {Structure} from '../../../../common-types/structure';
 
 import {TransactionPattern} from '../patterns/transaction-pattern';
@@ -36,6 +38,7 @@ export class TransactionListComponent implements OnInit {
     transactions: Transaction[] = [];
     patterns: TransactionPattern[] = [];
     selectedIndex: number;
+    datepickerConfig: Partial<BsDatepickerConfig>;
 
     private structure: Structure;
 
@@ -46,6 +49,10 @@ export class TransactionListComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.datepickerConfig = Object.assign({}, {
+            minMode: 'month' as BsDatepickerViewMode
+        });
+
         this.route.data
             .subscribe((data: { structure: Structure }) => {
                 this.structure = data.structure;
@@ -136,7 +143,7 @@ export class TransactionListComponent implements OnInit {
         const transaction = pattern.create(this.structure);
         const now = new Date();
         if (this.month.getMonth() !== now.getMonth() || this.month.getFullYear() !== now.getFullYear()) {
-            transaction.date = this.month.toISOString();
+            transaction.date = calendarDate(this.month);
         }
         this.addTransaction(pattern, transaction);
     }

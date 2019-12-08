@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { AccountChooserComponent } from './account-chooser/account-chooser.component';
@@ -21,7 +21,7 @@ import { TransactionService } from './transaction.service';
         BrowserAnimationsModule,
         FormsModule,
         HttpClientModule,
-        DatepickerModule.forRoot(),
+        BsDatepickerModule.forRoot(),
         TypeaheadModule.forRoot(),
         StatisticsModule,
     ],

@@ -43,8 +43,11 @@
 
       <div *ngIf="editMode" class="form-group">
         <label class="small">Date</label>
-        <datepicker [ngModel]="transactionDate()" (ngModelChange)="transactionDateChanged($event)"
-            name="transactionDate" showWeeks="false" startingDay="1"></datepicker>
+        <bs-datepicker-inline
+          [bsValue]="transactionDate()"
+          (bsValueChange)="transactionDateChanged($event)"
+          [bsConfig]="datepickerConfig">
+        </bs-datepicker-inline>
       </div>
 
       <div *ngIf="editMode">

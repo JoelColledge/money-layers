@@ -11,6 +11,8 @@ import {
     Router
 } from '@angular/router';
 
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
 import {Account, Structure, Rule, findAccountIdByName, findAccountById, findAccountIdsByType} from '../../../../common-types/structure';
 import {Transaction, Entry, calendarDate} from '../../../../common-types/transaction';
 import {EntryPattern, TransactionPattern} from '../patterns/transaction-pattern';
@@ -50,6 +52,7 @@ export class TransactionComponent implements OnInit {
     _index: number;
     _selectedIndex: number;
     editMode = false;
+    datepickerConfig: Partial<BsDatepickerConfig>;
 
     private _transactionDate: Date;
 
@@ -61,10 +64,15 @@ export class TransactionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.datepickerConfig = Object.assign({}, {
+            showWeekNumbers: false
+        });
+
         this.route.data
             .subscribe((data: { structure: Structure }) => {
                 this.structure = data.structure;
             });
+        this._transactionDate = new Date(this.transaction.date);
     }
 
     update(deselect: boolean): void {
