@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { enGbLocale } from 'ngx-bootstrap/locale';
+
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { AccountChooserComponent } from './account-chooser/account-chooser.component';
@@ -14,6 +17,8 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionsPageComponent } from './transactions-page/transactions-page.component';
 import { TransactionService } from './transaction.service';
+
+defineLocale('engb', enGbLocale);
 
 @NgModule({
     imports: [
@@ -36,4 +41,8 @@ import { TransactionService } from './transaction.service';
         TransactionService,
     ],
 })
-export class TransactionsModule { }
+export class TransactionsModule {
+    constructor(private bsLocaleService: BsLocaleService) {
+        this.bsLocaleService.use('engb');
+    }
+}
