@@ -4,7 +4,7 @@ import ImportService from '../service/import-service';
 
 export class TransactionController {
     static getAll(req: express.Request, res: express.Response): void {
-        TransactionDao.getAll(req.query.month)
+        TransactionDao.getAll(+req.query.month.toString())
             .then(transactions => res.status(200).json(transactions))
             .catch(error => res.status(400).json(error));
     }
